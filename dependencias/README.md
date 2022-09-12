@@ -42,16 +42,21 @@ VERSION DEL PROYECTO: 8.11.0
 2. Instalar Node en el proyecto (SOLO LA PRIMERA VEZ)
 - npm install
 
-3. Despues de haber instalado TailwindCSS, se debe de tener otro POWERSHELL o CMD corriendo con este comando:
+3. Instalar TailwindCSS al proyecto y creacipon de archivo de configuracion (SOLO LA PRIMERA VEZ)
+- Posicionarse en la carpeta del proyecto de laravel
+- npm install -D tailwindcss postcss autoprefixer
+- npx tailwindcss init -p
+
+4. Despues de haber instalado TailwindCSS, se debe de tener otro POWERSHELL o CMD corriendo con este comando:
 - npm run dev
 
-4. Creacion de tablas o bases de datos por medio de migraciones de Laravel y MySQL Workbench
-4.1. Migraciones
+5. Creacion de tablas o bases de datos por medio de migraciones de Laravel y MySQL Workbench
+5.1. Migraciones
 - php artisan migrate
 - artisan migrate:rollback (Revierte la conección con la tabla)
 - sail artisan migrate:rollback --step=5 (ejemplo de un rollback por pasos)
 
-4.2. Make, comando para creación
+5.2. Make, comando para creación
 - artisan make:migration <nombre> (les da un nombre a las migraciones, este nombre sale en el proyecto de laravel en la parte de migraciones)
 
 ## DESCARGA E INSTALACION
