@@ -1,0 +1,41 @@
+base de datos 
+
+-nombre de las tablas: inglés-plural eje: "tb_obs_users"
+-nombre de los campos: ingles- eje: tabla-> "users"-> "obs_users_id"
+-nombre de los campos llave: inglés - eje: "obs_users_id_fk", "obs_users_id_pk"
+-nombre de los procedimientos almacenados: infitivo-inglés.
+
+Modelos
+clases-> por convención los modelos en laravel se crean en ingles singular.
+ejemplo tabla en base de datos users -> modelo : User.
+*representacion de modulos , en formato _nombreModulo_nombreModelo. ej: Posts_post*
+
+atributos "manejar la misma nomenclatura de base de datos, o simplemente
+omitir el prefijo y mantener nombre base" ejemplo en BD:  
+user -> obs_users_name -> modelo: "users_name" 
+
+Metodos;
+de igual manera dentro del route, controladora, modelos y migraciones los metodos de laravel se usan en ingles
+al igual que las propiedades ya establecidas dentro de cada metodo
+
+
+
+*LA NOMENCLATURA A USAR DURANTE EL PROYECTO PARA VARIABLES, METODOS, Y CAMPOS DE BASE DE DATOS 
+ES POR EJ: USER_NAME*
+
+ejemplo: Controller_User{
+
+metodo principal : 
+public function index(){};
+
+metodo para crear un posts por ejemplo
+
+public function create(){};
+
+
+#NOTA: en el archivo web.php donde se registran las rutas usar siempre un ->name("mismo nombre que url");
+en caso de tener que afectar/cambiar URL del sitio, no es necesario reemplazar el llamado o envio de datos hacia ese
+archivo en cada lugar llamado, porque se mantiene o trabaja con el name (basicamente es alias);
+
+
+
