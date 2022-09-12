@@ -202,7 +202,8 @@ Lo principal que debe de saber es.. ¿en dónde van las vistas de la página web
 
 ![image](https://user-images.githubusercontent.com/85766666/189761780-2cef9603-2a6c-495b-b003-c2658ee334b5.png)
       
-En Laravel, la manera que una vista se conecta con otra, ya sea por medio de botones o formularios, etc, es por medio de enrutamiento, un file llamado route
+En Laravel, la manera que una vista se conecta con otra, ya sea por medio de botones o formularios, etc, es por medio de enrutamiento, un file llamado web.php
+      
 ![image](https://user-images.githubusercontent.com/85766666/189762017-b7f1be46-20e3-422e-8323-501b82c189fe.png)
       
 ### Controladoras de las vistas
