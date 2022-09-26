@@ -77,6 +77,31 @@ Se escoje la arquitectura de la computadora y se instala.
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
+### Github Desktop: 
+https://desktop.github.com/
+
+![image](https://user-images.githubusercontent.com/85766666/192297683-bae300e3-3fce-46e7-b447-47fbc55148f2.png)
+
+### Pasos de uso:
+1. Descargar la aplicación a la computadora.
+2. Localizar una carpeta en donde se guardaran el o los repositorios en nuestra computadora.
+3. Iniciar sesión de github en la aplicación.
+4. Seleccionar un repositorio para clonar en la carpeta del paso 2.
+
+Cuando ya hay un repositorio clonado en nuestra computadora:
+1. Presionar fetch origin para verificar cambios en el repositorio de git.
+![image](https://user-images.githubusercontent.com/85766666/192298363-1cbbe0f7-47ef-4da3-a7f3-2ab4c04b15e1.png)
+2. En caso de haber, presionar el mismo boton, el mismo dirá "Pull request" con un numero de la cantidad de cambios.
+
+En caso de hacer un cambio:
+1. Verificar los cambios del git.
+2. Verificar los cambios por hacer en la aplicación (parte izquierda, sale todos los archivos y lineas modificadas por usted).
+3. Darle nombre y descripción al commit, abajo a la izquierda.
+4. Presionar Commit to main.
+5. Volver a presionar el mismo boton.
+
+----------------------------------------------------------------------------------------------------------------------------------
+
 ### Para MySQL:
 https://dev.mysql.com/downloads/mysql/
 
