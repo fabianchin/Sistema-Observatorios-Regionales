@@ -103,7 +103,7 @@ En caso de hacer un cambio:
 ----------------------------------------------------------------------------------------------------------------------------------
 
 ### Para MySQL:
-https://dev.mysql.com/downloads/mysql/
+https://dev.mysql.com/downloads/installer/
 
 ![image](https://user-images.githubusercontent.com/85766666/189496047-1bae6868-286b-4d9c-b761-9d311f7fb875.png)
 
