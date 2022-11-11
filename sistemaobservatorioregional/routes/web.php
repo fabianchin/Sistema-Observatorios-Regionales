@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DimensionController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,23 +37,32 @@ Route::get('/', function () {
 //PREFIJO ADMIN
 //Se le aplicara middleware de autenticacion
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', function () {return view('admin_layouts.index.admin_index');});
-    Route::get('/index', function () {return view('admin_layouts.index.admin_index');})->name('admin.index');
+    Route::get('/', function () {
+        return view('admin_layouts.index.admin_index');
+    });
+    Route::get('/index', function () {
+        return view('admin_layouts.index.admin_index');
+    })->name('admin.index');
 
     //-----------------------------------------DIMENSIONES-----------------------------------------
-    
+
     Route::get('/dimension', [DimensionController::class, 'getAllDimension'])->name("dimension.manage");
-    Route::get('/dimension/{dimension_id}',[DimensionController::class, 'deleteDimension'])->name("dimension.delete");
-    Route::post('/createdimension',[DimensionController::class, 'insertDimension'])->name("dimension.insert");
-    Route::post('/updatedimension',[DimensionController::class, 'updateDimension'])->name("dimension.update");
+    Route::get('/dimension/{dimension_id}', [DimensionController::class, 'deleteDimension'])->name("dimension.delete");
+    Route::post('/createdimension', [DimensionController::class, 'insertDimension'])->name("dimension.insert");
+    Route::post('/updatedimension', [DimensionController::class, 'updateDimension'])->name("dimension.update");
 
     //Enrutamiento para editar y crear, ya que estas redirigen a otra pagina, las otras se mantienen en la misma pagina por medio de opciones de la tabla
-    Route::get('/createdimension', function () { return view('admin_layouts.dimension.create');})->name("dimension.redirectToCreateDimension");
+    Route::get('/createdimension', function () {
+        return view('admin_layouts.dimension.create');
+    })->name("dimension.redirectToCreateDimension");
     //Route::get('/updatedimension/{dimension_id}',[DimensionController::class, 'loadDimensionData'])->name("dimension.redirectToUpdateDimension");
-    Route::get('/updatedimension',[DimensionController::class, 'loadDimensionData'])->name("dimension.redirectToUpdateDimension");
-    
+    Route::get('/updatedimension', [DimensionController::class, 'loadDimensionData'])->name("dimension.redirectToUpdateDimension");
+
     //-----------------------------------------DIMENSIONES-----------------------------------------
+    //!rutas del login
     
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
 });
 
 //-------------Dimension----------------
