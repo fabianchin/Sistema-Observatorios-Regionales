@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DimensionController;
 use App\Http\Controllers\VariableController;
 use App\Http\Controllers\SubVariableController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,9 @@ Route::get('/', function () {
 
 //PREFIJO ADMIN
 //Se le aplicara middleware de autenticacion
+
 Route::group(['prefix' => 'admin'], function () {
+
     //-----------------------------------------INDEX-----------------------------------------
     Route::get('/variable', [VariableController::class, 'getAllVariables'])->name("variable.manage");
     Route::get('/', function () {return view('admin_layouts.index.admin_index');});
@@ -74,6 +77,9 @@ Route::group(['prefix' => 'admin'], function () {
     //-----------------------------------------INDICADORES-----------------------------------------
     Route::get('/indicador', [IndicatorController::class, 'getAllIndicators'])->name("indicator.manage");
     
+    //-----------------------------------------Rutas del login-----------------------------------------
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
 
 });
 
