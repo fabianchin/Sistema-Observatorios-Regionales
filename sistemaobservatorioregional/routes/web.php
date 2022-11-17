@@ -1,12 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< Updated upstream
-=======
 use App\Http\Controllers\DimensionController;
 use App\Http\Controllers\VariableController;
 use App\Http\Controllers\SubVariableController;
->>>>>>> Stashed changes
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +19,6 @@ use App\Http\Controllers\SubVariableController;
 Route::get('/', function () {
     return view('welcome');
 });
-<<<<<<< Updated upstream
-=======
 
 /* Rutas fuera de prefix
  //Index or home de ADMIN
@@ -83,4 +78,3 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 //-------------Dimension----------------
->>>>>>> Stashed changes

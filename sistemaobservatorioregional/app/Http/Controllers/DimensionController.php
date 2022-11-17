@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dimension;
 use Illuminate\Http\Request;
 
 class DimensionController extends Controller
 {
-<<<<<<< Updated upstream
-    //
-}
-=======
     // public function manage()
     // {
     //     $dimensions = new Dimension();
@@ -34,12 +31,12 @@ class DimensionController extends Controller
     }
 
     //Al aplicar filtros
-    // public function getDimensionById(Request $request)
-    // {
-    //     $dimension = new Dimension();
-    //     $dimension->getProcDimensionById($request->dimension_id);
-    //     return view('admin_layouts.dimension.manage', $dimension);
-    // }
+    public function getDimensionById(Request $request)
+    {
+        $dimension = new Dimension();
+        $dimension->getProcDimensionById($request->dimension_id);
+        return view('admin_layouts.dimension.manage', $dimension);
+    }
 
     //Opciones de la tabla
     public function deleteDimension(Request $request)
@@ -103,4 +100,3 @@ class DimensionController extends Controller
     }
 
 }
->>>>>>> Stashed changes
