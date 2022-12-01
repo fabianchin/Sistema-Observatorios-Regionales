@@ -5,6 +5,8 @@ use App\Http\Controllers\DimensionController;
 use App\Http\Controllers\VariableController;
 use App\Http\Controllers\SubVariableController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\IndicatorController;
+use App\Http\Controllers\Dynamic_IndicatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,9 +77,23 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/createsubvariable', [SubVariableController::class, 'loadDropdownData'])->name("sub_variable.redirectToCreateSubVariable");
     Route::get('/updatesubvariable', [SubVariableController::class, 'loadSubVariableData'])->name("sub_variable.redirectToUpdateSubVariable");
     //-----------------------------------------INDICADORES-----------------------------------------
-    Route::get('/indicador', [IndicatorController::class, 'getAllIndicators'])->name("indicator.manage");
+    Route::get('/indicator', [IndicatorController::class, 'getAllIndicators'])->name("indicator.manage");
+    Route::get('/indicator/{indicator_id}',[IndicatorController::class, 'deleteIndicator'])->name("indicator.delete");
+    Route::post('/createindicator', [IndicatorController::class, 'insertIndicator'])->name("indicator.insert");
+    Route::post('/updateindicator',[IndicatorController::class, 'updateIndicator'])->name("indicator.update");
+
+    Route::get('/createindicator', [IndicatorController::class, 'loadDropdownData'])->name("indicator.redirectToCreateIndicator");
+    Route::get('/updateindicator', [IndicatorController::class, 'loadIndicatorData'])->name("indicator.redirectToUpdateIndicator");
     
-    //-----------------------------------------Rutas del login-----------------------------------------
+    //-----------------------------------------DYNAMIC INDICATORS-----------------------------------------
+    Route::get('/insert_dynamic_indicator',[Dynamic_IndicatorController::class, 'insertInit'])->name("dynamic_indicator.load");
+    Route::post('/insert_dynamic_indicator',[Dynamic_IndicatorController::class, 'insertDynamicIndicator'])->name("dynamic_indicator.insert");
+
+    //Fill comboboxes
+    Route::post('/fillVariable',[Dynamic_IndicatorController::class, 'fillVariable'])->name("dynamic_indicator.fillVariable");
+    Route::post('/fillSubVariable',[Dynamic_IndicatorController::class, 'fillSubVariable'])->name("dynamic_indicator.fillSubVariable");
+
+    //-----------------------------------------LOGIN-----------------------------------------
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
 
