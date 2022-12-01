@@ -7,6 +7,7 @@ use App\Http\Controllers\SubVariableController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndicatorController;
 use App\Http\Controllers\Dynamic_IndicatorController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
 
+    //-----------------------------------------registro de Usuarios-----------------------------------------
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register');
 });
 
 //-------------Dimension----------------
