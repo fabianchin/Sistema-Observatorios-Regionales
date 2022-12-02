@@ -3,7 +3,7 @@
 @section('crud_content')
 
 <div class="container">
-    <h1>Bienvenido ADMIN: xxxxx</h1>
+    <h1>Bienvenido ADMIN: <span>{{auth()->user()->name}} </span> </h1>
 </div>
 
 @endsection

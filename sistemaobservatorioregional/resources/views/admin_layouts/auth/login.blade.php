@@ -60,15 +60,13 @@
                     <form  method="POST" action="{{ route('login')}}" novalidate>
                         @csrf
                         
-                         @if ('status')
+                        
+
+                         @if (session('success'))
                             <div class="alert alert-success" style="color: white;">
-                              {{ 'Usuario creado correctamente, inicie sesión' }}
+                              {{ session('success') }}
                             </div>
-                            @elseif (session('status'))
-                            <div class="alert alert-success">
-                              {{ session('status') }}
-                            </div>
-                            @elseif (session('error'))
+                          @elseif (session('error'))
                             <div class="alert alert-danger" style="color: white;">
                                 {{ session('error') }}
                             </div>

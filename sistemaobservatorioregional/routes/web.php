@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DimensionController;
-use App\Http\Controllers\VariableController;
-use App\Http\Controllers\SubVariableController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\IndicatorController;
-use App\Http\Controllers\Dynamic_IndicatorController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\VariableController;
+use App\Http\Controllers\DimensionController;
+use App\Http\Controllers\IndicatorController;
+use App\Http\Controllers\SubVariableController;
+use App\Http\Controllers\Dynamic_IndicatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,9 +100,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
 
+    //-----------------------------------------LOGOUT-----------------------------------------
+    Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+
     //-----------------------------------------registro de Usuarios-----------------------------------------
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register');
+
+    //-----------------------------------------actualizar informacion de usuario-----------------------------------------
+    Route::get('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
+    Route::post('/editar-perfil', [PerfilController::class, 'store'])->name('perfil.store');
 });
 
 //-------------Dimension----------------

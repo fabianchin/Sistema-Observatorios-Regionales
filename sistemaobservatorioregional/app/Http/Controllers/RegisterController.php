@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+
 class RegisterController extends Controller
 {
     
@@ -27,8 +28,8 @@ class RegisterController extends Controller
             'password'=> Hash::make($request->password) 
         ]);
 
-            
-        return view('admin_layouts.auth.login' )->with('status');
+        //retornar a la vista de login con mensaje de exito
+        return redirect()->route('login')->with('success', 'Usuario creado con exito, inicie sesion');
        
         
     }
