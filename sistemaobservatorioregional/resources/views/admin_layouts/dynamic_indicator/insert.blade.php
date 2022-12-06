@@ -28,6 +28,15 @@
                 <h5>Crear Indicador de manera dinamica</h5>
             </div>
             <div class="card-body">
+                @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                  </div>
+                  @elseif (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <form class="contact-form" method="post" action="{{route('dynamic_indicator.insert')}}">
                     @csrf
                     <div class="form-section">
@@ -57,13 +66,13 @@
                                 Selecciona la unidad
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMeasurement" id="dropdown-menu-measurement">
-                                    {{-- @foreach ($dimensions as $dimension) 
-                                        <li><a class="dropdown-item" id="dimension_id_drop" name="dimension_id_drop" href="#" value="{{$dimension->dimension_id}}">{{$dimension->dimension_name}}</a></li>
-                                    @endforeach --}}
-                                    <li><a class="dropdown-item"  value="1">No aplica</a></li>
+                                    @foreach ($measurements as $measurement) 
+                                        <li><a class="dropdown-item" href="#" value="{{$measurement->measurement_unit_id}}">{{$measurement->measurement_unit_description}}</a></li>
+                                    @endforeach
+                                    {{-- <li><a class="dropdown-item"  value="1">No aplica</a></li>
                                     <li><a class="dropdown-item"  value="2">Litros</a></li>
                                     <li><a class="dropdown-item"  value="3">Kg</a></li>
-                                    <li><a class="dropdown-item"  value="4">Centrimetros</a></li>
+                                    <li><a class="dropdown-item"  value="4">Centrimetros</a></li> --}}
 
                                 </ul>
                                 <input type="hidden" id="measuremente_unit_id" name="measuremente_unit_id" value="none">
@@ -125,15 +134,15 @@
                             Selecciona la region
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonRegion" id="dropdown-menu-region">
-                            {{-- @foreach ($dimensions as $dimension) 
-                                <li><a class="dropdown-item" id="dimension_id_drop" name="dimension_id_drop" href="#" value="{{$dimension->dimension_id}}">{{$dimension->dimension_name}}</a></li>
-                            @endforeach --}}
-                            <li><a class="dropdown-item" href="#" value="1">Huetar Norte</a></li>
+                            @foreach ($regions as $region) 
+                                <li><a class="dropdown-item"  href="#" value="{{$region->region_id}}">{{$region->region_name}}</a></li>
+                            @endforeach
+                            {{-- <li><a class="dropdown-item" href="#" value="1">Huetar Norte</a></li>
                             <li><a class="dropdown-item" href="#" value="2">Huetar Caribe</a></li>
                             <li><a class="dropdown-item" href="#" value="3">Huetar Norte y Caribe</a></li>
                             <li><a class="dropdown-item" href="#" value="4">Chorotega</a></li>
                             <li><a class="dropdown-item" href="#" value="5">Brunca</a></li>
-                            <li><a class="dropdown-item" href="#" value="6">Nacional</a></li>
+                            <li><a class="dropdown-item" href="#" value="6">Nacional</a></li> --}}
                         </ul>
                             <input type="hidden" id="region_id" name="region_id" value="none">
                         </div>
@@ -206,7 +215,7 @@
 
                             <div class="form-group row">
                                 <div class="listInputs">
-                                    <input type="text" id="list_value_0" name="list_value_0" placeholder="Dato del listado" /> <input type="text" id="cualitative_value_0" name="cualitative_value_0" placeholder="Dato..." /> <br/>
+                                    <input type="text" id="list_value_0" name="list_value_0" placeholder="Dato del listado" /> <input type="number" id="cualitative_value_0" name="cualitative_value_0" placeholder="Dato..." /> <br/>
                                 </div>
                             </div>
 
@@ -419,7 +428,7 @@ function removeInputFieldRefs (selectedField) {
 //Funcion de boton de agregar listado
 $(document).ready(function() {
     $('.add_list').on('click', function() {
-        var fieldList = '<div class="insertedLists"><input type="text" id="list_value_'+listIndex+'" name="list_value_'+listIndex+'" placeholder="Dato del listado" required/> <input type="text" id="cualitative_value_'+listIndex+'" name="cualitative_value_'+listIndex+'" placeholder="Dato..." required/> <button onclick="removeInputFieldList(this);">Eliminar</button> <br/> </div>';
+        var fieldList = '<div class="insertedLists"><input type="text" id="list_value_'+listIndex+'" name="list_value_'+listIndex+'" placeholder="Dato del listado" required/> <input type="number" id="cualitative_value_'+listIndex+'" name="cualitative_value_'+listIndex+'" placeholder="Dato..." required/> <button onclick="removeInputFieldList(this);">Eliminar</button> <br/> </div>';
         $('.listInputs').append(fieldList);
         listIndex = listIndex+1;
     })
