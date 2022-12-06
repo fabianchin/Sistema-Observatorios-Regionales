@@ -18,6 +18,8 @@ use App\Models\Reference;
 use Illuminate\Support\Facades\DB; //Para usar DB::beginTransaction(); DB::commit(); DB::rollBack();
 
 class Dynamic_IndicatorController extends Controller{
+
+    //Clase que carga los dropdowns de la vista insert
     public function insertInit(){
         $dimensionModel = new Dimension(); 
         $dimensionModel = $dimensionModel->makeVisible(['dimension_id']); 
@@ -27,6 +29,7 @@ class Dynamic_IndicatorController extends Controller{
 
         $measurementModel = new MeasurementUnit();
         $measurementModel = $measurementModel->makeVisible(['measurement_unit_id']);
+
         $data = [          
             'dimensions' => $dimensionModel->getAllDimension(),
             'regions' => $regionModel->getAllRegion(),
@@ -48,13 +51,12 @@ class Dynamic_IndicatorController extends Controller{
     {
         $subvariableModel = new Sub_Variable();
         $data['subvariables'] = $subvariableModel->getSubVariableByVariableId($request->variable_id);
-        //dd($data);
         return response()->json($data);
     }
 
     //Metodo final que inserta todo
     /*
-    *  RAZON DE QUE SOLO SE INSERTE UNA REFERENCIA Y DETALLE:
+    *  RAZON POR LA QUE SOLO SE INSERTA UNA REFERENCIA Y DETALLE:
     *       PARA PODER DETERMINAR LA CANTIDAD DE REFERENCIAS Y DETALLES QUE SE INSERTARAN,
     *       SE DEBE HACER UNA FUNCION DESDE JS QUE DEVUELVA EL NUMERO DE REFERENCIAS Y DETALLES QUE SE INSERTARAN O UN ARRAY
     *       ESTO SE HACE CON AJAX, EL BOTON SUBMIT DEJA DE SER SUBMIT Y LLAMA UNA FUNCION DE JS
@@ -77,9 +79,7 @@ class Dynamic_IndicatorController extends Controller{
                     $lastIndicatorID = reset($lastInsertedIndicatorDetailID[0]);
                     $indicatorDetailModel->insertIndicatorDetail($lastIndicatorID, $request->region_id); //Inserta en la tabla indicador detalle
                     
-                    
-
-                    //Referencias
+                    //Referencias--------------------------------------------------
                     // for($i = 0; $i < 10; $i++){ //Quemado el 10 hasta que se haga la funcion correcta, ya sea por ajax o algo que se pase un vector, o logre algo raro
                     //     if($request->reference_name_."".$i != null){
                     //         $referenceModel->insertReference($request->reference_name_."".$i); //Inserta en la tabla referencia
@@ -96,7 +96,7 @@ class Dynamic_IndicatorController extends Controller{
                     $lastReferenceID = reset($lastInsertedReferenceId[0]);
                     $indicatorReferenceModel->insertIndicatorReference($lastIndicatorID,$request->region_id, $lastReferenceID); //Inserta en la tabla indicador referencia
 
-                    //Datos
+                    //Datos--------------------------------------------------
                     if($request->options == 1){ //Cuantitativo
                         $indicatorDataModel->insertIndicatorDataCuantitative($request->indicator_name, $lastIndicatorID, $request->region_id);
                         // for($h = 0; $h < 10; $h++){
