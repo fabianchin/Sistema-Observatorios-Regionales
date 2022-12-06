@@ -91,25 +91,40 @@ class Dynamic_IndicatorController extends Controller{
                     // }
 
                     //Por el momento se inserta solo una referencia
-                    $referenceModel->insertReference($request->reference_name_0); //Inserta en la tabla referencia
-                    $lastInsertedReferenceId = DB::select('SELECT LAST_INSERT_ID();'); //Obtiene el ultimo id insertado de la tabla reference
-                    $lastReferenceID = reset($lastInsertedReferenceId[0]);
-                    $indicatorReferenceModel->insertIndicatorReference($lastIndicatorID,$request->region_id, $lastReferenceID); //Inserta en la tabla indicador referencia
+                    // $referenceModel->insertReference($request->reference_name_0); //Inserta en la tabla referencia
+                    // $lastInsertedReferenceId = DB::select('SELECT LAST_INSERT_ID();'); //Obtiene el ultimo id insertado de la tabla reference
+                    // $lastReferenceID = reset($lastInsertedReferenceId[0]);
+                    // $indicatorReferenceModel->insertIndicatorReference($lastIndicatorID,$request->region_id, $lastReferenceID); //Inserta en la tabla indicador referencia
 
+                    foreach($request->reference_name_ as $reference_link){
+                        $referenceModel->insertReference($reference_link); //Inserta en la tabla referencia
+                        $lastInsertedReferenceId = DB::select('SELECT LAST_INSERT_ID();'); //Obtiene el ultimo id insertado de la tabla reference
+                        $lastReferenceID = reset($lastInsertedReferenceId[0]);
+                        $indicatorReferenceModel->insertIndicatorReference($lastIndicatorID,$request->region_id, $lastReferenceID); //Inserta en la tabla indicador referencia
+                    }
                     //Datos--------------------------------------------------
                     if($request->options == 1){ //Cuantitativo
                         $indicatorDataModel->insertIndicatorDataCuantitative($request->indicator_name, $lastIndicatorID, $request->region_id);
                         // for($h = 0; $h < 10; $h++){
                         //     $indicatorDataModel->insertYearIndicatorDataCuantitative($request->datepicker_."".$h, $request->cuantitative_value_."".$h, $lastIndicatorID, $request->region_id, $request->measuremente_unit_id);
                         // }
-                        $indicatorDataModel->insertYearIndicatorDataCuantitative($request->datepicker_0, $request->cuantitative_value_0, $lastIndicatorID, $request->region_id, $request->measuremente_unit_id);
-
+                        //$indicatorDataModel->insertYearIndicatorDataCuantitative($request->datepicker_0, $request->cuantitative_value_0, $lastIndicatorID, $request->region_id, $request->measuremente_unit_id);
+                        for($i=0, $count = count($request->datepicker_);$i<$count;$i++) {
+                            $year  = $request->datepicker_[$i];
+                            $cuantitative_value = $request->cuantitative_value_[$i];
+                            $indicatorDataModel->insertYearIndicatorDataCuantitative($year, $cuantitative_value, $lastIndicatorID, $request->region_id, $request->measuremente_unit_id);
+                           }
                     }else{ //Cualitativo
                         $indicatorDataModel->insertIndicatorDataCualitative($request->indicator_name, 10, $lastIndicatorID, $request->region_id);
                         // for($k = 0; $k < 10; $k++){ //Quemado el 10 hasta que se haga la funcion correcta, ya sea por ajax o algo que se pase un vector, o logre algo raro
                         //    $indicatorDataModel->insertListIndicatorDataCualitative($request->list_value_."".$k, $request->cualitative_value_."".$k, $lastIndicatorID, $request->region_id, $request->measuremente_unit_id);
                         // }
-                        $indicatorDataModel->insertListIndicatorDataCualitative($request->list_value_0, $request->cualitative_value_0, $lastIndicatorID, $request->region_id, $request->measuremente_unit_id);
+                        //$indicatorDataModel->insertListIndicatorDataCualitative($request->list_value_0, $request->cualitative_value_0, $lastIndicatorID, $request->region_id, $request->measuremente_unit_id);
+                        for($i=0, $count = count($request->list_value_);$i<$count;$i++) {
+                            $list_value  = $request->list_value_[$i];
+                            $cualitative_value = $request->cualitative_value_[$i];
+                            $indicatorDataModel->insertListIndicatorDataCualitative($list_value, $cualitative_value, $lastIndicatorID, $request->region_id, $request->measuremente_unit_id);
+                           }
                     }
                     DB::commit();
                     $request["databaseError"] = "";

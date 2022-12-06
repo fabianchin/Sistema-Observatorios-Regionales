@@ -160,7 +160,7 @@
 
                         <div class="refsInputs">
                             <label for="reference_name"><h3>Referencia</h3></label>
-                            <input type="text" name="reference_name_0" id="reference_name_0" class="form-control" placeholder="Referencia" aria-label="reference_name" required>  
+                            <input type="text" name="reference_name_[0]" id="reference_name_[0]" class="form-control" placeholder="Referencia" aria-label="reference_name" required>  
                         </div>
                         
                         <button type="button" class="btn btn-info add_ref">
@@ -187,7 +187,7 @@
                             
                             <div class="form-group row">
                                 <div class="yearInputs">
-                                    <input type="number" id="datepicker_0" name="datepicker_0" placeholder="Año" /> <input type="text" id="cuantitative_value_0" name="cuantitative_value_0" placeholder="Dato..." /> <br/>
+                                    <input type="number" id="datepicker_[0]" name="datepicker_[0]" placeholder="Año" /> <input type="number" id="cuantitative_value_[0]" name="cuantitative_value_[0]" placeholder="Dato..." /> <br/>
                                 </div>
                             </div>
                         
@@ -215,7 +215,7 @@
 
                             <div class="form-group row">
                                 <div class="listInputs">
-                                    <input type="text" id="list_value_0" name="list_value_0" placeholder="Dato del listado" /> <input type="number" id="cualitative_value_0" name="cualitative_value_0" placeholder="Dato..." /> <br/>
+                                    <input type="text" id="list_value_[0]" name="list_value_[0]" placeholder="Dato del listado" /> <input type="number" id="cualitative_value_[0]" name="cualitative_value_[0]" placeholder="Dato..." /> <br/>
                                 </div>
                             </div>
 
@@ -317,6 +317,7 @@
                         $("#dropdown_menu_variable")
                         .append('<li><a class="dropdown-item" href="javascript:void(0);" onclick="clickAndFill_Variable(this,'+value.variable_id+')" value="'+value.variable_id+'" variable_nombre="'+value.variable_name+'">'+value.variable_name+'</a></li>');
                     });
+                    $('#dropdownMenuButtonSub').html('');
                     $('#dropdownMenuButtonSub').html('Seleccione la sub-variable');
                     $("#variable_id").val('none');
                     $("#sub_variable_id").val('none');
@@ -335,7 +336,7 @@
 
         global_variable_id_value = variable_id_value; //Guarda el valor de la variable globalmente
         // //Ajax
-        $("#dropdown_menu_sub").html('');
+        $("#dropdown-menu-sub").html('');
         $.ajax
         ({
             url: "{{route('dynamic_indicator.fillSubVariable')}}",
@@ -372,7 +373,8 @@ var refIndex = 1;
 $(document).ready(function() {
     $('.add_ref').on('click', function() {
         //<input type="text" name="reference_name" class="form-control" placeholder="Referencia" aria-label="reference_name" required>
-        var fieldRefs = '<div class="insertedRefs"><input type="text" id="reference_name_'+refIndex+'" name="reference_name_'+refIndex+'" class="form-control" placeholder="Referencia..." required /><button onclick="removeInputFieldRefs(this);">Eliminar</button> <br/> </div>';
+        // var fieldRefs = '<div class="insertedRefs"><input type="text" id="reference_name_'+refIndex+'" name="reference_name_'+refIndex+'" class="form-control" placeholder="Referencia..." required /><button onclick="removeInputFieldRefs(this);">Eliminar</button> <br/> </div>';
+        var fieldRefs = '<div class="insertedRefs"><input type="text" id="reference_name_['+refIndex+']" name="reference_name_['+refIndex+']" class="form-control" placeholder="Referencia..." required /><button onclick="removeInputFieldRefs(this);">Eliminar</button> <br/> </div>';
         $('.refsInputs').append(fieldRefs);
         refIndex = refIndex+1;
     })
@@ -391,7 +393,7 @@ function removeInputFieldRefs (selectedField) {
     //Funcion de boton de agregar año
     $(document).ready(function() {
         $('.add').on('click', function() {
-            var field = '<div class="insertedYears"><input type="number" id="datepicker_'+yearindex+'" name="datepicker_'+yearindex+'" placeholder="Año" required/> <input type="text" id="cuantitative_value_'+yearindex+'" name="cuantitative_value_'+yearindex+'" placeholder="Dato" required/> <button onclick="removeInputField(this);">Eliminar</button> <br/> </div>';
+            var field = '<div class="insertedYears"><input type="number" id="datepicker_['+yearindex+']" name="datepicker_['+yearindex+']" placeholder="Año" required/> <input type="text" id="cuantitative_value_['+yearindex+']" name="cuantitative_value_['+yearindex+']" placeholder="Dato" required/> <button onclick="removeInputField(this);">Eliminar</button> <br/> </div>';
             $('.yearInputs').append(field);
             yearindex = yearindex+1;
             addDatePickerFormat();
@@ -404,7 +406,7 @@ function removeInputFieldRefs (selectedField) {
     }
 
     //Para el primer valor de datepicker
-    $("#datepicker_0").datepicker({
+    $("#datepicker_[0]").datepicker({
         format: "yyyy",
         viewMode: "years", 
         minViewMode: "years"
@@ -413,7 +415,7 @@ function removeInputFieldRefs (selectedField) {
     //Para los datepicker dinamicos
     function addDatePickerFormat(){
         for (var k = yearindex-1; k <= yearindex; k++) {
-            $("#datepicker_"+k).datepicker({
+            $("#datepicker_["+k+"]").datepicker({
                 format: "yyyy",
                 viewMode: "years", 
                 minViewMode: "years"
@@ -428,7 +430,7 @@ function removeInputFieldRefs (selectedField) {
 //Funcion de boton de agregar listado
 $(document).ready(function() {
     $('.add_list').on('click', function() {
-        var fieldList = '<div class="insertedLists"><input type="text" id="list_value_'+listIndex+'" name="list_value_'+listIndex+'" placeholder="Dato del listado" required/> <input type="number" id="cualitative_value_'+listIndex+'" name="cualitative_value_'+listIndex+'" placeholder="Dato..." required/> <button onclick="removeInputFieldList(this);">Eliminar</button> <br/> </div>';
+        var fieldList = '<div class="insertedLists"><input type="text" id="list_value_['+listIndex+']" name="list_value_['+listIndex+']" placeholder="Dato del listado" required/> <input type="number" id="cualitative_value_['+listIndex+']" name="cualitative_value_['+listIndex+']" placeholder="Dato..." required/> <button onclick="removeInputFieldList(this);">Eliminar</button> <br/> </div>';
         $('.listInputs').append(fieldList);
         listIndex = listIndex+1;
     })
