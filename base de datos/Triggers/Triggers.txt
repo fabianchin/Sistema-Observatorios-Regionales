@@ -1,0 +1,178 @@
+
+drop trigger after_insert_dimension
+$$
+CREATE TRIGGER after_insert_dimension AFTER INSERT ON tb_obs_dimension
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_dimension',CONCAT('insert the dimention: ',NEW.dimension_name));
+$$
+
+CREATE TRIGGER after_delete_dimension AFTER delete ON tb_obs_dimension
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_dimension',CONCAT('delete the dimention: ',old.dimension_name));
+$$
+
+CREATE TRIGGER after_update_dimension AFTER update ON tb_obs_dimension
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_dimension',CONCAT('update the dimention: ',old.dimension_name,' for ',new.dimension_name));
+$$
+
+
+$$
+CREATE TRIGGER after_insert_indicator AFTER INSERT ON tb_obs_indicator
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_indicator',CONCAT('insert the indicator: ',NEW.indicator_name));
+$$
+
+
+CREATE TRIGGER after_delete_indicator AFTER delete ON tb_obs_indicator
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_indicator',CONCAT('delete the indicator: ',old.indicator_name));
+$$
+
+
+CREATE TRIGGER after_update_indicator AFTER update ON tb_obs_indicator
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_indicator',CONCAT('update the indicator: ',old.indicator_name,' for ',new.indicator_name));
+$$
+
+
+CREATE TRIGGER after_insert_indicator_data_cualitative AFTER INSERT ON tb_obs_indicator_data_cualitative
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_indicator_data_cualitative',CONCAT('insert the indicator-data-cualitative: ',NEW.indicator_data_description,'-',NEW.indicator_data_total));
+$$
+CREATE TRIGGER after_delete_indicator_data_cualitative AFTER delete ON tb_obs_indicator_data_cualitative
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_indicator_data_cualitative',CONCAT('delete the indicator_reference: ',OLD.indicator_data_description,'-',OLD.indicator_data_total));
+$$
+
+
+CREATE TRIGGER after_insert_indicator_data_cuantitative AFTER INSERT ON tb_obs_indicator_data_cuantitative
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_indicator_data_cuantitative',CONCAT('insert the indicator_data_cuantitative: ',NEW.indicator_data_description,'-',NEW.indicator_id));
+$$
+
+CREATE TRIGGER after_delete_indicator_data_cuantitative AFTER delete ON tb_obs_indicator_data_cuantitative
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_indicator_data_cuantitative',CONCAT('delete the indicator_data_cuantitative: ',OLD.indicator_data_description,'-',OLD.indicator_id));
+$$
+
+CREATE TRIGGER after_update_indicator_data_cuantitative AFTER update ON tb_obs_indicator_data_cuantitative
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_indicator_data_cuantitative',CONCAT('update the indicator_data_cuantitative: ',OLD.indicator_data_description,'-',NEW.indicator_data_description));
+$$
+
+CREATE TRIGGER after_insert_indicator_reference AFTER INSERT ON tb_obs_indicator_reference
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_indicator_reference',CONCAT('insert the indicator-reference: ',NEW.indicator_reference_id,'-',NEW.indicator_reference_id));
+$$
+
+CREATE TRIGGER after_delete_indicator_reference AFTER delete ON tb_obs_indicator_reference
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_indicator_reference',CONCAT('delete the indicator_reference: ',OLD.indicator_reference_id,'-',OLD.indicator_reference_id));
+$$
+
+CREATE TRIGGER after_insert_List AFTER INSERT ON tb_obs_list
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_list',CONCAT('insert the list: ',NEW.list_name,'-',NEW.list_value,'-',NEW.indicator_id,'-',NEW.indicator_region_id));
+$$
+
+CREATE TRIGGER after_delete_list AFTER delete ON tb_obs_list
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_list',CONCAT('delete the list: ',OLD.list_name,'-',OLD.list_value));
+$$
+
+CREATE TRIGGER after_update_list AFTER update ON tb_obs_list
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_list',CONCAT('update the list: ',OLD.list_name,'-',OLD.list_value,'-',NEW.list_name,'-',NEW.list_value));
+$$
+CREATE TRIGGER after_insert_reference AFTER INSERT ON tb_obs_reference
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_reference',CONCAT('insert the reference: ',NEW.reference_link));
+$$
+
+CREATE TRIGGER after_delete_reference AFTER delete ON tb_obs_reference
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_reference',CONCAT('delete the reference: ',old.reference_link));
+$$
+
+CREATE TRIGGER after_update_reference AFTER update ON tb_obs_reference
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_reference',CONCAT('update the reference: ',old.reference_link,' for ',new.reference_link));
+$$
+CREATE TRIGGER after_insert_subVariable AFTER INSERT ON tb_obs_sub_variable
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_sub_variable',CONCAT('insert the sub variable: ',NEW.sub_variable_name));
+$$
+
+CREATE TRIGGER after_delete_subVariable AFTER delete ON tb_obs_sub_variable
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_sub_variable',CONCAT('delete the sub variable: ',old.sub_variable_name));
+$$
+
+CREATE TRIGGER after_update_sub_variable AFTER update ON tb_obs_sub_variable
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_sub_variable',CONCAT('update the sub variable: ',old.sub_variable_name,' for ',new.sub_variable_name));
+$$
+
+
+CREATE TRIGGER after_insert_variable AFTER INSERT ON tb_obs_variable
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_variable',CONCAT('insert the variable: ',NEW.variable_name));
+$$
+
+CREATE TRIGGER after_delete_variable AFTER delete ON tb_obs_variable
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_variable',CONCAT('delete the variable: ',old.variable_name));
+$$
+
+CREATE TRIGGER after_update_variable AFTER update ON tb_obs_variable
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_variable',CONCAT('update the variable: ',old.variable_name,' for ',new.variable_name));
+$$
+
+CREATE TRIGGER after_insert_year AFTER INSERT ON tb_obs_year
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_year',CONCAT('insert the year: ',NEW.year_id,'-',NEW.year_value,'-',NEW.indicator_id,'-',NEW.indicator_region_id));
+$$
+
+CREATE TRIGGER after_delete_year AFTER delete ON tb_obs_year
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_year',CONCAT('delete the year: ',OLD.year_id,'-',OLD.year_value));
+$$
+
+CREATE TRIGGER after_update_year AFTER update ON tb_obs_year
+FOR each row
+  INSERT INTO tb_obs_log(user,table_name,description)
+  values(user(),'tb_obs_year',CONCAT('update the year: ',OLD.year_id,'-',OLD.year_value,'-',NEW.year_id,'-',NEW.year_value));
+$$
+
+
+
+
