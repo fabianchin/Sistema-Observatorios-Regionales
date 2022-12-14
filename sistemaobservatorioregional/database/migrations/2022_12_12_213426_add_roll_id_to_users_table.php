@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTbObsReferenceTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateTbObsReferenceTable extends Migration
      */
     public function up()
     {
-        Schema::create('tb_obs_reference', function (Blueprint $table) {
-            $table->integer('reference_id')->primary();
-            $table->string('reference_link', 50)->default('Link de referencia no definido');
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('roll_id');
         });
     }
 
@@ -26,6 +25,8 @@ class CreateTbObsReferenceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_obs_reference');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('roll_id');
+        });
     }
-}
+};
