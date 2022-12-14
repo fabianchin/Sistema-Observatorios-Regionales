@@ -4,21 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Dimension;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; 
 
 class DimensionController extends Controller
 {
-    // public function manage()
-    // {
-    //     $dimensions = new Dimension();
-    //     //$dimensions->getAllDim();
-
-    //     $data = [          
-    //         'dimensions' => $dimensions->getAllDim()
-    //     ];
-    //     //dd('Controladora de dimensiones, DD');
-    //     return view('admin_layouts.dimension.manage', $data);
-    // }
-    
     public function getAllDimension()
     {
         $dimensionModel = new Dimension(); 
@@ -41,9 +30,21 @@ class DimensionController extends Controller
     //Opciones de la tabla
     public function deleteDimension(Request $request)
     {
-        $dimension = new Dimension();
-        $dimension->deleteDimension($request->dimension_id);
-        return redirect()->route('dimension.manage'); 
+        DB::beginTransaction();
+        try {
+            $dimension = new Dimension();
+            $dimension->deleteDimension($request->dimension_id);
+            return redirect()->route('dimension.manage'); 
+
+            DB::commit();
+            $request["databaseError"] = "";
+
+        } catch (\Exception $ex) {
+
+            DB::rollBack();
+            $request["databaseError"] = "Error al insertar el indicador ".$request->indicator_name.', con el error: ' . $ex->getMessage() ;
+            return redirect()->route('dimension.manage')->with('error', $request['databaseError']); 
+        }
     }
 
     //-----------------------------------------

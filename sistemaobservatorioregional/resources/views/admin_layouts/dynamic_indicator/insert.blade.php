@@ -44,6 +44,10 @@
                         <input type="text" name="indicator_name" id="indicator_name" class="form-control" placeholder="Nombre del indicador" required>
                         <br/>
 
+                        <label for="indicator_description">Descripcion del indicador</label>
+                        <input type="text" name="indicator_description" id="indicator_description" class="form-control" placeholder="Descripcion del indicador" required>
+                        <br/>
+
                         <label for="variable-type">Tipo de indicador:&nbsp;</label>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons" id="variable-type">
                             
@@ -137,12 +141,6 @@
                             @foreach ($regions as $region) 
                                 <li><a class="dropdown-item"  href="#" value="{{$region->region_id}}">{{$region->region_name}}</a></li>
                             @endforeach
-                            {{-- <li><a class="dropdown-item" href="#" value="1">Huetar Norte</a></li>
-                            <li><a class="dropdown-item" href="#" value="2">Huetar Caribe</a></li>
-                            <li><a class="dropdown-item" href="#" value="3">Huetar Norte y Caribe</a></li>
-                            <li><a class="dropdown-item" href="#" value="4">Chorotega</a></li>
-                            <li><a class="dropdown-item" href="#" value="5">Brunca</a></li>
-                            <li><a class="dropdown-item" href="#" value="6">Nacional</a></li> --}}
                         </ul>
                             <input type="hidden" id="region_id" name="region_id" value="none">
                         </div>
@@ -187,7 +185,7 @@
                             
                             <div class="form-group row">
                                 <div class="yearInputs">
-                                    <input type="number" id="datepicker_[0]" name="datepicker_[0]" placeholder="Año" /> <input type="number" id="cuantitative_value_[0]" name="cuantitative_value_[0]" placeholder="Dato..." /> <br/>
+                                    <input type="text" maxlength="4" onkeypress='return event.charCode >= 48 && event.charCode <= 57'   id="datepicker_[0]" name="datepicker_[0]" placeholder="Año" /> <input type="number" id="cuantitative_value_[0]" name="cuantitative_value_[0]" placeholder="Dato..." /> <br/>
                                 </div>
                             </div>
                         
@@ -215,7 +213,8 @@
 
                             <div class="form-group row">
                                 <div class="listInputs">
-                                    <input type="text" id="list_value_[0]" name="list_value_[0]" placeholder="Dato del listado" /> <input type="number" id="cualitative_value_[0]" name="cualitative_value_[0]" placeholder="Dato..." /> <br/>
+                                    <input type="text" id="list_value_[0]" name="list_value_[0]" placeholder="Dato del listado" /> 
+                                    {{-- <input type="number" id="cualitative_value_[0]" name="cualitative_value_[0]" placeholder="Dato..." /> <br/> --}}
                                 </div>
                             </div>
 
@@ -246,6 +245,7 @@
 @section('scripts')
 
 <script>
+    //Para verificacion de datos vacios del formulario
     var global_dimension_id_value="none";
     var global_variable_id_value="none";
     var global_subvariable_id_value="none";
@@ -270,7 +270,7 @@
         $(this).closest(".dropdown-menu").prev(".dropdown-toggle").text($(this).text()); //Boton
     });
 
-    //Unidad de medida
+    //Obtencion de dato de: Unidad de medida
     $("#dropdown-menu-measurement li a").click(function()
     {
         var unidad_medida_id = $(this).attr("value");
@@ -279,7 +279,7 @@
     });
 
     
-        //Region
+    //Obtencion de dato de: Region
     $("#dropdown-menu-region li a").click(function() 
     {
         region_id_value = $(this).attr('value');
@@ -287,7 +287,7 @@
         global_region_id_value = region_id_value;
     });
 
-    //Dimension
+    //Obtencion de dato de: Dimension
     $("#dropdown_menu_dimension li a").on('click',function() 
     {
         dimension_id_value = $(this).attr('value');
@@ -312,7 +312,6 @@
                 dataType: 'json',
                 success: function (result) 
                 {
-                    //$('#dropdownMenuButtonVariable').html('Seleccione la variable');
                     $.each(result.variables, function (key, value) {
                         $("#dropdown_menu_variable")
                         .append('<li><a class="dropdown-item" href="javascript:void(0);" onclick="clickAndFill_Variable(this,'+value.variable_id+')" value="'+value.variable_id+'" variable_nombre="'+value.variable_name+'">'+value.variable_name+'</a></li>');
@@ -393,7 +392,7 @@ function removeInputFieldRefs (selectedField) {
     //Funcion de boton de agregar año
     $(document).ready(function() {
         $('.add').on('click', function() {
-            var field = '<div class="insertedYears"><input type="number" id="datepicker_['+yearindex+']" name="datepicker_['+yearindex+']" placeholder="Año" required/> <input type="text" id="cuantitative_value_['+yearindex+']" name="cuantitative_value_['+yearindex+']" placeholder="Dato" required/> <button onclick="removeInputField(this);">Eliminar</button> <br/> </div>';
+            var field = '<div class="insertedYears"><input type="text" maxlength="4" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="datepicker_['+yearindex+']" name="datepicker_['+yearindex+']" placeholder="Año" required/> <input type="number" id="cuantitative_value_['+yearindex+']" name="cuantitative_value_['+yearindex+']" placeholder="Dato" required/> <button onclick="removeInputField(this);">Eliminar</button> <br/> </div>';
             $('.yearInputs').append(field);
             yearindex = yearindex+1;
             addDatePickerFormat();
@@ -412,6 +411,14 @@ function removeInputFieldRefs (selectedField) {
         minViewMode: "years"
     });    
 
+    // array.forEach($("#datepicker_[]") => {
+    //     $("#datepicker_").datepicker({
+    //         format: "yyyy",
+    //         viewMode: "years", 
+    //         minViewMode: "years"
+    //     });
+    // });
+
     //Para los datepicker dinamicos
     function addDatePickerFormat(){
         for (var k = yearindex-1; k <= yearindex; k++) {
@@ -425,12 +432,13 @@ function removeInputFieldRefs (selectedField) {
 
 //CUANTITATIVO YEARS----------------------------------------------------------------------------
 
-//CUALITTIVO LISTS----------------------------------------------------------------------------
+//CUALITATIVO LISTS----------------------------------------------------------------------------
   var listIndex = 1;
 //Funcion de boton de agregar listado
 $(document).ready(function() {
     $('.add_list').on('click', function() {
-        var fieldList = '<div class="insertedLists"><input type="text" id="list_value_['+listIndex+']" name="list_value_['+listIndex+']" placeholder="Dato del listado" required/> <input type="number" id="cualitative_value_['+listIndex+']" name="cualitative_value_['+listIndex+']" placeholder="Dato..." required/> <button onclick="removeInputFieldList(this);">Eliminar</button> <br/> </div>';
+        // var fieldList = '<div class="insertedLists"><input type="text" id="list_value_['+listIndex+']" name="list_value_['+listIndex+']" placeholder="Dato del listado" required/> <input type="number" id="cualitative_value_['+listIndex+']" name="cualitative_value_['+listIndex+']" placeholder="Dato..." required/> <button onclick="removeInputFieldList(this);">Eliminar</button> <br/> </div>';
+        var fieldList = '<div class="insertedLists"><input type="text" id="list_value_['+listIndex+']" name="list_value_['+listIndex+']" placeholder="Dato del listado" required/> <button onclick="removeInputFieldList(this);">Eliminar</button> <br/> </div>';
         $('.listInputs').append(fieldList);
         listIndex = listIndex+1;
     })
