@@ -109,7 +109,12 @@ Route::group(['prefix' => 'admin'], function () {
 
     //-----------------------------------------actualizar informacion de usuario-----------------------------------------
     Route::get('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
+    Route::post('/confirm-password', [PerfilController::class, 'confirm'])->name('perfil.confirm'); 
+    Route::get('/confirm-password', [PerfilController::class, 'confirmView'])->name('perfil.confirm.password'); 
     Route::post('/editar-perfil', [PerfilController::class, 'store'])->name('perfil.store');
+    Route::get('/users', [PerfilController::class, 'getAllUsers'])->name('perfil.list');
+    Route::post('/user/{user_id}', [PerfilController::class, 'destroy'])->name('perfil.destroy');
+
 });
 
 //-------------Dimension----------------

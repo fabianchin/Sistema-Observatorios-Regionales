@@ -36,7 +36,7 @@ class User extends Authenticatable
 
     public function insertUser($user_name, $user_email, $user_password){ return DB::statement('call insertUser(?,?,?)',[$user_name,$user_email,$user_password]);}
     public function deleteUser($user_id){ return DB::statement('call deleteUser(?)',[$user_id]);}
-    public function updateUser($user_id, $user_name, $user_email, $user_password){ return DB::statement('call updateUser(?,?,?,?)',[$user_id, $user_name, $user_email, $user_password]);}
+    public function updateUser($user_id, $user_name, $user_email){ return DB::statement('call updateUsers(?,?,?)',[$user_id, $user_name, $user_email]);}
 
     /**
      * The attributes that should be hidden for serialization.

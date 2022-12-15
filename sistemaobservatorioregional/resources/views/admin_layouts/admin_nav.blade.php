@@ -315,7 +315,7 @@
              
               @auth
                 
-                <a href="{{route('perfil.index')}}" class="nav-link text-body p-0">
+                <a href="{{route('perfil.confirm.password')}}" class="nav-link text-body p-0">
                   <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer fa-lg"></i>
                 </a>
                 

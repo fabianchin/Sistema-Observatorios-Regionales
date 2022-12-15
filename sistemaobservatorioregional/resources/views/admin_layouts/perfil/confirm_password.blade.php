@@ -31,65 +31,48 @@
           <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
             <div style="width: 100%" class="shadow p-3 mb-5 bg-body rounded card card-plain mt-8">
               <div class="card-header pb-0 text-left bg-transparent">
-                <h3 class="font-weight-bolder text-info text-gradient">Actualiza tus datos</h3>
+                <h3 class="font-weight-bolder text-info text-gradient">Ingresa tu contraseña</h3>
               </div>
               <div class="card-body">
 
-                  <form  method="POST" action="{{ route('perfil.store')}}" novalidate>
+                  <form  method="POST" action="{{ route('perfil.confirm')}}" novalidate>
                       @csrf
-                      @if (session('success'))
-                            <div class="alert alert-success" style="color: white;">
-                              {{ session('success') }}
-                            </div>
-                          @elseif (session('error'))
-                            <div class="alert alert-danger" style="color: white;">
-                                {{ session('error') }}
-                            </div>
-                          @endif
-                    <div class="mb-3">
-                        <label for="name" >
-                            Nombre
-                        </label>
-                        <input 
-                            type="text"
-                            name="name"
-                            id="name"
-                            placeholder="Tu nombre"
-                            class="form-control"
-                            value="{{auth()->user()->name}}"
-                            >
-                            @error('name')
-                            <p class="alert  alert-danger text-white" role="alert">
-                                {{$message}}
-                            </p>
-                            @enderror
-                    </div>
+                
+                        @if (session('error'))
+                        <div class="alert alert-danger" style="color: white;">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+                      
+                      <div class="mb-3">
+                          <input 
+                              type="hidden"
+                              name="email"
+                              id="email"
+                              class="form-control"
+                              value="{{auth()->user()->email}}"
+                              >
+                      </div>
 
                     <div class="mb-3">
-                        <label for="email" >
-                            Correo
-                        </label>
-                        <input 
-                            type="text"
-                            name="email"
-                            id="email"
-                            placeholder="correo@una.cr"
-                            class="form-control"
-                            value="{{auth()->user()->email}}"
-                            >
-                            @error('email')
-                            <p class="alert alert-danger text-white" role="alert">
-                                {{$message}}
-                            </p>
-                            @enderror
-                    </div>
-                  
-                    <input
-                      type="submit"
-                      value="Actualizar"
-                      class="btn bg-gradient-info w-100 mt-4 mb-0"
-                    >
-                </form>
+                      <label for="password" >
+                          Contraseña
+                      </label>
+                      <input 
+                          type="password"
+                          name="password"
+                          id="password"
+                          placeholder="tu contraseña actual"
+                          class="form-control"
+                          >
+                         
+                  </div>
+                      <input
+                           type="submit"
+                           value="Enviar"
+                           class="btn bg-gradient-info w-100 mt-4 mb-0"
+                          >
+                  </form>
                   
               </div>
               
