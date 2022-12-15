@@ -59,9 +59,7 @@
 
                     <form  method="POST" action="{{ route('login')}}" novalidate>
                         @csrf
-                        
-                        
-
+                    
                          @if (session('success'))
                             <div class="alert alert-success" style="color: white;">
                               {{ session('success') }}

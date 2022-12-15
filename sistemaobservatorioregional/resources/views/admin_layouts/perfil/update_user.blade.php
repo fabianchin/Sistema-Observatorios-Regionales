@@ -35,8 +35,17 @@
               </div>
               <div class="card-body">
 
-                  <form  method="POST" action="{{ route('register')}}" novalidate>
+                  <form  method="POST" action="{{ route('perfil.store')}}" novalidate>
                       @csrf
+                      @if (session('success'))
+                            <div class="alert alert-success" style="color: white;">
+                              {{ session('success') }}
+                            </div>
+                          @elseif (session('error'))
+                            <div class="alert alert-danger" style="color: white;">
+                                {{ session('error') }}
+                            </div>
+                          @endif
                       <div class="mb-3">
                           <label for="name" >
                               Nombre
@@ -76,23 +85,50 @@
                       </div>
                       
                       <div class="mb-3">
-                          <label for="password" >
+                          <label for="newpassword" >
                               Contraseña
                           </label>
                           <input 
                               type="password"
-                              name="password"
-                              id="password"
+                              name="newpassword"
+                              id="newpassword"
                               placeholder="Contraseña"
                               class="form-control"
                               >
-                              @error('password')
+                              @error('newpassword')
                               <p class="alert alert-danger text-white" role="alert">
                                   {{$message}}
                               </p>
                               @enderror
                       </div>
-                      
+                      <div class="mb-3">
+                        <label for="password_confirmation" >
+                            Repetir contraseña
+                        </label>
+                        <input 
+                            type="password"
+                            name="password_confirmation"
+                            id="password_confirmation"
+                            placeholder="Contraseña"
+                            class="form-control"
+                            >
+                            
+                    </div>
+                    <!--separar con una linea  -->
+                    <hr style="background-color: black" class="horizontal">
+                    <div class="mb-3">
+                      <label for="password" >
+                          Contraseña actual
+                      </label>
+                      <input 
+                          type="password"
+                          name="password"
+                          id="password"
+                          placeholder="tu contraseña actual"
+                          class="form-control"
+                          >
+                         
+                  </div>
                       <input
                            type="submit"
                            value="Actualizar"
