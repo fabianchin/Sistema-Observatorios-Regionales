@@ -28,6 +28,7 @@
                   <tr>
 
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Variable</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acronimo</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dimension</th>
                     <th class="text-secondary opacity-7"></th>
                   </tr>
@@ -42,6 +43,13 @@
                         </div>
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="mb-0 text-sm">{{$variable->variable_name}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{$variable->variable_acronym}}</h6>
                         </div>
                       </div>
                     </td>

@@ -30,8 +30,8 @@
                       </div>
                     </th> --}}
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dimension</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ultima modificacion</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario que modifico</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Acrónimo</th>
+                    {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario que modifico</th> --}}
                     <th class="text-secondary opacity-7"></th>
                   </tr>
                 </thead>
@@ -53,15 +53,11 @@
                       <p class="text-xs text-secondary mb-0">Organization</p>
                     </td> --}}
                     <td class="text-xs font-weight-bold mb-0">
-                      <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <p class="text-xs font-weight-bold mb-0">Usuario XXXXX</p>
+                      <span class="text-secondary text-xs font-weight-bold">{{$dimension->dimension_acronym}}</span>
                     </td>
                     <td class="align-middle">
                       <a href="{{route('dimension.redirectToUpdateDimension').'?dimension_id='.$dimension->dimension_id}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                       {{-- SI FUNCIONA PERO PIERDE REF POR SLASH <a href="{{route('dimension.redirectToUpdateDimension',['dimension_id'=>$dimension->dimension_id])}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user"> --}}
-
                         <span style="color:white" class="badge badge-sm bg-gradient-success">Editar</span>
                       </a>
                       <a href="{{route('dimension.delete', $dimension->dimension_id)}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user">

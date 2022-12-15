@@ -19,6 +19,10 @@
             <label for="dimension_name">Nombre de la sub-variable</label>
             <input type="text" name="sub_variable_name" class="form-control" placeholder="Nombre de la sub-variable" aria-label="sub_variable_name" required value="{{$sub->sub_variable_name}}">
             <input type="hidden" name="sub_variable_id" value="{{$sub->sub_variable_id}}">
+            <br>
+            <label for="sub_variable_code">Código</label>
+            <input type="text" maxlength="3" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="sub_variable_code" class="form-control" placeholder="Codigo de la sub-variable" aria-label="sub_variable_code" 
+            value="{{$sub->sub_variable_code}}" required>
         </div>
   
         <label for="dropdownMenuButton">Variable</label>

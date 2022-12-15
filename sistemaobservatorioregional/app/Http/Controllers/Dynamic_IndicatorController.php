@@ -67,7 +67,7 @@ class Dynamic_IndicatorController extends Controller{
         
         DB::beginTransaction();
                 try {
-                    $indicatorModel->insertIndicator($request->indicator_name, $request->sub_variable_id, $request->options); //Inserta en la tabla indicador
+                    $indicatorModel->insertIndicator($request->indicator_name, $request->sub_variable_id, $request->options, $request->indicator_code); //Inserta en la tabla indicador
                     $lastInsertedIndicatorDetailID = DB::select('SELECT LAST_INSERT_ID();'); //Obtiene el ultimo id insertado de la tabla indicador
                     $lastIndicatorID = reset($lastInsertedIndicatorDetailID[0]);
                     $indicatorDetailModel->insertIndicatorDetail($lastIndicatorID, $request->region_id); //Inserta en la tabla indicador detalle

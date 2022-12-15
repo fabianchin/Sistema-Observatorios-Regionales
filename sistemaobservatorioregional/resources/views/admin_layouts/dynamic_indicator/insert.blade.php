@@ -48,6 +48,10 @@
                         <input type="text" name="indicator_description" id="indicator_description" class="form-control" placeholder="Descripcion del indicador" required>
                         <br/>
 
+                        <label for="indicator_code">Código del indicador</label>
+                        <input type="text" maxlength="4" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="indicator_code" id="indicator_code" class="form-control" placeholder="Codigo del indicador" required>
+                        <br/>
+
                         <label for="variable-type">Tipo de indicador:&nbsp;</label>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons" id="variable-type">
                             

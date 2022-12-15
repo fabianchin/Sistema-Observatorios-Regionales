@@ -19,6 +19,10 @@
             <label for="dimension_name">Nombre de la variable</label>
             <input type="text" name="variable_name" class="form-control" placeholder="Nombre de la variable" aria-label="variable_name" required value="{{$variable->variable_name}}">
             <input type="hidden" name="variable_id" value="{{$variable->variable_id}}">
+            <br>
+            <label for="variable_acronym">Acrónimo de la variable</label>
+            <input type="text" maxlength="2" onkeypress='return event.charCode >= 65' name="variable_acronym" class="form-control" 
+              placeholder="Acronimo de la variable" aria-label="variable_acronym" value="{{$variable->variable_acronym}}" required>
         </div>
   
         <label for="dropdownMenuButton">Dimension</label>
@@ -58,7 +62,6 @@
  $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
         $(this).closest(".dropdown-menu").prev(".dropdown-toggle").text($(this).text()); //Boton
     });
-
 
   //Agarrar el dato del dropdown y asignarlo al input hidden
   $(document).ready(function()

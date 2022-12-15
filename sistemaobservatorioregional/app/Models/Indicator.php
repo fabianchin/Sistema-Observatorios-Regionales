@@ -10,7 +10,7 @@ class Indicator extends Model
 {
     use HasFactory;
     protected $table = 'tb_obs_indicator';
-    protected $fillable = ['indicator_name','indicator_sub_variable','indicator_sub_variable_type']; //indicator_sub_variable_id, indicator_variable_type_id
+    protected $fillable = ['indicator_name','indicator_sub_variable_id','indicator_sub_variable_type','indicator_code'];
     protected $hidden = ['indicator_id'];
 
     //Storaged procedures
@@ -21,7 +21,7 @@ class Indicator extends Model
         $indicator = DB::select('call getIndicatorById(?)',[$indicator_id]);
         return $indicator[0];
     }    
-    public function insertIndicator($indicator_name, $indicator_sub_variable, $indicator_sub_variable_type){ return DB::statement('call insertIndicator(?,?,?)',[$indicator_name,$indicator_sub_variable, $indicator_sub_variable_type]);}
+    public function insertIndicator($indicator_name, $indicator_sub_variable, $indicator_sub_variable_type,$indicator_code){ return DB::statement('call insertIndicator(?,?,?,?)',[$indicator_name,$indicator_sub_variable, $indicator_sub_variable_type,$indicator_code]);}
     public function deleteIndicator($indicator_id){ return DB::statement('call deleteIndicator(?)',[$indicator_id]);}
-    public function updateIndicator($indicator_id,$indicator_name, $indicator_sub_variable, $indicator_sub_variable_type){ return DB::statement('call updateIndicator(?,?,?,?)',[$indicator_id,$indicator_name, $indicator_sub_variable, $indicator_sub_variable_type]);}
+    public function updateIndicator($indicator_id,$indicator_name, $indicator_sub_variable, $indicator_sub_variable_type,$indicator_code){ return DB::statement('call updateIndicator(?,?,?,?,?)',[$indicator_id,$indicator_name, $indicator_sub_variable, $indicator_sub_variable_type,$indicator_code]);}
 }
