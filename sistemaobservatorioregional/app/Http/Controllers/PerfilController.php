@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Termwind\Components\Dd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Psr\Http\Message\RequestInterface;
 
 class PerfilController extends Controller
 {
@@ -60,16 +57,16 @@ class PerfilController extends Controller
         ];
         return view('admin_layouts.users.manage', $data);
     }
+
     //borrrar usuario
     public function destroy(Request $request)
     {
-        //obtner el id del usuario a eliminar
         $user = new User();
         $state = $user->deleteUser($request->user_id);
         if($state == 1){
-            return redirect()->route('perfil.list')->with('status', 'Se elimino correctamente el indicador');
+            return redirect()->route('perfil.list')->with('status', 'Se elimino correctamente el usuario');
         }else{
-            return redirect()->route('perfil.list')->with('error', 'No se puede eliminar el indicador porque tiene informacion asociado');
+            return redirect()->route('perfil.list')->with('error', 'No se pudo eliminar el usuario');
         }
     }
 
