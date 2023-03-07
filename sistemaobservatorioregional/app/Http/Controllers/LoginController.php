@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Dimension;
-use Termwind\Components\Dd;
 
 class LoginController extends Controller
 {
@@ -23,15 +21,8 @@ class LoginController extends Controller
         ]);
    
         if (!auth()->attempt(request(['email', 'password']))) {
-            return back()->with('mensaje', 'Credenciales incorrectas');
+            return back()->with('error', 'Credenciales incorrectas');
         }
-
-        $dimensionModel = new Dimension();
-        $dimensionModel = $dimensionModel->makeVisible(['dimension_id']);
-        $data = [
-            'dimensions' => $dimensionModel->getAllDimension()
-        ];
-
-        return view('admin_layouts.dimension.manage', $data);
+        return view('admin_layouts.index.admin_index');
     }
 }
