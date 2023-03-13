@@ -1,17 +1,3 @@
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.6
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,25 +38,33 @@
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
-                  <h3 class="font-weight-bolder text-info text-gradient">Bienvenido de vuelta</h3>
-                  <p class="mb-0">Ingrese su correo y contraseña para ingresar</p>
+                  <h3 class="font-weight-bolder text-info text-gradient">Registro de usuario</h3>
+                  <p class="mb-0">Ingrese los datos que se le solicitan</p>
                 </div>
                 <div class="card-body">
 
-                    <form  method="POST" action="{{ route('login')}}" novalidate>
+                    <form  method="POST" action="{{ route('register')}}" novalidate>
                         @csrf
-                    
-                         @if (session('success'))
-                            <div class="alert alert-success" style="color: white;">
-                              {{ session('success') }}
-                            </div>
-                          @elseif (session('error'))
-                            <div class="alert alert-danger" style="color: white;">
-                                {{ session('error') }}
-                            </div>
-                          @endif
+                        <div class="mb-3">
+                            <label for="name" >
+                                Nombre
+                            </label>
+                            <input 
+                                type="text"
+                                name="name"
+                                id="name"
+                                placeholder="Tu nombre"
+                                class="form-control"
+                                value="{{old('name')}}"
+                                >
+                                @error('name')
+                                <p class="alert  alert-danger text-white" role="alert">
+                                    {{$message}}
+                                </p>
+                                @enderror
+                        </div>
 
-                        <div class="mb-5">
+                        <div class="mb-3">
                             <label for="email" >
                                 Correo
                             </label>
@@ -88,7 +82,8 @@
                                 </p>
                                 @enderror
                         </div>
-                        <div class="mb-5">
+                        
+                        <div class="mb-3">
                             <label for="password" >
                                 Contraseña
                             </label>
@@ -105,23 +100,26 @@
                                 </p>
                                 @enderror
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remenber"> 
-                            <label class="form-check-label" for="rememberMe">Recordar dispositivo</label> 
+                        <div class="mb-3">
+                            <label for="password_confirmation" >
+                                Repetir contraseña
+                            </label>
+                            <input 
+                                type="password"
+                                name="password_confirmation"
+                                id="password_confirmation"
+                                placeholder="Contraseña"
+                                class="form-control"
+                                >
+                                
                         </div>
                         <input
                              type="submit"
-                             value="Iniciar sesión"
+                             value="Registrar"
                              class="btn bg-gradient-info w-100 mt-4 mb-0"
                             >
                     </form>
-                    <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                        <p class="mb-4 text-sm mx-auto">
-                          ¿No tienes cuenta?
-                          <a href="{{route('register')}}" class="text-info text-gradient font-weight-bold">Solicitar acceso</a>
-                        </p>
-                    </div>
-
+                    
                 </div>
                 
               </div>
@@ -140,46 +138,7 @@
   <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
   <footer class="footer py-5">
     <div class="container">
-      <div class="row">
-        {{-- <div class="col-lg-8 mb-4 mx-auto text-center">
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Company
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            About Us
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Team
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Products
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Blog
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Pricing
-          </a>
-        </div>
-        <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-dribbble"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-twitter"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-instagram"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-pinterest"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-github"></span>
-          </a>
-        </div>
-      </div> --}}
-      <div class="row">
+      
         <div class="col-8 mx-auto text-center mt-1">
           <p class="mb-0 text-secondary">
             Copyright © <script>

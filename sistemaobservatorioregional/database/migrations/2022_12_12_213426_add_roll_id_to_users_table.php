@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTbObsRegionTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateTbObsRegionTable extends Migration
      */
     public function up()
     {
-        Schema::create('tb_obs_region', function (Blueprint $table) {
-            $table->integer('region_id')->primary();
-            $table->string('region_name', 50)->default('Region no definida');
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('roll_id')->nullable();
         });
     }
 
@@ -26,6 +25,8 @@ class CreateTbObsRegionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_obs_region');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('roll_id');
+        });
     }
-}
+};

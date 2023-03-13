@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dimension;
-use Termwind\Components\Dd;
 
 class LoginController extends Controller
 {
@@ -16,22 +15,17 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-        
+        $remember = $request->has('remember');
         $this->validate(request(), [
             'email' => 'required|email',
             'password' => 'required'
         ]);
+
    
-        if (!auth()->attempt(request(['email', 'password']))) {
-            return back()->with('mensaje', 'Credenciales incorrectas');
+        if (!auth()->attempt(request(['email', 'password'], $remember))) {
+            return back()->with('error', 'Credenciales incorrectas');
         }
-
-        $dimensionModel = new Dimension();
-        $dimensionModel = $dimensionModel->makeVisible(['dimension_id']);
-        $data = [
-            'dimensions' => $dimensionModel->getAllDimension()
-        ];
-
-        return view('admin_layouts.dimension.manage', $data);
+        
+        return view('admin_layouts.index.admin_index');
     }
 }
