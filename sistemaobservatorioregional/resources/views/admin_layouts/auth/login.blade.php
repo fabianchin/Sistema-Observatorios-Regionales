@@ -106,7 +106,7 @@
                                 @enderror
                         </div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" name="remember" id="rememberMe"> 
+                            <input class="form-check-input" type="checkbox" name="remember" id="remenber"> 
                             <label class="form-check-label" for="rememberMe">Recordar dispositivo</label> 
                         </div>
                         <input
@@ -118,7 +118,7 @@
                     <div class="card-footer text-center pt-0 px-lg-2 px-1">
                         <p class="mb-4 text-sm mx-auto">
                           ¿No tienes cuenta?
-                          <a href="javascript:;" class="text-info text-gradient font-weight-bold">Solicitar acceso</a>
+                          <a href="{{route('register')}}" class="text-info text-gradient font-weight-bold">Solicitar acceso</a>
                         </p>
                     </div>
 
