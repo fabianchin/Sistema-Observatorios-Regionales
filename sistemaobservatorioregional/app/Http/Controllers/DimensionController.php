@@ -46,13 +46,7 @@ class DimensionController extends Controller
         return redirect()->route('dimension.manage'); 
     }
 
-    //-----------------------------------------
-    //onclick del boton de editar
-    // public function redirectToUpdateDimension($dimension_id)
-    // {
-    //     return redirect()->route('dimension.updateDimension', $dimension_id);
-    //     //return view('admin_layouts.dimension.update', $dimension_id);
-    // }
+    
 
     public function loadDimensionData(Request $request)
     {
@@ -76,25 +70,17 @@ class DimensionController extends Controller
     public function updateDimension(Request $request)
     {
         $dimension = new Dimension();
-        $dimension->updateDimension($request->dimension_id,$request->dimension_name);
+        $dimension->updateDimension($request->dimension_id,$request->dimension_name, $request->acronym);
         return redirect()->route('dimension.manage')->with('success', 'Dimension actualizada correctamente'); 
         // return view('admin_layouts.dimension.update', $dimension_id);
     }
 
-    //------------------------------------------
-
-    // //onclick del boton de crear
-    // public function redirectToInsertDimension()
-    // {
-    //     return redirect()->route('dimension.create');
-    //     //return view('admin_layouts.dimension.create');
-    // }
 
     //onclick del boton de guardar en la vista de crear dimension
     public function insertDimension(Request $request)
     {
         $dimension = new Dimension();
-        $dimension->insertDimension($request->dimension_name);
+        $dimension->insertDimension($request->dimension_name, $request->acronym);
         return redirect()->route('dimension.redirectToCreateDimension');//->with('success', 'Se agrego la dimension '.$request->dimension_name.' correctamente'); 
         //return redirect()->route('dimension.manage');
     }
