@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -147,9 +148,8 @@
                 <div class="card">
                   <img src="assets/img/portfolio/portfolio-1-1.jpg" class="card-img-top" alt="...">
                   <div class="card-body">
-                    <h5 class="card-title"><a href="">Observatorio Chorotega</a></h5>
-                    <p class="card-text">Et architecto provident deleniti facere repellat nobis iste. Id facere quia
-                      quae dolores dolorem tempore</p>
+                    <h5 class="card-title"><a href="">Observatorio Regional Chorotega</a></h5>
+                    <p class="card-text"><b>Responsable:</b> MSc. William Gómez Solis</p>
                     <a href="#" class="btn">Conocer más</a>
                   </div>
                 </div>
@@ -158,20 +158,18 @@
                 <div class="card">
                   <img src="assets/img/portfolio/portfolio-2-2.jpg" class="card-img-top" alt="...">
                   <div class="card-body">
-                    <h5 class="card-title"><a href="">Observatorio Huetar</a></h5>
-                    <p class="card-text">Ut quas omnis est. Non et aut tempora dignissimos similique in dignissimos. Sit
-                      incidunt et odit iusto</p>
+                    <h5 class="card-title"><a href="">Observatorio Regional Huetar</a></h5>
+                    <p class="card-text"><b>Responsable:</b> MSc. Adrián Carmona Miranda</p>
                     <a href="#" class="btn">Conocer más</a>
                   </div>
                 </div>
               </div>
               <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-5 mb-lg-0">
                 <div class="card">
-                  <img src="assets/img/portfolio/portfolio-1-1.jpg" class="card-img-top" alt="...">
+                <img src="assets/img/portfolio/logo-obs-brunca.png" class="card-img-top" alt="..."  height="270" width="300">
                   <div class="card-body">
-                    <h5 class="card-title"><a href="">Observatorio Brunca</a></h5>
-                    <p class="card-text">Modi ut et delectus. Modi nobis saepe voluptates nostrum. Sed quod consequatur
-                      quia provident dera</p>
+                    <h5 class="card-title"><a href="">Observatorio Regional Brunca</a></h5>
+                    <p class="card-text"><b>Responsable:</b> MSc. Miguel Calderón Quesada</p>
                     <a href="#" class="btn">Conocer más</a>
                   </div>
                 </div>
@@ -186,85 +184,101 @@
           <div class="container">
 
             <div class="section-title">
-              <h2>¿A qué se dedican los observatorios?</h2>
-              <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat
-                sit in iste officiis commodi quidem hic quas.</p>
+              <h3><b> ¿A qué se dedican los observatorios?</b></h3>
+              <div class="row row d-flex justify-content-center">
+                <div class="col-md-9">
+                  <h5 align='center'>El observatorio regional toma gran importancia, ya que se enfoca en las acciones de monitoreo, generación, análisis y comunicación de
+                    información pertinente y oportuna del estado de las regiones y su desarrollo integral, orientando la acción sustantiva
+                    universitaria e interuniversitaria en las dimensiones económica-productiva, social, cultural y ambiental.</h5>
+                </div>
+              </div>
             </div>
 
-            <div class="row">
+            
+            
+            <div class="row d-flex justify-content-center">
               <div class="col-md-6">
                 <div class="icon-box">
-                  <i class="bi bi-briefcase"></i>
-                  <h4><a href="#">Lorem Ipsum</a></h4>
-                  <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                    cupiditate non provident</p>
-                </div>
-              </div>
-              <div class="col-md-6 mt-4 mt-md-0">
-                <div class="icon-box">
-                  <i class="bi bi-card-checklist"></i>
-                  <h4><a href="#">Dolor Sitema</a></h4>
-                  <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                    tarad limino ata</p>
-                </div>
-              </div>
-              <div class="col-md-6 mt-4 mt-md-0">
-                <div class="icon-box">
-                  <i class="bi bi-bar-chart"></i>
-                  <h4><a href="#">Sed ut perspiciatis</a></h4>
-                  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur</p>
-                </div>
-              </div>
-              <div class="col-md-6 mt-4 mt-md-0">
-                <div class="icon-box">
-                  <i class="bi bi-binoculars"></i>
-                  <h4><a href="#">Nemo Enim</a></h4>
-                  <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                    est laborum</p>
-                </div>
-              </div>
-              <div class="col-md-6 mt-4 mt-md-0">
-                <div class="icon-box">
-                  <i class="bi bi-brightness-high"></i>
-                  <h4><a href="#">Magni Dolore</a></h4>
-                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                    deleniti atque</p>
-                </div>
-              </div>
-              <div class="col-md-6 mt-4 mt-md-0">
-                <div class="icon-box">
-                  <i class="bi bi-calendar4-week"></i>
-                  <h4><a href="#">Eiusmod Tempor</a></h4>
-                  <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
-                    eligendi</p>
+                  <i class="bi bi-trophy"></i>
+                  <h4><a href="#">Objetivo General</a></h4>
+                  <p>Analizar el estado de las regiones, para el acceso oportuno y pertinente de la información que oriente la toma de decisiones de las acciones sustantivas universitarias e interuniversitarias y procesos del desarrollo integral e inclusivo.</p>
                 </div>
               </div>
             </div>
 
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-6 mt-4 mt-md-0">
+                <div class="icon-box">
+                  <i class="bi bi-eye"></i>
+                  <h4><a href="#">Visión</a></h4>
+                  <p>Ser un observatorio referente en el estudio y análisis de la realidad regional, que incide en la toma de decisiones institucional e interinstitucional para el desarrollo integral e inclusivo.</p>
+                  <br/>
+                </div>
+              </div>
+              <div class="col-md-6 mt-4 mt-md-0">
+                <div class="icon-box">
+                  <i class="bi bi-flag"></i>
+                  <h4><a href="#">Misión</a></h4>
+                  <p>Unidad estratégica que monitorea, genera, analiza y comunica información pertinente y oportuna del estado de las regiones y desarrollo integral, para la orientación de las acciones sustantivas universitarias e interuniversitarias.</p>
+                </div>
+              </div>
+            </div>
+
+            
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-6">
+                <div class="icon-box">
+                  <i class="bi bi-card-checklist"></i>
+                  <h4><a href="#">Productos Esperados</a></h4>
+                  <br/>
+                  <li>Informe técnico</li>
+                  <li>Desarrollo de eventos (simposios, congresos, talleres, capacitaciones)</li>
+                  <li>Alianzas estratégicas con organizaciones, instituciones, sociedad civil y empresas</li>
+                  <li>Articulación del quehacer académico</li>
+                  <li>Informe técnico</li>
+                  <li>Base de datos</li>
+                  <li>Página Web, Portal y sitios web dinámicos</li>
+                  <li>Formación y consolidación de redes de cooperación</li>
+                  <li>Desarrollo de metodologías de trabajo</li>
+                </div>
+              </div>
+            </div>
           </div>
         </section><!-- End Services Section -->
 
+    
+        
+
+     
+        <!-- ======= FAQ SECCTION ======= -->
+
+
+
+
+
+
+
+
+        
         <!-- ======= Contact Section ======= -->
         <section id="contact" class="contact section-bg">
           <div class="container">
 
             <div class="section-title">
-              <h2>Contactanos</h2>
-              <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat
-                sit in iste officiis commodi quidem hic quas.</p>
+              <h3><b>Contáctanos</b></h3>
+              <p></p>
             </div>
 
             <div class="row">
-              <div class="col-lg-6">
+              <h4 align='center'><b>Observatorio Regional Chorotega</b></h4>
+            </div>
+            
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-3 col-md-6">
                 <div class="info-box mb-4">
                   <i class="bx bx-map"></i>
                   <h3>Dirección</h3>
-                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem nulla fuga, consequatur sit
-                    aspernatur officia obcaecati molestiae accusamus velit veritatis! Voluptate veritatis voluptatum
-                    nisi aspernatur, doloremque praesentium consequatur labore ullam!</p>
+                  <p>Campus Coto, UNA.</p>
                 </div>
               </div>
 
@@ -284,6 +298,75 @@
                 </div>
               </div>
 
+            </div>
+
+            <div class="row">
+              <h4 align='center'><b>Observatorio Regional Huetar</b></h4>
+            </div>
+            
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-3 col-md-6">
+                <div class="info-box mb-4">
+                  <i class="bx bx-map"></i>
+                  <h3>Dirección</h3>
+                  <p>Campus Coto, UNA.</p>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                <div class="info-box  mb-4">
+                  <i class="bx bx-envelope"></i>
+                  <h3>Correo Electrónico</h3>
+                  <p>contact@example.com</p>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                <div class="info-box  mb-4">
+                  <i class="bx bx-phone-call"></i>
+                  <h3>Teléfono</h3>
+                  <p>+506 0000 0000</p>
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="row">
+              <h4 align='center'><b>Observatorio Regional Brunca</b></h4>
+            </div>
+            
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-3 col-md-6">
+                <div class="info-box mb-4">
+                  <i class="bx bx-map"></i>
+                  <h3>Dirección</h3>
+                  <p>Campus Coto, UNA.</p>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                <div class="info-box  mb-4">
+                  <i class="bx bx-envelope"></i>
+                  <h3>Correo Electrónico</h3>
+                  <p>observatorio.regional.brunca@una.cr</p>
+                  <p>miguel.calderon.quesada@una.cr</p>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                <div class="info-box  mb-4">
+                  <i class="bx bx-phone-call"></i>
+                  <h3>Teléfono</h3>
+                  <p>+506 0000 0000</p>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="section-title">
+              <h3><b>Formulario de contacto</b></h3>
+              <p></p>
             </div>
 
             <div class="row d-flex justify-content-center">
@@ -332,49 +415,22 @@
     <div class="footer-top">
       <div class="container">
         <div class="row">
-
           <div class="col-lg-15 col-md-15">
             <div class="footer-info">
-              <h3>Observatorios</h3>
-              <p class="pb-3"><em>Qui repudiandae et eum dolores alias sed ea. Qui suscipit veniam excepturi quod.</em>
-              </p>
-              <p>
-                Dirección:<br>
-                ---- Calle ----- <br>
-                UNA -------, CR<br><br>
-                <strong>Phone:</strong> +506 0000 0000<br>
-                <strong>Email:</strong> info@example.com<br>
-              </p>
-              <!-- <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>-->
+              <h3>Universidad Nacional</h3>
+              <h3>Observatorios Regionales</h3>
             </div>
           </div>
-
-
-
-
-
         </div>
-
       </div>
     </div>
     </div>
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>UNA</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Universidad Nacional</span></strong>. Todos los derechos reservados.
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/alstar-free-parallax-bootstrap-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
   </footer><!-- End Footer -->
