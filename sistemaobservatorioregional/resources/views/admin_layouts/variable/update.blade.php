@@ -20,6 +20,10 @@
             <input type="text" name="variable_name" class="form-control" placeholder="Nombre de la variable" aria-label="variable_name" required value="{{$variable->variable_name}}">
             <input type="hidden" name="variable_id" value="{{$variable->variable_id}}">
         </div>
+        <div class="mb-3">
+          <label for="dimension_name">Acrónimo</label>
+          <input type="text" name="acronym" value="{{$variable->variable_acronym}}" class="form-control" placeholder="Nombre del acronimo" aria-label="variable_acronimo" required>
+      </div>
   
         <label for="dropdownMenuButton">Dimension</label>
         <div class="dropdown">

@@ -85,6 +85,8 @@ class SubVariableController extends Controller
     //onclick del boton de guardar en la vista de crear dimension
     public function insertSubVariable(Request $request)
     {
+        $variableId = $request->input('variable_id');
+        dd( $variableId);
         if($request->sub_variable_name != null && $request->sub_variable_variable_id != null)
         {
             $subModel = new Sub_Variable(); 

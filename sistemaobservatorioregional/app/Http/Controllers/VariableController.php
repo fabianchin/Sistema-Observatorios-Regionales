@@ -61,7 +61,7 @@ class VariableController extends Controller
         if($request->variable_name != null && $request->variable_dimension_id != null)
         {
             $variableModel = new Variable(); 
-            $variableModel->updateVariable($request->variable_id,$request->variable_dimension_id,$request->variable_name);
+            $variableModel->updateVariable($request->variable_id,$request->variable_dimension_id,$request->variable_name, $request->acronym);
             return redirect()->route('variable.manage')->with('success', 'Variable actualizada correctamente');
         }
         else if($request->variable_name == null && $request->variable_dimension_id != null)
@@ -87,7 +87,7 @@ class VariableController extends Controller
         if($request->variable_name != null && $request->variable_dimension_id != null)
         {
             $variableModel = new Variable(); 
-            $variableModel->insertVariable($request->variable_dimension_id,$request->variable_name);
+            $variableModel->insertVariable($request->variable_dimension_id,$request->variable_name, $request->acronym);
             return redirect()->route('variable.manage')->with('success', 'Variable creada correctamente'); 
         }
         else if($request->variable_name == null && $request->variable_dimension_id != null)

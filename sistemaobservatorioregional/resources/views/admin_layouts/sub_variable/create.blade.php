@@ -26,9 +26,34 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropdown-menu-variable">
           @foreach ($variables as $variable) 
-            <li><a class="dropdown-item" href="#" value="{{$variable->variable_id}}">{{$variable->variable_name}}</a></li>
+            <li><a class="dropdown-item" name="variable_id" href="#" value="{{$variable->variable_id}}">{{$variable->variable_name}}</a></li>
           @endforeach
         </ul>
+
+        <script>
+          // Agrega un evento de clic a cada elemento de la lista desplegable
+          $('#dropdown-menu-variable a').on('click', function(e) {
+            e.preventDefault(); // evita la acción predeterminada del clic en el enlace
+
+            // Obtiene el valor del atributo "value" del elemento seleccionado
+            var variableId = $(this).attr('value');
+            
+            // Envía el valor seleccionado al controlador mediante una petición Ajax
+            $.ajax({
+              type: 'POST',
+              url: '/createsubvariable',
+              data: { variable_id: variableId },
+              success: function(response) {
+                // maneja la respuesta del controlador aquí
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
+                // maneja los errores de la petición aquí
+              }
+            });
+            });
+
+        </script>
+
         <input type="hidden" id="sub_variable_variable_id" name="sub_variable_variable_id" value="">
       </div>
 

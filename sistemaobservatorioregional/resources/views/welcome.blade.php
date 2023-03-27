@@ -54,7 +54,6 @@
           <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
 
           <li><a class="nav-link scrollto" href="{{route('login')}}">Inicie Sesión</a></li>
-          <li><a class="nav-link scrollto" href="{{route('register')}}">Resgistrarse</a></li>
 
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
