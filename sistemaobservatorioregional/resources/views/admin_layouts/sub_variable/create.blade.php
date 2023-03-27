@@ -29,31 +29,6 @@
             <li><a class="dropdown-item" name="variable_id" href="#" value="{{$variable->variable_id}}">{{$variable->variable_name}}</a></li>
           @endforeach
         </ul>
-
-        <script>
-          // Agrega un evento de clic a cada elemento de la lista desplegable
-          $('#dropdown-menu-variable a').on('click', function(e) {
-            e.preventDefault(); // evita la acción predeterminada del clic en el enlace
-
-            // Obtiene el valor del atributo "value" del elemento seleccionado
-            var variableId = $(this).attr('value');
-            
-            // Envía el valor seleccionado al controlador mediante una petición Ajax
-            $.ajax({
-              type: 'POST',
-              url: '/createsubvariable',
-              data: { variable_id: variableId },
-              success: function(response) {
-                // maneja la respuesta del controlador aquí
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                // maneja los errores de la petición aquí
-              }
-            });
-            });
-
-        </script>
-
         <input type="hidden" id="sub_variable_variable_id" name="sub_variable_variable_id" value="">
       </div>
 
@@ -68,22 +43,31 @@
 
 @section('scripts')
 <script>
-  //Cambiar el valor del boton dropdown
- $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
-        $(this).closest(".dropdown-menu").prev(".dropdown-toggle").text($(this).text()); //Boton
-    });
 
-
-  //Agarrar el dato del dropdown y asignarlo al input hidden
-  $(document).ready(function()
-  {
-    $("#dropdown-menu-variable li a").click(function() 
-    {
+// escucho por el click a la variable elegida para obtener el  valor de id y mandarlo a la controller
+  $(document).ready(function() {
+    $("#dropdown-menu-variable li a").click(function() {
       variable_id_value = $(this).attr('value');
-    //   dimension_name_value = $(this).text();
       $("#sub_variable_variable_id").val(variable_id_value);
     });
   });
-  
+
+    //Cambiar el valor del boton dropdown
+  $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
+          $(this).closest(".dropdown-menu").prev(".dropdown-toggle").text($(this).text()); //Boton
+      });
+
+
+    //Agarrar el dato del dropdown y asignarlo al input hidden
+    $(document).ready(function()
+    {
+      $("#dropdown-menu-variable li a").click(function() 
+      {
+        variable_id_value = $(this).attr('value');
+      //   dimension_name_value = $(this).text();
+        $("#sub_variable_variable_id").val(variable_id_value);
+      });
+    });
+    
 </script>
 @endsection

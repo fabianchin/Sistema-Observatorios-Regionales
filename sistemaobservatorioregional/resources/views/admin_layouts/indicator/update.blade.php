@@ -62,6 +62,9 @@
             @endforeach
           </ul>
           <input type="hidden" id="variable_type_id" name="variable_type_id" value="{{$indicator->indicator_sub_variable_type}}">
+          <input type="hidden" id="indicator_code" name="indicator_code" value="{{$indicator->indicator_code}}">
+
+
         </div>
 
         <div class="container text-center">

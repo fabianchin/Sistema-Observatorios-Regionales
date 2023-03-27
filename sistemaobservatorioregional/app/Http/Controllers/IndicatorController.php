@@ -73,7 +73,7 @@ class IndicatorController extends Controller
     {
         if($request->indicator_id != null && $request->indicator_name != null && $request->sub_variable_id != null && $request->variable_type_id != null){
             $indicatorModel = new Indicator();
-            $indicatorModel->updateIndicator($request->indicator_id, $request->indicator_name, $request->sub_variable_id, $request->variable_type_id);
+            $indicatorModel->updateIndicator($request->indicator_id, $request->indicator_name, $request->sub_variable_id, $request->variable_type_id,$request->indicator_code);    
             return redirect()->route('indicator.manage')->with('status', 'Se actualizo correctamente el indicador');
         }else if($request->indicator_id == null && $request->indicator_name != null && $request->sub_variable_id != null && $request->variable_type_id != null){
             return redirect()->route('indicator.manage')->with('status', 'No se puede actualizar el indicador porque no se encontro el id');
