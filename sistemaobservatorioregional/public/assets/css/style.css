@@ -382,6 +382,9 @@ h6 {
   right: 0;
   left: 0;
   bottom: 0;
+  justify-content: center;
+  align-items: last baseline;
+  position: absolute;
 }
 
 #hero .carousel-container {
