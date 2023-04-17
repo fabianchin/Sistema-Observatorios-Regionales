@@ -71,8 +71,8 @@ class DimensionController extends Controller
     {
         $dimension = new Dimension();
         $dimension->insertDimension($request->dimension_name, $request->acronym);
-        return redirect()->route('dimension.redirectToCreateDimension');//->with('success', 'Se agrego la dimension '.$request->dimension_name.' correctamente'); 
-        //return redirect()->route('dimension.manage');
+        
+        return redirect()->route('dimension.manage');
     }
 
 }

@@ -14,7 +14,12 @@
 
     <form role="form text-left" method="post" action="{{route('indicator.update')}}">
         @csrf
-
+        <?php
+        echo"<pre>";
+          var_dump($indicator);
+          echo"</pre>";
+          exit;
+          ?>
         <div class="mb-3">
             <label for="dimension_name">Nombre del indicador</label>
             <input type="text" name="indicator_name" class="form-control" placeholder="Nombre del indicador" aria-label="indicator_name" required value="{{$indicator->indicator_name}}">
@@ -23,6 +28,9 @@
   
         <label for="dropdownMenuButton">Sub-Variable</label>
         <div class="dropdown">
+          <?php
+            $sub = null;
+          ?>
             <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButton" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" text="Sub-Variable">
            @for ($i = 0; $i < count($subs); $i++)
               @if ($subs[$i]->sub_variable_id == $indicator->indicator_sub_variable_id)
@@ -39,7 +47,7 @@
             @endif
             @endforeach
           </ul>
-          <input type="hidden" id="sub_variable_id" name="sub_variable_id" value="{{$sub->sub_variable_id}}">
+          <input type="hidden" id="sub_variable_id" name="sub_variable_id" value="{{ $sub ? $sub->sub_variable_id : '' }}">
         </div>
 
         <label for="dropdownMenuButtonType">Tipo de variable</label>
@@ -68,7 +76,7 @@
         </div>
 
         <div class="container text-center">
-          <a class="btn bg-gradient-success w-30 my-4 mb-2" style="color:white">Modificar</a>
+          <a class="btn bg-gradient-success w-30 my-4 mb-2" href={{route('indicator.update')}} style="color:white">Modificar</a>
           <a class="btn bg-gradient-danger w-30 my-4 mb-2" style="color:white" href={{route('indicator.manage')}}>Regresar</a>
         </div>
 
