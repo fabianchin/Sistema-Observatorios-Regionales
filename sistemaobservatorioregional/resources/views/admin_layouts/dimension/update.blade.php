@@ -14,8 +14,8 @@
             <input type="text" name="acronym"  required value="{{$dimension->dimension_acronym}}" class="form-control" placeholder="nombre del acrónimo" aria-label="acronimo" required>
         </div>
         <div class="container text-center">
-            <button type="submit" class="btn bg-gradient-success w-30 my-4 mb-2"><a style="color:white">Modificar</a></button>
-            <button type="button" class="btn bg-gradient-danger w-30 my-4 mb-2"><a style="color:white" href={{route('dimension.manage')}}>Regresar</a></button>
+            <a class="btn bg-gradient-danger w-30 my-4 mb-2" style="color:white">Modificar</a>
+            <a class="btn bg-gradient-danger w-30 my-4 mb-2" style="color:white" href={{route('dimension.manage')}}>Regresar</a>
         </div>
     </form>
   </div>

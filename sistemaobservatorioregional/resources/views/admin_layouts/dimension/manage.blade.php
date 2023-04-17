@@ -14,9 +14,9 @@
             <h6>Administracion de dimensiones</h6>
           </div>
           <div class="text-center">
-            <button  type="button" class="btn bg-gradient-success w-50 my-4 mb-2">
-              <a style="color:white" href="{{ route('dimension.redirectToCreateDimension') }}">Nuevo</a>
-            </button>
+            
+              <a class="btn bg-gradient-success w-50 my-4 mb-2" style="color:white" href="{{ route('dimension.redirectToCreateDimension') }}">Nueva</a>
+            
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -24,11 +24,7 @@
                 <thead>
                   <tr>
                     
-                    {{-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      <div class="text-center">
-                        <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Nuevo</button>
-                      </div>
-                    </th> --}}
+                   
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dimension</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ultima modificacion</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario que modifico</th>

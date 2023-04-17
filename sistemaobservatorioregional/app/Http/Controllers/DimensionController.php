@@ -7,17 +7,7 @@ use Illuminate\Http\Request;
 
 class DimensionController extends Controller
 {
-    // public function manage()
-    // {
-    //     $dimensions = new Dimension();
-    //     //$dimensions->getAllDim();
 
-    //     $data = [          
-    //         'dimensions' => $dimensions->getAllDim()
-    //     ];
-    //     //dd('Controladora de dimensiones, DD');
-    //     return view('admin_layouts.dimension.manage', $data);
-    // }
     
     public function getAllDimension()
     {

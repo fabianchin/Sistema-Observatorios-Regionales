@@ -34,8 +34,8 @@
 
 
       <div class="container text-center">
-        <button type="submit" class="btn bg-gradient-success w-30 my-4 mb-2"><a style="color:white">Guardar</a></button>
-        <button type="button" class="btn bg-gradient-danger w-30 my-4 mb-2"><a style="color:white" href={{route('sub_variable.manage')}}>Regresar</a></button>
+        <a class="btn bg-gradient-success w-30 my-4 mb-2" style="color:white">Guardar</a>
+        <a class="btn bg-gradient-danger w-30 my-4 mb-2" style="color:white" href={{route('sub_variable.manage')}}>Regresar</a>
       </div>
     </form>
   </div>
