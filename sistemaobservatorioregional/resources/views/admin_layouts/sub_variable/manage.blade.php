@@ -9,9 +9,9 @@
             <h6>Administracion de sub variables</h6>
           </div>
           <div class="text-center">
-            <button  type="button" class="btn bg-gradient-success w-50 my-4 mb-2">
-              <a style="color:white" href="{{ route('sub_variable.redirectToCreateSubVariable') }}">Nuevo</a>
-            </button>
+            
+            <a class="btn bg-gradient-success w-50 my-4 mb-2" style="color:white" href="{{ route('sub_variable.redirectToCreateSubVariable') }}">Nuevo</a>
+            
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
