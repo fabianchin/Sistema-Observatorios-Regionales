@@ -66,71 +66,71 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero">
-    <div class="hero-container">
-      <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div id="heroCarousel" data-bs-interval="1600" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
-        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-        <div class="carousel-inner" role="listbox">
+      <div class="carousel-inner" role="listbox">
 
-          <!-- Slide 1   style="background-image: url(assets/img/slide/slide-2.jpg); "  -->
-          <div class="carousel-item active">
-            <div class="carousel-container">
-              <img src="assets/img/slide/c-slide1.jpg" displayfle>
-              <div class="carousel-content">
-                <!-- <h2 class="animate__animated animate__fadeInDown">Universidad Nacional de Costa Rica<span></span></h2> -->
-                <img class="animate__animated animate__fadeInDown" src="assets/img/slide/logoU3.png" alt="" style=" ">
+        <!-- Slide 1 -->
+        <div class="carousel-item active" style="background-image: url(assets/img/slide/c-slide1.jpg); background-position-y: -30px;">
+          <div class="carousel-container">
 
-              </div>
-            </div>
+            <img class="animate__animated animate__fadeInDown" src="assets/img/slide/logoU3.png" alt="" style=" ">
           </div>
-
-          <!-- Slide 2     style="background-image: url(assets/img/slide/slide-5.jpg);" -->
-          <div class="carousel-item">
-            <div class="carousel-container">
-              <img src="assets/img/slide/c-slide3.jpg" alt="">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Observatorios regionales</h2>
-
-
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3   style="background-image: url(assets/img/slide/slide-4.jpg);"   -->
-          <div class="carousel-item">
-            <div class="carousel-container">
-              <img src="assets/img/slide/c-slide4.jpg" alt="">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Observatorios regionales</h2>
-              </div>
-            </div>
-          </div>
-          <!-- Slide 4   style="background-image: url(assets/img/slide/slide-3.jpg);"   -->
-          <div class="carousel-item">
-            <div class="carousel-container">
-              <img src="assets/img/slide/slide-3.jpg" alt="">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Muchas gracias, por el interes de visitarnos</h2>
-
-              </div>
-            </div>
-          </div>
-
         </div>
 
-        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon bi bi-chevron-double-left" aria-hidden="true"></span>
-        </a>
+        <!-- Slide 2 -->
+        <div class="carousel-item" style="background-image: url(assets/img/slide/c-slide3.jpg); background-position-y: -30px; ">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">Bienvenidos a los Observatorios Regionales <span></span></h2>
 
-        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-          <span class="carousel-control-next-icon bi bi-chevron-double-right" aria-hidden="true"></span>
-        </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-4.jpg); background-position-y: -30px;">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">Observatorios Regionales
+              </h2>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 4 -->
+        <div class="carousel-item" style="background-image: url(assets/img/slide/c-slide4.jpg); background-position-y: -30px;">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">Observatorios Regionales
+              </h2>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 5-->
+        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg); background-position-y: -30px;">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">Muchas gracias, por el interés de visitarnos
+              </h2>
+            </div>
+          </div>
+        </div>
 
       </div>
+
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      </a>
+
     </div>
   </section><!-- End Hero -->
-
   <main id="main">
 
     <!-- ======= About Section ======= -->
@@ -214,25 +214,7 @@
         </div>
 
 
-        <div class="row d-flex justify-content-center">
-          <div class="col-md-6">
-            <div class="icon-box">
-              <i class="bi bi-card-checklist"></i>
-              <h4><a href="#">Productos Esperados</a></h4>
-              <br />
-              <li>Informe técnico</li>
-              <li>Desarrollo de eventos (simposios, congresos, talleres, capacitaciones)</li>
-              <li>Alianzas estratégicas con organizaciones, instituciones, sociedad civil y empresas</li>
-              <li>Articulación del quehacer académico</li>
-              <li>Informe técnico</li>
-              <li>Base de datos</li>
-              <li>Página Web, Portal y sitios web dinámicos</li>
-              <li>Formación y consolidación de redes de cooperación</li>
-              <li>Desarrollo de metodologías de trabajo</li>
-            </div>
-          </div>
-        </div>
-      </div>
+       
     </section><!-- End Services Section -->
 
 
