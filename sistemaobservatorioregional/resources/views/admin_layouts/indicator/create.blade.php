@@ -4,11 +4,11 @@
 
 <div class="card-body">
   @if (session('success'))
-  <div class="alert alert-success">
-      {{ session('status') }}
+  <div class="alert alert-success" style="font-weight: bold; color: white">
+      {{ session('success') }}
   </div>
   @elseif (session('error'))
-  <div class="alert alert-danger">
+  <div class="alert alert-danger" style="font-weight: bold; color: white">
       {{ session('error') }}
   </div>
   @endif
@@ -17,6 +17,10 @@
       <div class="mb-3">
           <label for="dimension_name">Nombre de la variable</label>
           <input type="text" name="indicator_name" class="form-control" placeholder="Nombre del indicador" aria-label="indicator_name" required>
+      </div>
+      <div class="mb-3">
+          <label for="dimension_name">Código del indicador</label>
+          <input type="text" name="indicator_code" class="form-control" placeholder="Código del indicador" aria-label="indicator_code" required>
       </div>
 
       <label for="dropdownMenuButton">Sub-Variable</label>
@@ -46,7 +50,7 @@
       </div>
 
       <div class="container text-center">
-        <a class="btn bg-gradient-success w-30 my-4 mb-2" style="color:white">Guardar</a>
+        <button class="btn bg-gradient-success w-30 my-4 mb-2" href={{route('indicator.insert')}} style="color:white">Guardar</button>
         <a class="btn bg-gradient-danger w-30 my-4 mb-2" style="color:white" href={{route('indicator.manage')}}>Regresar</a></button>
       </div>
     </form>

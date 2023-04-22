@@ -71,6 +71,7 @@ class IndicatorController extends Controller
     //onclick del boton de guardar actualizacion
     public function updateIndicator(Request $request)
     {
+        dd($request->all());
         if($request->indicator_id != null && $request->indicator_name != null && $request->sub_variable_id != null && $request->variable_type_id != null){
             $indicatorModel = new Indicator();
             $indicatorModel->updateIndicator($request->indicator_id, $request->indicator_name, $request->sub_variable_id, $request->variable_type_id,$request->indicator_code);    
@@ -94,8 +95,9 @@ class IndicatorController extends Controller
     {
         if($request->indicator_name != null && $request->sub_variable_id != null && $request->variable_type_id != null)
         {
+            
             $indicator = new Indicator(); 
-            $indicator->insertIndicator($request->indicator_name, $request->sub_variable_id, $request->variable_type_id);
+            $indicator->insertIndicator($request->indicator_name, $request->sub_variable_id, $request->variable_type_id, $request->indicator_code);
             return redirect()->route('indicator.redirectToCreateIndicator')->with('success', 'Se agrego el indicador '.$request->indicator_name.' correctamente');
         }else if($request->indicator_id != null && $request->indicator_name == null && $request->sub_variable_id != null && $request->variable_type_id != null){
             return redirect()->route('indicator.redirectToCreateIndicator')->with('error', 'No se puede agregar el indicador porque no se ha llenado el nombre');

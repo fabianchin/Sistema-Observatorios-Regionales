@@ -2,7 +2,7 @@
 
 @section('crud_content')
 @if (session('status'))
-<div class="alert alert-success">
+<div class="alert alert-success" style="font-weight: bold; color: white">
     {{ session('status') }}
   </div>
 @endif
