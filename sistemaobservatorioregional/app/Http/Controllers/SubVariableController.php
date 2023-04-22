@@ -87,10 +87,11 @@ class SubVariableController extends Controller
     {
 
        
+       
         if($request->sub_variable_name != null && $request->sub_variable_variable_id != null)
         {
             $subModel = new Sub_Variable(); 
-            $subModel->insertSubVariable($request->sub_variable_variable_id,$request->sub_variable_name);
+            $subModel->insertSubVariable($request->sub_variable_variable_id,$request->sub_variable_name,$request->code_param);
             return redirect()->route('sub_variable.redirectToCreateSubVariable')->with('success', 'Se agrego la sub variable '.$request->sub_variable_name.' correctamente');
         }
         else if($request->sub_variable_name == null && $request->sub_variable_variable_id != null){
