@@ -22,40 +22,27 @@ class ReportsController extends Controller
         $dimensionModel = $dimensionModel->makeVisible(['dimension_id']); 
         $variableModel = $variableModel->makeVisible(['variable_id']); 
         $data = [          
-            'dimensions' => $dimensionModel->getAllDimension(), 'variables' => $variableModel->getAllVariables()
-           
+            'dimensions' => $dimensionModel->getAllDimension(), 
+            'variables' => $variableModel = Variable::where('variable_dimension_id', 1)->get()
+        
         ];
         return view('admin_layouts.reports.create',$data);
     }
 
-    public function obtenerVariables(Request $request)
+    public function getVariablesByDimension(Request $request, $dimension_id)
     {
-        /*
-        $variableModel = new Variable();
-        $variableModel = $variableModel->makeVisible(['variable_id']); 
-        $data = [          
-            'variables' => $variableModel->getVariableTypeById($variable_type_id)
-           
-        ];
-        */
-        $variables = Variable::where('variable_dimension_id', $request->dimension_id)->get();
-        return response()->json($variables);
-    }
+        dd($dimension_id);
+        $variables = Variable::where('dimension_id', $dimension_id)->get();
 
-    public function loadDropdownData()
-    {
-        $dimensionModel = new Dimension();
-        $variableModel = new Variable();  
-        $dimensionModel = $dimensionModel->makeVisible(['dimension_id']); 
-        $variableModel = $variableModel->makeVisible(['variable_id']); 
-        $data = [          
-            'dimensions' => $dimensionModel->getAllDimension() 
-           
-        ];
-        $dataVar = [          
-            'variables' => $variableModel->getAllVariables()
-        ];
-        return view('admin_layouts.variable.create', $data, $dataVar);
+        $options = [];
+        foreach ($variables as $variable) {
+            $options[] = [
+                'id' => $variable->id,
+                'name' => $variable->name
+            ];
+        }
+
+        return response()->json(['options' => $options]);
     }
 
 }
