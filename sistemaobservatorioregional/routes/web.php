@@ -101,9 +101,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/user/{user_id}', [PerfilController::class, 'destroy'])->name('perfil.destroy');
 
     //-----------------------------------------actualizar informacion de usuario-----------------------------------------
+    
+    //-----------------------------------------Reportes -----------------------------------------
     Route::get('/report', [ReportsController::class, 'genReport'])->name('report');
     Route::post('/variables', [ReportsController::class, 'venReporteVar'])->name('variables.by.dimension');
     Route::post('/subVariables', [ReportsController::class, 'venReporteSubVar'])->name('subVariables.by.variables');
+    Route::post('/indicador', [ReportsController::class, 'venReporteIndicador'])->name('indicators.by.subVariable');
 });
 
 //-------------Dimension----------------

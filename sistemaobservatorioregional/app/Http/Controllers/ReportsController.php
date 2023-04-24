@@ -40,12 +40,28 @@ class ReportsController extends Controller
         $subVariableModel = new Sub_Variable(); 
         $dimensionID = $request->input('variable_dimension_id'); 
         $variableId = $request->input('Variable_Variable_id');
-        $subVariableModel = $subVariableModel->makeVisible(['variable_id']);  
+        $subVariableModel = $subVariableModel->makeVisible(['sub_variable_id']);  
         $data = [          
             'subVariables' => $subVariableModel->getSubVariableByVariableId($variableId),
+            'variableId' => $variableId,
             'dimensionID' => $dimensionID
         ];
         return view('admin_layouts.reports.subVariable',$data);
+    }
+
+    public function venReporteIndicador(Request $request){
+        $indicadorModel = new Indicator(); 
+        $dimensionID = $request->input('variable_dimension_id'); 
+        $variableId = $request->input('Variable_Variable_id');
+        $subVariable = $request->input('subVariable_Variable_id');
+        $indicadorModel = $indicadorModel->makeVisible(['indicador_id']);  
+        $data = [  
+            'indicators' => $indicadorModel->getIndicadorBySubVariableId($subVariable),
+            'subVariableId' => $subVariable,
+            'variableId' => $variableId,
+            'dimensionID' => $dimensionID
+        ];
+        return view('admin_layouts.reports.indicador',$data);
     }
 
 }

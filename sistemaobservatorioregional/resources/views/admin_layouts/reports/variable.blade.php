@@ -25,7 +25,8 @@
             <li><a class="dropdown-item" id="variable_id_drop" name="variable_id_drop" href="#" value="{{$variable->variable_id}}">{{$variable->variable_name}}</a></li>
           @endforeach
         </ul>
-        <input type="hidden" id="variable_dimension_id" name="variable_dimension_id" value="">
+        <input type="hidden" id="variable_dimension_id" name="variable_dimension_id" value="$dimensionID">
+        <input type="hidden" id="Variable_Variable_id" name="Variable_Variable_id" value="">
       </div>
 
         <button type="submit" class="btn bg-gradient-success w-30 my-4 mb-2"><a style="color:white">Seleccionar Sub Variable</a></button>
@@ -51,7 +52,7 @@
     {
       variable_id_value = $(this).attr('value');
       variable_name_value = $(this).text();
-      $("#variable_dimension_id").val(variable_id_value);
+      $("#Variable_Variable_id").val(variable_id_value);
     });
   });
 
@@ -59,7 +60,7 @@
   $("#dropdown-menu-variable li a").click(function() {
     variable_id_value = $(this).attr('value');
     variable_name_value = $(this).text();
-    $("#variable_dimension_id").val(variable_id_value);
+    $("#Variable_Variable_id").val(variable_id_value);
 
     // Habilitar los botones cuando se selecciona una variable
     $('button[type="submit"]').prop('disabled', false);
