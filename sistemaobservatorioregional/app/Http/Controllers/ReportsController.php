@@ -18,31 +18,34 @@ class ReportsController extends Controller
 
     public function genReport(){
         $dimensionModel = new Dimension();
-        $variableModel = new Variable();  
         $dimensionModel = $dimensionModel->makeVisible(['dimension_id']); 
-        $variableModel = $variableModel->makeVisible(['variable_id']); 
         $data = [          
             'dimensions' => $dimensionModel->getAllDimension(), 
-            'variables' => $variableModel = Variable::where('variable_dimension_id', 1)->get()
-        
         ];
-        return view('admin_layouts.reports.create',$data);
+        return view('admin_layouts.reports.dimension',$data);
     }
 
-    public function getVariablesByDimension(Request $request, $dimension_id)
-    {
-        dd($dimension_id);
-        $variables = Variable::where('dimension_id', $dimension_id)->get();
+    public function venReporteVar(Request $request){
+        $variableModel = new Variable(); 
+        $dimensionID = $request->input('variable_dimension_id'); 
+        $variableModel = $variableModel->makeVisible(['variable_id']);  
+        $data = [          
+            'variables' => $variableModel->getVariableByDimensionId($dimensionID),
+            'dimensionID' => $dimensionID
+        ];
+        return view('admin_layouts.reports.variable',$data);
+    }
 
-        $options = [];
-        foreach ($variables as $variable) {
-            $options[] = [
-                'id' => $variable->id,
-                'name' => $variable->name
-            ];
-        }
-
-        return response()->json(['options' => $options]);
+    public function venReporteSubVar(Request $request){
+        $subVariableModel = new Sub_Variable(); 
+        $dimensionID = $request->input('variable_dimension_id'); 
+        $variableId = $request->input('Variable_Variable_id');
+        $subVariableModel = $subVariableModel->makeVisible(['variable_id']);  
+        $data = [          
+            'subVariables' => $subVariableModel->getSubVariableByVariableId($variableId),
+            'dimensionID' => $dimensionID
+        ];
+        return view('admin_layouts.reports.subVariable',$data);
     }
 
 }

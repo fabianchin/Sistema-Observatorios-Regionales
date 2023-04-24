@@ -102,9 +102,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     //-----------------------------------------actualizar informacion de usuario-----------------------------------------
     Route::get('/report', [ReportsController::class, 'genReport'])->name('report');
-    Route::post('/variables', [ReportsController::class, 'getVariablesByDimension'])->name('variables.by.dimension');
-    //Route::get('/dimension/{id}/variables', [VariableController::class, 'getVariablesByDimensionId'])->name('dimension.variables');
-    //Route::get('/variables/{dimension_id}', [ReportsController::class, 'getVariablesByDimension'])->name('variables.by.dimension');
+    Route::post('/variables', [ReportsController::class, 'venReporteVar'])->name('variables.by.dimension');
+    Route::post('/subVariables', [ReportsController::class, 'venReporteSubVar'])->name('subVariables.by.variables');
 });
 
 //-------------Dimension----------------

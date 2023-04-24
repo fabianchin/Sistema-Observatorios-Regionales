@@ -14,11 +14,7 @@
   @endif
     <form role="form text-left" method="post" action="{{route('variables.by.dimension')}}">
       @csrf
-      <div class="mb-3">
-          <label for="dimension_name">Nombre de la variable</label>
-          <input type="text" name="variable_name" class="form-control" placeholder="Nombre de la variable" aria-label="variable_name" required>
-      </div>
-
+      <h1>Generacion de Reportes</h1>
       <label for="dropdownMenuButton">Dimension</label>
       <div class="dropdown">
         <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButton" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" text="Dimension">
@@ -32,11 +28,10 @@
         <input type="hidden" id="variable_dimension_id" name="variable_dimension_id" value="">
       </div>
 
-
-      <div class="container text-center">
-        <button type="submit" class="btn bg-gradient-success w-30 my-4 mb-2"><a style="color:white">Guardar</a></button>
-        <button type="button" class="btn bg-gradient-danger w-30 my-4 mb-2"><a style="color:white" href={{route('variable.manage')}}>Regresar</a></button>
-      </div>
+        <button type="submit" class="btn bg-gradient-success w-30 my-4 mb-2"><a style="color:white">Seleccionar Variable</a></button>
+    </form>
+    <form role="form text-left" method="post" action="{{route('variable.insert')}}">
+        <button type="submit" class="btn bg-gradient-success w-30 my-4 mb-2"><a style="color:white">Generar Reporte</a></button>
     </form>
   </div>
 @endsection
@@ -59,6 +54,20 @@
       $("#variable_dimension_id").val(dimension_id_value);
     });
   });
+
+  $(document).ready(function() {
+  $("#dropdown-menu-dimension li a").click(function() {
+    dimension_id_value = $(this).attr('value');
+    dimension_name_value = $(this).text();
+    $("#variable_dimension_id").val(dimension_id_value);
+
+    // Habilitar los botones cuando se selecciona una dimensión
+    $('button[type="submit"]').prop('disabled', false);
+  });
+
+  // Deshabilitar los botones por defecto
+  $('button[type="submit"]').prop('disabled', true);
+});
   
 </script>
 @endsection
