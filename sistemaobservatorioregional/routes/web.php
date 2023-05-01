@@ -10,6 +10,7 @@ use App\Http\Controllers\DimensionController;
 use App\Http\Controllers\IndicatorController;
 use App\Http\Controllers\SubVariableController;
 use App\Http\Controllers\Dynamic_IndicatorController;
+use App\Http\Controllers\ReportsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +100,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/users', [PerfilController::class, 'getAllUsers'])->name('perfil.list');
     Route::post('/user/{user_id}', [PerfilController::class, 'destroy'])->name('perfil.destroy');
 
+    ////-----------------------------------------Reportes -----------------------------------------
+    Route::get('/report', [ReportsController::class, 'genReport'])->name('report');
+    Route::post('/createReport', [ReportsController::class,'createReport'])->name('report.create');
 });
 
 //-------------Dimension----------------
