@@ -103,6 +103,9 @@ Route::group(['prefix' => 'admin'], function () {
     ////-----------------------------------------Reportes -----------------------------------------
     Route::get('/report', [ReportsController::class, 'genReport'])->name('report');
     Route::post('/createReport', [ReportsController::class,'createReport'])->name('report.create');
+    Route::post('/fillVariableReport',[ReportsController::class, 'fillVariable'])->name("report.fillVariable");
+    Route::post('/fillSubVariableReport',[ReportsController::class, 'fillSubVariable'])->name("report.fillSubVariable");
+    Route::post('/fillIndicatorReport',[ReportsController::class, 'fillIndicator'])->name("report.fillIndicator");
 });
 
 //-------------Dimension----------------

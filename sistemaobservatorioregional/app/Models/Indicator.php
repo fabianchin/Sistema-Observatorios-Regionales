@@ -15,6 +15,7 @@ class Indicator extends Model
 
     //Storaged procedures
     public function getAllIndicators(){ return DB::select('call getAllIndicator()'); }
+    public function getAllIndicatorsBySubVariableId($indicator_sub_variable_id){return DB::select('call getAllIndicatorBySubVariableId(?)',[$indicator_sub_variable_id]); }
     public function getIndicatorById($indicator_id)
     {
         $indicator = new Indicator();

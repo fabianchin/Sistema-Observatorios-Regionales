@@ -6,6 +6,7 @@ use App\Models\Variable;
 use App\Models\Sub_Variable;
 use App\Models\Indicator;
 use Illuminate\Http\Request;
+use Termwind\Components\Dd;
 
 class ReportsController extends Controller
 {
@@ -14,29 +15,41 @@ class ReportsController extends Controller
     public function genReport()
     {
         $dimensionModel = new Dimension(); 
-        $dimensionModel = $dimensionModel->makeVisible(['dimension_id']); 
-        $VariableModel = new Variable(); 
-        $VariableModel = $VariableModel->makeVisible(['variable_id']); 
-        $SubVariableModel = new Sub_Variable(); 
-        $SubVariableModel = $SubVariableModel->makeVisible(['sub_variable_id']);
-        $IndicatorModel = new Indicator(); 
-        $IndicatorModel = $IndicatorModel->makeVisible(['indicator_id']); 
+        $dimensionModel = $dimensionModel->makeVisible(['dimension_id']);  
         $data = [          
             'dimensions' => $dimensionModel->getAllDimension(),
-            'variables' => $VariableModel->getAllVariables(),
-            'subvariables' => $SubVariableModel->getAllSubVariables(),
-            'indicators' => $IndicatorModel->getAllIndicators()
         ];
         //dd('Controladora de dimensiones, DD');
         return view('admin_layouts.reports.report', $data);
     }
-
     
+    public function fillVariable(Request $request){
+        $variableModel = new Variable();
+        $data['variables'] = $variableModel->getVariableByDimensionId($request->dimension_id);
+        return response()->json($data);
+    }
+
+    public function fillSubVariable(Request $request)
+    {
+        $subvariableModel = new Sub_Variable();
+        $data['subvariables'] = $subvariableModel->getSubVariableByVariableId($request->variable_id);
+        //dd($data);
+        return response()->json($data);
+    }
+
+    public function fillIndicator(Request $request)
+    {
+        $indicatorModel = new Indicator();
+        $data['indicators'] = $indicatorModel->getAllIndicatorsBySubVariableId($request->subvariable_id);
+        //dd($data);
+        return response()->json($data);
+    }
+
     public function createReport(Request $request){
-        $dimensionId = $request->input('sub_variable_dimension_id');
-        $variableId = $request->input('sub_variable_variable_id');
-        $subVariableId = $request->input('sub_variable_subvariable_id');
-        $indicatorId = $request->input('sub_variable_indicator_id');
+        $dimensionId = $request->input('dimension_id');
+        $variableId = $request->input('variable_id');
+        $subVariableId = $request->input('subvariable_id');
+        $indicatorId = $request->input('indicator_id');
         dd($indicatorId);
         if($indicatorId != NULL){
             /*Aqui se va a enviar toda la informacion del indicador para ser mostrada*/ 

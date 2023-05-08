@@ -2,6 +2,25 @@
 
 @section('crud_content')
 
+<style>
+    .form-section{
+        display:none;
+    }
+    
+    .form-section.current{
+        display:inherit;
+    }
+
+    .parsley-errors-list{
+        margin:2px 0 3px;
+        padding:0;
+        list-style-type:none;
+        color:red;
+    }
+
+</style>
+
+
 <div class="card-body">
   @if (session('status'))
   <div class="alert alert-success">
@@ -25,20 +44,18 @@
             <li><a class="dropdown-item" name="dimension_id" href="#" value="{{$dimension->dimension_id}}">{{$dimension->dimension_name}}</a></li>
             @endforeach
         </ul>
-        <input type="hidden" id="sub_variable_dimension_id" name="sub_variable_dimension_id" value="">
+        <input type="hidden" id="dimension_id" name="dimension_id" value="none">
         </div>
 
-      <label for="dropdownMenuButton">Variable</label>
+      <label for="dropdownMenuButtonVariable">Variable</label>
       <div class="dropdown">
-        <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButton" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" text="Variable" >
+        <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonVariable" id="dropdownMenuButtonVariable" data-bs-toggle="dropdown" aria-expanded="false" text="Variable" >
           Selecciona la variable
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropdown-menu-variable">
-          @foreach ($variables as $variable) 
-            <li><a class="dropdown-item" name="variable_id" href="#" value="{{$variable->variable_id}}">{{$variable->variable_name}}</a></li>
-          @endforeach
+          {{-- Aqui se llena por medio de Ajax --}}
         </ul>
-        <input type="hidden" id="sub_variable_variable_id" name="sub_variable_variable_id" value="">
+        <input type="hidden" id="variable_id" name="variable_id" value="none">
       </div>
 
       <label for="dropdownMenuButtonSubVariable">Subvariable</label>
@@ -47,11 +64,9 @@
             Selecciona la subvariable
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSubVariable" id="dropdown-menu-subvariable">
-            @foreach ($subvariables as $subvariable) 
-            <li><a class="dropdown-item" name="subvariable_id" href="#" value="{{$subvariable->sub_variable_id}}">{{$subvariable->sub_variable_name}}</a></li>
-            @endforeach
+          {{-- Aqui se llena por medio de Ajax --}}
         </ul>
-        <input type="hidden" id="sub_variable_subvariable_id" name="sub_variable_subvariable_id" value="">
+        <input type="hidden" id="subvariable_id" name="subvariable_id" value="">
         </div>
 
 
@@ -61,11 +76,9 @@
             Selecciona el indicador
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonIndicator" id="dropdown-menu-indicator">
-            @foreach ($indicators as $indicator) 
-            <li><a class="dropdown-item" name="indicator_id" href="#" value="{{$indicator->indicator_id}}">{{$indicator->indicator_name}}</a></li>
-            @endforeach
+          {{-- Aqui se llena por medio de Ajax --}}
         </ul>
-        <input type="hidden" id="sub_variable_indicator_id" name="sub_variable_indicator_id" value="">
+        <input type="hidden" id="indicator_id" name="indicator_id" value="">
         </div>
 
 
@@ -85,33 +98,143 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
 
 
     $(document).ready(function() {
-        $("#dropdown-menu-dimension li a").click(function() 
-        {
-        sub_variable_id_value = $(this).attr('value');
-        $("#sub_variable_dimension_id").val(sub_variable_id_value);
-        });
+    });
 
+      $("#dropdown-menu-dimension li a").click(function() 
+      {
+        $("#dropdown_menu_variable").html('');
+        $("#dropdown-menu-variable").empty().off('click');
+        dimension_id_value = $(this).attr('value');
+        $("#dimension_id").val(dimension_id_value);
+        $("#variable_id").val('none');
+        $("#subvariable_id").val('none');
+        $("#indicator_id").val('none');
+        $('#dropdownMenuButtonVariable').text('SELECCIONE LA VARIABLE'); //Setea el nombre en el texto del boton de variable
+        $('#dropdownMenuButtonSubVariable').text('SELECCIONE LA SUB-VARIABLE'); //Setea el nombre en el texto del boton de variable
+        $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR');
+        //Ajax
+       
+        $.ajax
+        ({
+                url: "{{route('report.fillVariable')}}",
+                type: "POST",
+                data: 
+                {
+                    dimension_id: dimension_id_value,
+                    _token: '{{csrf_token()}}'
+                },
+                dataType: 'json',
+                success: function (result) 
+                {
+                    //$('#dropdownMenuButtonVariable').html('Seleccione la variable');
+                    $.each(result.variables, function (key, value) {
+                        $("#dropdown-menu-variable")
+                        .append('<li><a class="dropdown-item" href="javascript:void(0);" onclick="clickAndFill_Variable(this,'+value.variable_id+')" variable_nombre="'+value.variable_name+'" value="'+value.variable_id+'">'+value.variable_name+'</a></li>');
+                    });
+                    $('#dropdownMenuButtonSub').html('Seleccione la sub-variable');
+                    $("#variable_id").val('none');
+                    $("#sub_variable_id").val('none');
+                    $("#indicator_id").val('none');
+                }
+          });
+        });
+         //fill variable
+        function clickAndFill_Variable(element,variable_id_value) 
+        {
+            //alert('Variable id: '+variable_id_value+', variable nombre: '+$(element).attr('variable_nombre'));    
+            $('#dropdownMenuButtonVariable').text($(element).attr('variable_nombre')); //Setea el nombre en el texto del boton
+            $("#variable_id").val(variable_id_value); //Setea el valor en el input hidden
+            $('#dropdownMenuButtonSubVariable').text('SELECCIONE LA SUB-VARIABLE'); //Setea el nombre en el texto del boton de variable
+            $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR'); //Setea el nombre en el texto del boton de variable
+
+            // //Ajax
+            $("#dropdown-menu-subvariable").html('');
+            $.ajax
+            ({
+                url: "{{route('report.fillSubVariable')}}",
+                type: "POST",
+                data: 
+                {
+                    variable_id: variable_id_value,
+                    _token: '{{csrf_token()}}'
+                    // _token:'{!! csrf_token() !!}'
+
+                },
+                dataType: 'json',
+                success: function (result) 
+                {
+                    $.each(result.subvariables, function (key, value) {
+                        $("#dropdown-menu-subvariable")
+                        .append('<li><a class="dropdown-item" href="javascript:void(0);" onclick="clickAndFill_SubVariable(this,'+value.sub_variable_id+')" sub_variable_nombre="'+value.sub_variable_name+'" value="'+value.sub_variable_id+'">'+value.sub_variable_name+'</a></li>');
+                    });
+                    $('#dropdownMenuButtonSubVariable').html('Seleccione la sub-variable');
+                    $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR');
+                    $("#indicator_id").val('none');
+                    $("#sub_variable_id").val('none');
+                }
+            });
+        }
+
+        function clickAndFill_SubVariable(element,sub_variable_id_value) {
+          //alert('Subvariable id: '+sub_variable_id_value+', subvariable nombre: '+$(element).attr('sub_variable_nombre'));    
+          $('#dropdownMenuButtonSubVariable').text($(element).attr('sub_variable_nombre')); //Setea el nombre en el texto del boton
+          $("#subvariable_id").val(sub_variable_id_value); //Setea el valor en el input hidden
+          $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR');
+          $("#indicator_id").val('none');
+          $.ajax
+            ({
+                url: "{{route('report.fillIndicator')}}",
+                type: "POST",
+                data: 
+                {
+                    Subvariable_id: sub_variable_id_value,
+                    _token: '{{csrf_token()}}'
+                    // _token:'{!! csrf_token() !!}'
+
+                },
+                dataType: 'json',
+                success: function (result) 
+                {
+                  console.log(result.indicators)
+                    $.each(result.indicators, function (key, value) {
+                        $("#dropdown-menu-indicator")
+                        .append('<li><a class="dropdown-item" href="javascript:void(0);" onclick="clickAndFill_Indicators(this,'+value.indicator_id+')" sub_variable_nombre="'+value.indicator_name+'" value="'+value.indicator_id+'">'+value.indicator_name+'</a></li>');
+                    });
+                    $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR');
+                    $("#indicator_id").val('none');
+                }
+            });
+        }
+
+        function clickAndFill_Indicators(element,indicator_id_value){
+          ('#dropdownMenuButtonIndicator').text($(element).attr('indicator_nombre')); //Setea el nombre en el texto del boton
+          $("#indicator_id").val(indicator_id_value); //Setea el valor en el input hidden
+        }
+
+        /*
         $("#dropdown-menu-variable li a").click(function() 
         {
         variable_type_id_value = $(this).attr('value');
-        $("#sub_variable_variable_id").val(variable_type_id_value);
+        $("#variable_id").val(variable_type_id_value);
+        $("#subvariable_id").val('none');
+        $("#indicator_id").val('none');
         });
 
         $("#dropdown-menu-subvariable li a").click(function() 
         {
         sub_variable_id_value = $(this).attr('value');
-        $("#sub_variable_subvariable_id").val(sub_variable_id_value);
+        $("#subvariable_id").val(sub_variable_id_value);
+        $("#indicator_id").val('none');
         });
 
         $("#dropdown-menu-indicator li a").click(function() 
         {
         variable_type_id_value = $(this).attr('value');
-        $("#sub_variable_indicator_id").val(variable_type_id_value);
+        $("#indicator_id").val(variable_type_id_value);
         });
+        */
         
-    });
-
-
+  
     //Cambiar el valor del boton dropdown
 
 
