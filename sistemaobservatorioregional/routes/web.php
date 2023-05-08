@@ -93,18 +93,13 @@ Route::group(['middleware' => ['auth']], function () {
     //-----------------------------------------LOGOUT-----------------------------------------
     Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
-
-    //-----------------------------------------actualizar informacion de usuario-----------------------------------------
-
-    
-
     //-----------------------------------------Reportes -----------------------------------------
     Route::get('/report', [ReportsController::class, 'genReport'])->name('report');
     Route::get('/view-report', [ReportsController::class,'createReport'])->name('report.create');
     Route::post('/fillVariableReport',[ReportsController::class, 'fillVariable'])->name("report.fillVariable");
     Route::post('/fillSubVariableReport',[ReportsController::class, 'fillSubVariable'])->name("report.fillSubVariable");
     Route::post('/fillIndicatorReport',[ReportsController::class, 'fillIndicator'])->name("report.fillIndicator");
-
+//-----------------------------------------actualizar informacion de usuario-----------------------------------------
     Route::group(['prefix' => 'usuarios'], function () {
         Route::get('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
         Route::post('/confirm-password', [PerfilController::class, 'confirm'])->name('perfil.confirm');
