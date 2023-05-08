@@ -60,9 +60,15 @@
 
                         <span style="color:white" class="badge badge-sm bg-gradient-success">Editar</span>
                       </a>
-                      <a href="{{route('dimension.delete', $dimension->dimension_id)}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user">
+                      <!--<a href="{{route('dimension.delete', $dimension->dimension_id)}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user">
                         <span style="color:white" class="badge badge-sm bg-gradient-danger">Eliminar</span>
                       </a>
+                    -->
+                    <a onclick="confirm_delete({{$dimension->dimension_id}},'{{$dimension->dimension_name}}')" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user">
+                      <span style="color:white" class="badge badge-sm bg-gradient-danger">Eliminar</span>
+                    </a>
+                    <form style="display:none" action="{{route('dimension.delete', $dimension->dimension_id)}}" id="dimension_delete_{{$dimension->dimension_id}}">
+                    </form>
                     </td>
                   </tr>
                   @endforeach
@@ -74,4 +80,5 @@
       </div>
     </div>
 </div>
+@include('components.confirm_delete')
 @endsection
