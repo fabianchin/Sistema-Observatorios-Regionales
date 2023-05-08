@@ -104,6 +104,8 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
       {
         $("#dropdown_menu_variable").html('');
         $("#dropdown-menu-variable").empty().off('click');
+        $("#dropdown-menu-subvariable").empty().off('click');
+        $("#dropdown-menu-indicator").empty().off('click');
         dimension_id_value = $(this).attr('value');
         $("#dimension_id").val(dimension_id_value);
         $("#variable_id").val('none');
@@ -146,7 +148,8 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
             $("#variable_id").val(variable_id_value); //Setea el valor en el input hidden
             $('#dropdownMenuButtonSubVariable').text('SELECCIONE LA SUB-VARIABLE'); //Setea el nombre en el texto del boton de variable
             $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR'); //Setea el nombre en el texto del boton de variable
-
+            $("#dropdown-menu-subvariable").empty().off('click');
+            $("#dropdown-menu-indicator").empty().off('click');
             // //Ajax
             $("#dropdown-menu-subvariable").html('');
             $.ajax
@@ -181,6 +184,7 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
           $("#subvariable_id").val(sub_variable_id_value); //Setea el valor en el input hidden
           $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR');
           $("#indicator_id").val('none');
+          $("#dropdown-menu-indicator").empty().off('click');
           $.ajax
             ({
                 url: "{{route('report.fillIndicator')}}",
@@ -195,10 +199,10 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
                 dataType: 'json',
                 success: function (result) 
                 {
-                  console.log(result.indicators)
+                  console.log(result.indicators);
                     $.each(result.indicators, function (key, value) {
                         $("#dropdown-menu-indicator")
-                        .append('<li><a class="dropdown-item" href="javascript:void(0);" onclick="clickAndFill_Indicators(this,'+value.indicator_id+')" sub_variable_nombre="'+value.indicator_name+'" value="'+value.indicator_id+'">'+value.indicator_name+'</a></li>');
+                        .append('<li><a class="dropdown-item" href="javascript:void(0);" onclick="clickAndFill_Indicators(this,'+value.indicator_id+')" indicator_nombre="'+value.indicator_name+'" value="'+value.indicator_id+'">'+value.indicator_name+'</a></li>');
                     });
                     $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR');
                     $("#indicator_id").val('none');
@@ -207,7 +211,7 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
         }
 
         function clickAndFill_Indicators(element,indicator_id_value){
-          ('#dropdownMenuButtonIndicator').text($(element).attr('indicator_nombre')); //Setea el nombre en el texto del boton
+          $('#dropdownMenuButtonIndicator').text($(element).attr('indicator_nombre')); //Setea el nombre en el texto del boton
           $("#indicator_id").val(indicator_id_value); //Setea el valor en el input hidden
         }
 

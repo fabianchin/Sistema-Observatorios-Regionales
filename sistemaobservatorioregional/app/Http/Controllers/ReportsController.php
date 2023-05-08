@@ -33,14 +33,14 @@ class ReportsController extends Controller
     {
         $subvariableModel = new Sub_Variable();
         $data['subvariables'] = $subvariableModel->getSubVariableByVariableId($request->variable_id);
-        //dd($data);
+       // dd($data);
         return response()->json($data);
     }
 
     public function fillIndicator(Request $request)
     {
         $indicatorModel = new Indicator();
-        $data['indicators'] = $indicatorModel->getAllIndicatorsBySubVariableId($request->subvariable_id);
+        $data['indicators'] = $indicatorModel->getAllIndicatorsBySubVariableId($request->Subvariable_id);
         //dd($data);
         return response()->json($data);
     }
