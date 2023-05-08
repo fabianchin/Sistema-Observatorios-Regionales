@@ -14,18 +14,13 @@
 
     <form role="form text-left" method="post" action="{{route('indicator.update')}}">
         @csrf
-        <?php
-        echo"<pre>";
-          var_dump($indicator);
-          echo"</pre>";
-          exit;
-          ?>
+        
         <div class="mb-3">
             <label for="dimension_name">Nombre del indicador</label>
             <input type="text" name="indicator_name" class="form-control" placeholder="Nombre del indicador" aria-label="indicator_name" required value="{{$indicator->indicator_name}}">
             <input type="hidden" name="indicator_id" value="{{$indicator->indicator_id}}">
         </div>
-  
+      
         <label for="dropdownMenuButton">Sub-Variable</label>
         <div class="dropdown">
           <?php
@@ -76,7 +71,7 @@
         </div>
 
         <div class="container text-center">
-          <a class="btn bg-gradient-success w-30 my-4 mb-2" href={{route('indicator.update')}} style="color:white">Modificar</a>
+          <button type="submit" class="btn bg-gradient-success w-30 my-4 mb-2" href={{route('indicator.update')}} style="color:white">Modificar</button>
           <a class="btn bg-gradient-danger w-30 my-4 mb-2" style="color:white" href={{route('indicator.manage')}}>Regresar</a>
         </div>
 

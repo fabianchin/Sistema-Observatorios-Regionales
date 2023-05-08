@@ -3,9 +3,9 @@
 @section('crud_content')
 
 <div class="card-body">
-  @if (session('status'))
-  <div class="alert alert-success">
-      {{ session('status') }}
+  @if (session('success'))
+  <div class="alert alert-success" style="color: white; ">
+     <strong>{{ session('success') }}</strong> 
   </div>
   @elseif (session('error'))
   <div class="alert alert-danger">
@@ -15,8 +15,12 @@
     <form role="form text-left" method="post" action="{{route('sub_variable.insert')}}">
       @csrf
       <div class="mb-3">
-          <label for="dimension_name">Nombre de la sub-variable</label>
+          <label for="sub_variable_name">Nombre de la sub-variable</label>
           <input type="text" name="sub_variable_name" class="form-control" placeholder="Nombre de la sub-variable" aria-label="sub_variable_name" required>
+      </div>
+      <div class="mb-3">
+          <label for="sub_variable_code">Codigo de la sub-variable </label>
+          <input type="text" name="sub_variable_code" class="form-control" placeholder="Código de la sub-variable" aria-label="sub_variable_code" required>
       </div>
 
       <label for="dropdownMenuButton">Variable</label>
@@ -34,7 +38,7 @@
 
 
       <div class="container text-center">
-        <button class="btn bg-gradient-success w-30 my-4 mb-2" href={{route('sub_variable.insert')}} style="color:white">Guardar</button>
+        <button type="submit" class="btn bg-gradient-success w-30 my-4 mb-2" href={{route('sub_variable.insert')}} style="color:white">Guardar</button>
         <a class="btn bg-gradient-danger w-30 my-4 mb-2" style="color:white" href={{route('sub_variable.manage')}}>Regresar</a>
       </div>
     </form>

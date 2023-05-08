@@ -10,7 +10,7 @@ class Sub_Variable extends Model
 {
     use HasFactory;
     protected $table = 'tb_obs_sub_variable';
-    protected $fillable = ['sub_variable_name','sub_variable_variable_id', 'code_param'];
+    protected $fillable = ['sub_variable_name','sub_variable_variable_id', 'sub_variable_code'];
     protected $hidden = ['sub_variable_id'];
 
     //Storaged procedures
@@ -23,7 +23,7 @@ class Sub_Variable extends Model
     }
     public function getSubVariableByVariableId($sub_variable_variable_id){ return DB::select('call getSubVariableByVariableId(?)',[$sub_variable_variable_id]); }
 
-    public function insertSubVariable($sub_variable_variable_id, $sub_variable_name, $code_param){ return DB::statement('call insertSubVariable (?,?,?)',[$sub_variable_variable_id,$sub_variable_name, $code_param]);}
+    public function insertSubVariable($sub_variable_variable_id, $sub_variable_name, $sub_variable_code){ return DB::statement('call insertSubVariable (?,?,?)',[$sub_variable_variable_id,$sub_variable_name, $sub_variable_code]);}
     public function deleteSubVariable($sub_variable_id){ return DB::statement('call deleteSubVariable (?)',[$sub_variable_id]);}
-    public function updateSubVariable($sub_variable_id, $sub_variable_variable_id, $sub_variable_name){ return DB::statement('call updateSubVariable (?,?,?)',[$sub_variable_id, $sub_variable_variable_id, $sub_variable_name]);}
+    public function updateSubVariable($sub_variable_id, $sub_variable_variable_id, $sub_variable_name, $sub_variable_code){ return DB::statement('call updateSubVariable (?,?,?,?)',[$sub_variable_id, $sub_variable_variable_id, $sub_variable_name,$sub_variable_code]);}
 }
