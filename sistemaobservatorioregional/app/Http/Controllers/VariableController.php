@@ -58,6 +58,7 @@ class VariableController extends Controller
     //onclick del boton de guardar actualizacion
     public function updateVariable(Request $request)
     {
+        
         if($request->variable_name != null && $request->variable_dimension_id != null)
         {
             $variableModel = new Variable(); 

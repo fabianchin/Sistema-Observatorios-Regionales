@@ -19,7 +19,11 @@ class Variable extends Model
     {
         $variable = new Variable();
         $variable = DB::select('call getVariablebyId(?)',[$variable_id]);
-        return $variable[0];
+        if (count($variable) > 0) {
+            return $variable[0];
+        } else {
+            return null;
+        }
     }
     public function getVariableByDimensionId($variable_dimension_id){ return DB::select('call getVariableByDimensionId(?)',[$variable_dimension_id]); }
     public function getVariableBySubVariableVariableId($sub_variable_variable_id){ return DB::select('call getVariableBySubVariableVariableId(?)',[$sub_variable_variable_id]); }

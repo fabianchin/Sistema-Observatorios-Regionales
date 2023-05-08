@@ -19,8 +19,10 @@ class Indicator extends Model
     {
         $indicator = new Indicator();
         $indicator = DB::select('call getIndicatorById(?)',[$indicator_id]);
-        
-        return $indicator;
+        if(count($indicator) > 0){
+            return $indicator[0];
+        }
+        return null;
     }    
     public function insertIndicator($indicator_name, $indicator_sub_variable, $indicator_sub_variable_type, $indicator_code){ return DB::statement('call insertIndicator(?,?,?,?)',[$indicator_name,$indicator_sub_variable, $indicator_sub_variable_type,$indicator_code]);}
     public function deleteIndicator($indicator_id){ return DB::statement('call deleteIndicator(?)',[$indicator_id]);}

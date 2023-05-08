@@ -71,7 +71,7 @@ class IndicatorController extends Controller
     //onclick del boton de guardar actualizacion
     public function updateIndicator(Request $request)
     {
-        dd($request->all());
+        
         if($request->indicator_id != null && $request->indicator_name != null && $request->sub_variable_id != null && $request->variable_type_id != null){
             $indicatorModel = new Indicator();
             $indicatorModel->updateIndicator($request->indicator_id, $request->indicator_name, $request->sub_variable_id, $request->variable_type_id,$request->indicator_code);    

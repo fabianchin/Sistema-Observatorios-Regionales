@@ -2,22 +2,26 @@
 
 @section('crud_content')
 <div class="card-body">
-    @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-    @elseif (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-    @endif
-
+  @if (session('success'))
+  <div class="alert alert-success" style="color: white; ">
+     <strong>{{ session('success') }}</strong> 
+  </div>
+  @elseif (session('error'))
+  <div class="alert alert-danger">
+      {{ session('error') }}
+  </div>
+  @endif
     <form role="form text-left" method="post" action="{{route('sub_variable.update')}}">
         @csrf
 
         <div class="mb-3">
-            <label for="dimension_name">Nombre de la sub-variable</label>
-            <input type="text" name="sub_variable_name" class="form-control" placeholder="Nombre de la sub-variable" aria-label="sub_variable_name" required value="{{$sub->sub_variable_name}}">
+            <label for="sub-variable_name">Nombre de la sub-variable</label>
+            <input type="text" name="sub_variable_name" class="form-control"  aria-label="sub_variable_name" required value="{{$sub->sub_variable_name}}">
+            <input type="hidden" name="sub_variable_id" value="{{$sub->sub_variable_id}}">
+        </div>
+        <div class="mb-3">
+            <label for="sub-variable_code">Código de la sub-variable</label>
+            <input type="text" name="sub-variable_code" class="form-control"  aria-label="sub-variable_code" required value="{{$sub->sub_variable_code}}">
             <input type="hidden" name="sub_variable_id" value="{{$sub->sub_variable_id}}">
         </div>
   
@@ -43,7 +47,7 @@
         </div>
 
         <div class="container text-center">
-          <a class="btn bg-gradient-success w-30 my-4 mb-2" style="color:white">Modificar</a>
+          <button type="submit" class="btn bg-gradient-success w-30 my-4 mb-2" style="color:white">Modificar</button>
           <a class="btn bg-gradient-danger w-30 my-4 mb-2" style="color:white" href={{route('sub_variable.manage')}}>Regresar</a>
         </div>
 
