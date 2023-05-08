@@ -257,7 +257,7 @@
         $("#variable_id").val(variable_id_value); //Setea el valor en el input hidden
         $("#sub_variable_id").val('none');
         $('#dropdownMenuButtonSub').text('SELECCIONE LA SUB-VARIABLE'); //Setea el nombre en el texto del boton de variable
-
+        
         // //Ajax
         $("#dropdown_menu_sub").html('');
         $.ajax
