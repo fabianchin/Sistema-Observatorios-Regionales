@@ -1,5 +1,3 @@
-
-
 <div class="modal fade" id="confirm_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -13,13 +11,13 @@
           <form>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Message:</label>
-              <textarea class="form-control" id="text_confirm_delete"></textarea>
+              <textarea placeholder="Escribe: 'eliminar' para confirmar" class="form-control" id="text_confirm_delete"></textarea>
               <input type="hidden" id="dimension_delete_id" >
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button onclick="cerrarModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button onclick="delete_dimension()" type="button" class="btn btn-primary">Send message</button>
         </div>
       </div>
@@ -36,8 +34,8 @@
   }
   
   function delete_dimension(){
-    if($("#text_confirm_delete").val() != "ELIMINAR"){
-      alert("Debe escribir ELIMINAR para poder eliminar la dimension");
+    if($("#text_confirm_delete").val() != "eliminar"){
+      alert("Debe escribir eliminar para poder eliminar la dimension");
       return;
     }
     $("#dimension_delete_"+ $("#dimension_delete_id").val()).submit();
@@ -55,5 +53,9 @@
       alert("esta acción está prohibida");
     }
   }
+
+  function cerrarModal() {
+  $('#confirm_delete').modal('hide');
+}
   
   </script>
