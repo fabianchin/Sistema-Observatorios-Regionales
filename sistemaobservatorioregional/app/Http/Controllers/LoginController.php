@@ -26,6 +26,6 @@ class LoginController extends Controller
             return back()->with('error', 'Credenciales incorrectas');
         }
         
-        return view('admin_layouts.index.admin_index');
+        return redirect()->route('admin.index');
     }
 }
