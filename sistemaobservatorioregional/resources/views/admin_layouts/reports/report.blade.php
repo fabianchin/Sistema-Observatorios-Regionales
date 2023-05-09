@@ -31,7 +31,7 @@
       {{ session('error') }}
   </div>
   @endif
-    <form role="form text-left" method="post" action="{{route('report.create')}}">
+    <form role="form text-left" method="get" action="{{route('report.create')}}">
       @csrf
 
       <label for="dropdownMenuButtonDimension">Dimensión</label>
@@ -214,36 +214,6 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
           $('#dropdownMenuButtonIndicator').text($(element).attr('indicator_nombre')); //Setea el nombre en el texto del boton
           $("#indicator_id").val(indicator_id_value); //Setea el valor en el input hidden
         }
-
-        /*
-        $("#dropdown-menu-variable li a").click(function() 
-        {
-        variable_type_id_value = $(this).attr('value');
-        $("#variable_id").val(variable_type_id_value);
-        $("#subvariable_id").val('none');
-        $("#indicator_id").val('none');
-        });
-
-        $("#dropdown-menu-subvariable li a").click(function() 
-        {
-        sub_variable_id_value = $(this).attr('value');
-        $("#subvariable_id").val(sub_variable_id_value);
-        $("#indicator_id").val('none');
-        });
-
-        $("#dropdown-menu-indicator li a").click(function() 
-        {
-        variable_type_id_value = $(this).attr('value');
-        $("#indicator_id").val(variable_type_id_value);
-        });
-        */
-        
-  
-    //Cambiar el valor del boton dropdown
-
-
-
-
     
 </script>
 @endsection

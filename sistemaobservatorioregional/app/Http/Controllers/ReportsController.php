@@ -50,16 +50,28 @@ class ReportsController extends Controller
         $variableId = $request->input('variable_id');
         $subVariableId = $request->input('subvariable_id');
         $indicatorId = $request->input('indicator_id');
-        dd($indicatorId);
+        $variables = array();
+        $subVariables = array();
+        $indicators = array();
+        
+        //dd($indicatorId);
         if($indicatorId != NULL){
-            /*Aqui se va a enviar toda la informacion del indicador para ser mostrada*/ 
-        }else if($subVariableId != NULL){
-            /*Se envian todos los indicadores del la subvariable*/ 
-        }else if($variableId != NULL){
-            /*Se envian todas las subvariables y sus respecticos indicadores*/
-        }else{
-            /*se envian todos las variables y sus respectivas subvariable e indicadores*/
-        } 
+            $indicators = new Indicator();
+            //$indicators = $indicators->getAllIndicatorsBySubVariableId($subVariableId);
+            $indicators = $indicators->getAllIndicators();
+        }
+        if($subVariableId != NULL){
+            $subVariables = new Sub_Variable();
+            //$subVariables =  $subVariables->getSubVariableByVariableId($variableId);
+            $subVariables =  $subVariables->getAllSubVariables();
+        }
+        if($variableId != NULL){
+            $variables = new Variable();
+           //$variables = $variables->getVariableByDimensionId($dimensionId);
+            $variables = $variables->getAllVariables();
+        }
+        //dd($subVariables);
+        return view('admin_layouts.reports.viewReport', compact('subVariables','indicators','variables'));
     }
 
 }
