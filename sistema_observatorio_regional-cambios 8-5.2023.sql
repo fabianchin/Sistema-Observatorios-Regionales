@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-05-2023 a las 00:58:08
+-- Tiempo de generación: 09-05-2023 a las 05:51:47
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -421,8 +421,7 @@ CREATE TABLE `tb_obs_indicator` (
 
 INSERT INTO `tb_obs_indicator` (`indicator_id`, `indicator_name`, `indicator_sub_variable_id`, `indicator_sub_variable_type`, `indicator_code`) VALUES
 (0, 'Pandas-actualizado', 3, 1, 1),
-(12, 'Salario minimo neto por persona cada 500mts', 3, 1, 2),
-(13, 'Salario minimo neto por persona cada 500mts', 3, 1, 3);
+(12, 'Salario minimo neto por persona cada 500mts', 3, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -448,13 +447,6 @@ CREATE TABLE `tb_obs_indicator_data_cuantitative` (
   `indicator_region_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Volcado de datos para la tabla `tb_obs_indicator_data_cuantitative`
---
-
-INSERT INTO `tb_obs_indicator_data_cuantitative` (`indicator_data_description`, `indicator_id`, `indicator_region_id`) VALUES
-('Salario minimo neto por persona cada 500mts', 13, 3);
-
 -- --------------------------------------------------------
 
 --
@@ -465,13 +457,6 @@ CREATE TABLE `tb_obs_indicator_detail` (
   `detail_indicator_id` int(11) NOT NULL,
   `detail_region_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- Volcado de datos para la tabla `tb_obs_indicator_detail`
---
-
-INSERT INTO `tb_obs_indicator_detail` (`detail_indicator_id`, `detail_region_id`) VALUES
-(13, 3);
 
 -- --------------------------------------------------------
 
@@ -595,9 +580,9 @@ CREATE TABLE `tb_obs_sub_variable` (
 --
 
 INSERT INTO `tb_obs_sub_variable` (`sub_variable_id`, `sub_variable_name`, `sub_variable_variable_id`, `sub_variable_code`) VALUES
-(1, 'Animales en peligro', 4, 1),
 (2, 'Salario minimo', 3, 2),
-(3, 'Salario maximo', 3, 3);
+(3, 'Salario maximo', 3, 3),
+(9, 'Animales en peligro1', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -617,10 +602,9 @@ CREATE TABLE `tb_obs_variable` (
 --
 
 INSERT INTO `tb_obs_variable` (`variable_id`, `variable_name`, `variable_acronym`, `variable_dimension_id`) VALUES
-(1, 'Biodiversidad', 'VB', 1),
+(1, 'Biodiversidadad', 'VB', 1),
 (2, 'BeGreat', 'VB', 2),
-(3, 'Salarios', 'VS', 3),
-(4, 'Fauna', 'VF', 1);
+(3, 'Salarios', 'VS', 3);
 
 -- --------------------------------------------------------
 
@@ -654,22 +638,6 @@ CREATE TABLE `tb_obs_year` (
   `indicator_region_id` int(11) NOT NULL,
   `measurement_unit_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- Volcado de datos para la tabla `tb_obs_year`
---
-
-INSERT INTO `tb_obs_year` (`year_id`, `year_value`, `indicator_id`, `indicator_region_id`, `measurement_unit_id`) VALUES
-(0, 0.00, 13, 3, 6),
-(1, 1.00, 13, 3, 6),
-(2, 2.00, 13, 3, 6),
-(3, 3.00, 13, 3, 6),
-(4, 4.00, 13, 3, 6),
-(5, 5.00, 13, 3, 6),
-(6, 6.00, 13, 3, 6),
-(7, 7.00, 13, 3, 6),
-(8, 8.00, 13, 3, 6),
-(9, 9.00, 13, 3, 6);
 
 -- --------------------------------------------------------
 
@@ -825,13 +793,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `tb_obs_dimension`
 --
 ALTER TABLE `tb_obs_dimension`
-  MODIFY `dimension_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `dimension_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_obs_indicator`
 --
 ALTER TABLE `tb_obs_indicator`
-  MODIFY `indicator_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `indicator_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_obs_measurement_unit`
@@ -855,13 +823,13 @@ ALTER TABLE `tb_obs_region`
 -- AUTO_INCREMENT de la tabla `tb_obs_sub_variable`
 --
 ALTER TABLE `tb_obs_sub_variable`
-  MODIFY `sub_variable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `sub_variable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_obs_variable`
 --
 ALTER TABLE `tb_obs_variable`
-  MODIFY `variable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `variable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_obs_variable_type`
@@ -931,20 +899,20 @@ ALTER TABLE `tb_obs_log`
 -- Filtros para la tabla `tb_obs_sub_variable`
 --
 ALTER TABLE `tb_obs_sub_variable`
-  ADD CONSTRAINT `fk_sub_variable_variable_id` FOREIGN KEY (`sub_variable_variable_id`) REFERENCES `tb_obs_variable` (`variable_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_sub_variable_variable_id` FOREIGN KEY (`sub_variable_variable_id`) REFERENCES `tb_obs_variable` (`variable_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tb_obs_variable`
 --
 ALTER TABLE `tb_obs_variable`
-  ADD CONSTRAINT `fk_variable_dimension_id` FOREIGN KEY (`variable_dimension_id`) REFERENCES `tb_obs_dimension` (`dimension_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_variable_dimension_id` FOREIGN KEY (`variable_dimension_id`) REFERENCES `tb_obs_dimension` (`dimension_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tb_obs_year`
 --
 ALTER TABLE `tb_obs_year`
-  ADD CONSTRAINT `fk_year_indicator_data_cuantitative` FOREIGN KEY (`indicator_id`,`indicator_region_id`) REFERENCES `tb_obs_indicator_data_cuantitative` (`indicator_id`, `indicator_region_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_year_measurement_unit` FOREIGN KEY (`measurement_unit_id`) REFERENCES `tb_obs_measurement_unit` (`measurement_unit_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_year_indicator_data_cuantitative` FOREIGN KEY (`indicator_id`,`indicator_region_id`) REFERENCES `tb_obs_indicator_data_cuantitative` (`indicator_id`, `indicator_region_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_year_measurement_unit` FOREIGN KEY (`measurement_unit_id`) REFERENCES `tb_obs_measurement_unit` (`measurement_unit_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
