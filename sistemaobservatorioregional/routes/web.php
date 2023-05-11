@@ -23,9 +23,6 @@ use App\Http\Controllers\ReportsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 Route::group(['middleware' => ['auth']], function () {
@@ -111,9 +108,16 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
+
 //-----------------------------------------LOGIN-----------------------------------------
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 //-----------------------------------------registro de Usuarios-----------------------------------------
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
+
+Route::get('/', function () {
+    return view('/welcome');
+});
+
+
