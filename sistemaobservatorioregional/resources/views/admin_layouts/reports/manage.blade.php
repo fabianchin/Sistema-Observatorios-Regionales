@@ -75,7 +75,7 @@
     </table>
 @endif
 @if($state == 1)
-<h6>Indicadores de la Sub Variable: {{$subVariables->sub_variable_name}}</h6>
+    <h6>Indicadores de la Sub Variable: {{$subVariables->sub_variable_name}}</h6>
         <table border="2">
             <thead>
                 <tr>
@@ -90,6 +90,25 @@
                         @endif
                     </tr>
                 @endforeach
+            </tbody>
+        </table>
+@endif
+@if($state == 0)
+    <h6>Indicador: {{$indicators->indicator_name}}</h6>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Descripcion</th>
+                    <th>Region</th>
+                    <th>Tipo</th>
+                    <th>Dato</th>
+                </tr>
+            </thead>
+            <tbody>
+               <tr>
+                <td>{{$indicators->indicator_name}}</td>
+                <td>{{$region->region_name}}</td>
+               </tr>
             </tbody>
         </table>
 @endif

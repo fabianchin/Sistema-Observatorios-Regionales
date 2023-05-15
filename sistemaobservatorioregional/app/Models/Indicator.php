@@ -28,4 +28,9 @@ class Indicator extends Model
     public function insertIndicator($indicator_name, $indicator_sub_variable, $indicator_sub_variable_type, $indicator_code){ return DB::statement('call insertIndicator(?,?,?,?)',[$indicator_name,$indicator_sub_variable, $indicator_sub_variable_type,$indicator_code]);}
     public function deleteIndicator($indicator_id){ return DB::statement('call deleteIndicator(?)',[$indicator_id]);}
     public function updateIndicator($indicator_id,$indicator_name, $indicator_sub_variable, $indicator_sub_variable_type,$indicator_code){ return DB::statement('call updateIndicator(?,?,?,?,?)',[$indicator_id,$indicator_name, $indicator_sub_variable, $indicator_sub_variable_type,$indicator_code]);}
+
+    //Get informacion Indicators
+   
+   
+    
 }
