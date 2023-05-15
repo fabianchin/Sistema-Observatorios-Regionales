@@ -83,7 +83,7 @@
 
 
       <div class="container text-center">
-        <button class="btn bg-gradient-success w-30 my-4 mb-2" href={{route('sub_variable.insert')}} style="color:white">Generar Reporte</button>
+        <button id="btn_genReport" class="btn bg-gradient-success w-30 my-4 mb-2" href={{route('sub_variable.insert')}} style="color:white">Generar Reporte</button>
       </div>
     </form>
   </div>
@@ -98,10 +98,12 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
 
 
     $(document).ready(function() {
+      document.getElementById("btn_genReport").disabled = true;
     });
 
       $("#dropdown-menu-dimension li a").click(function() 
       {
+        document.getElementById("btn_genReport").disabled = false;
         $("#dropdown_menu_variable").html('');
         $("#dropdown-menu-variable").empty().off('click');
         $("#dropdown-menu-subvariable").empty().off('click');
@@ -150,6 +152,8 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
             $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR'); //Setea el nombre en el texto del boton de variable
             $("#dropdown-menu-subvariable").empty().off('click');
             $("#dropdown-menu-indicator").empty().off('click');
+            $("#subvariable_id").val('none');
+            $("#indicator_id").val('none');
             // //Ajax
             $("#dropdown-menu-subvariable").html('');
             $.ajax
@@ -185,6 +189,7 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
           $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR');
           $("#indicator_id").val('none');
           $("#dropdown-menu-indicator").empty().off('click');
+          $("#indicator_id").val('none');
           $.ajax
             ({
                 url: "{{route('report.fillIndicator')}}",
