@@ -50,28 +50,35 @@ class ReportsController extends Controller
         $variableId = $request->input('variable_id');
         $subVariableId = $request->input('subvariable_id');
         $indicatorId = $request->input('indicator_id');
-        $variables = array();
-        $subVariables = array();
-        $indicators = array();
-        
+        $state = -1;
+        $string = "";
         //dd($indicatorId);
-        if($indicatorId != NULL){
-            $indicators = new Indicator();
+        $indicators = new Indicator();
+        $subVariables = new Sub_Variable();
+        $variables = new Variable();
+        $dimensions = new Dimension();
+        if($indicatorId != 'none'){
             //$indicators = $indicators->getAllIndicatorsBySubVariableId($subVariableId);
+            $state = 0;
+        }else if($subVariableId != 'none'){
+            $indicators = $indicators->getAllIndicatorsBySubVariableId($subVariableId);
+            $subVariables =  $subVariables->getSubVariableById($subVariableId);
+            $state = 1;
+        }else if($variableId != 'none'){
+            $subVariables =  $subVariables->getSubVariableByVariableId($variableId);
+            $variables = $variables->getVariableById($variableId);
             $indicators = $indicators->getAllIndicators();
-        }
-        if($subVariableId != NULL){
-            $subVariables = new Sub_Variable();
-            //$subVariables =  $subVariables->getSubVariableByVariableId($variableId);
+            $dimensions = 'none';
+            $state = 2;
+        }else{
+            $dimensions = $dimensions->getDimensionById($dimensionId);
+            $variables = $variables->getVariableByDimensionId($dimensionId);
             $subVariables =  $subVariables->getAllSubVariables();
-        }
-        if($variableId != NULL){
-            $variables = new Variable();
-           //$variables = $variables->getVariableByDimensionId($dimensionId);
-            $variables = $variables->getAllVariables();
+            $indicators = $indicators->getAllIndicators();
+            $state = 3;
         }
         //dd($subVariables);
-        return view('admin_layouts.reports.viewReport', compact('subVariables','indicators','variables'));
+        return view('admin_layouts.reports.manage', compact('subVariables','indicators','variables','dimensions','state','string'));
     }
 
 }
