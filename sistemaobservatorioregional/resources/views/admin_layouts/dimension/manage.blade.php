@@ -1,9 +1,9 @@
 @extends('admin_layouts.admin_nav')
 
 @section('crud_content')
-@if (session('status'))
-<div class="alert alert-success">
-  {{ session('status') }}
+@if (session('success'))
+<div class="alert alert-success" style="font-weight: bold; color: white">
+  {{ session('success') }}
 </div>
 @endif
 <div class="container-fluid py-4">
