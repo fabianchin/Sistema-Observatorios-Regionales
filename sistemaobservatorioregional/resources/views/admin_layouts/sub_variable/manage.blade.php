@@ -1,6 +1,11 @@
 @extends('admin_layouts.admin_nav')
 
 @section('crud_content')
+@if (session('success'))
+<div class="alert alert-success" style="font-weight: bold; color: white">
+  {{ session('success') }}
+</div>
+@endif
 <div class="container-fluid py-4">
     <div class="row">
       <div class="col-12">
