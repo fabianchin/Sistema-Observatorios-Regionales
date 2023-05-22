@@ -24,7 +24,7 @@ class SubVariableController extends Controller
         $subModel = new Sub_Variable(); 
         $state = $subModel->deleteSubVariable($request->sub_variable_id);
         if($state == 1){
-            return redirect()->route('sub_variable.manage')->with('status', 'Se elimino correctamente la sub variable');
+            return redirect()->route('sub_variable.manage')->with('success', 'Se elimino correctamente la sub variable');
         }else{
             return redirect()->route('sub_variable.manage')->with('error', 'No se puede eliminar la sub-variable porque tiene preguntas asociadas');
         }
@@ -68,7 +68,7 @@ class SubVariableController extends Controller
         {
             $subModel = new Sub_Variable(); 
             $subModel->updateSubVariable($request->sub_variable_id,$request->sub_variable_variable_id,$request->sub_variable_name, $request->sub_variable_code);
-            return redirect()->route('sub_variable.manage')->with('success', 'Se actualizó correctamente la sub variable '.$request->sub_variable_name.'');
+            return redirect()->route('sub_variable.manage')->with('success', 'Se actualizó correctamente la sub variable ');
         }
         else if($request->sub_variable_name == null && $request->sub_variable_variable_id != null){
             return redirect()->route('sub_variable.manage')->with('error', 'No se puede actualizar la sub-variable porque no se ingreso un nombre');
@@ -90,17 +90,17 @@ class SubVariableController extends Controller
         {
             $subModel = new Sub_Variable(); 
             $subModel->insertSubVariable($request->sub_variable_variable_id,$request->sub_variable_name,$request->sub_variable_code);
-            return redirect()->route('sub_variable.redirectToCreateSubVariable')->with('success', 'Se agrego la sub variable '.$request->sub_variable_name.' correctamente');
+            return redirect()->route('sub_variable.manage')->with('success', 'Se agrego la sub variable '.$request->sub_variable_name.' correctamente');
         }
         else if($request->sub_variable_name == null && $request->sub_variable_variable_id != null){
-            return redirect()->route('sub_variable.redirectToCreateSubVariable')->with('error', 'No se puede agregar la sub-variable porque no se ingreso un nombre');
+            return redirect()->route('sub_variable.manage')->with('error', 'No se puede agregar la sub-variable porque no se ingreso un nombre');
         }
         else if($request->sub_variable_name != null && $request->sub_variable_variable_id == null){
-            return redirect()->route('sub_variable.redirectToCreateSubVariable')->with('error', 'No se puede agregar la sub-variable porque no se selecciono una variable');
+            return redirect()->route('sub_variable.manage')->with('error', 'No se puede agregar la sub-variable porque no se selecciono una variable');
         }
         else
         {
-            return redirect()->route('sub_variable.redirectToCreateSubVariable')->with('error', 'No se puede agregar la sub-variable porque no se ingreso un nombre y no se selecciono una variable');
+            return redirect()->route('sub_variable.manage')->with('error', 'No se puede agregar la sub-variable porque no se ingreso un nombre y no se selecciono una variable');
         }
     }
 }

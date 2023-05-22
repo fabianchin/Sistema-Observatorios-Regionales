@@ -33,7 +33,7 @@ class DimensionController extends Controller
     {
         $dimension = new Dimension();
         $dimension->deleteDimension($request->dimension_id);
-        return redirect()->route('dimension.manage'); 
+        return redirect()->route('dimension.manage')->with('success', 'Dimensión borrada correctamente');; 
     }
 
     
@@ -62,7 +62,7 @@ class DimensionController extends Controller
         $dimension = new Dimension();
         $dimension->updateDimension($request->dimension_id,$request->dimension_name, $request->acronym);
         return redirect()->route('dimension.manage')->with('success', 'Dimension actualizada correctamente'); 
-        // return view('admin_layouts.dimension.update', $dimension_id);
+       
     }
 
 
@@ -72,7 +72,7 @@ class DimensionController extends Controller
         $dimension = new Dimension();
         $dimension->insertDimension($request->dimension_name, $request->acronym);
         
-        return redirect()->route('dimension.manage');
+        return redirect()->route('dimension.manage')->with('success', 'Dimension creada correctamente');
     }
 
 }
