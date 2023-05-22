@@ -1,17 +1,59 @@
-@extends('admin_layouts.admin_nav')
+<div style="margin: 0; padding: 0;">
+  <img src="{{ $header }}" alt="Logo" style="width: 100%;">
+</div>
 <style>
+    @page {
+    margin: 0;
+    }
+
+  body {
+    margin: 0;
+  }
+
+  img {
+    width: 100%;
+    margin: 0;
+  }
   table {
     border-collapse: collapse;
+    margin-left: 20px;
   }
 
   table td {
     border: 1px solid black;
     padding: 5px;
+    margin-bottom: 5px;
   }
+
+  h1 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+    margin: 20px 0;
+  }
+
+  h2 {
+    font-size: 20px;
+    color: #555;
+    text-align: left;
+    margin-left: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+    color: #777;
+    text-align: left;
+    margin-left: 20px;
+  }
+
+
 </style>
-@section('crud_content')
+
 @if($state == 3)
-  <h6>Variables de Dimension {{$dimensions->dimension_name}}</h6>
+  <h1>Reporte de Dimension {{$dimensions->dimension_name}}</h1>
+  <h2>Fecha de emision: {{$today}}</h2>
+  <h3>Variables de Dimension {{$dimensions->dimension_name}}</h3>
     <table border="2">
       <thead>
         <tr>
@@ -112,6 +154,7 @@
             </tbody>
         </table>
 @endif
+<div style="margin: 0; padding: 0;">
+    <img src="{{ $footer }}" alt="footer" style="position: absolute; bottom: 0;">
+</div>
 
-<a class="btn bg-gradient-danger w-30 my-4 mb-2" style="color:white" href={{route('report')}}>Regresar</a>
-@endsection

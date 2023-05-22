@@ -11,6 +11,7 @@ use App\Models\Indicator_data_cuantitative;
 use App\Models\Indicator_data_cualitative;
 use Illuminate\Http\Request;
 use Termwind\Components\Dd;
+use Carbon\Carbon;
 
 class ReportsController extends Controller
 {
@@ -95,7 +96,15 @@ class ReportsController extends Controller
             $state = 3;
         }
         //dd($subVariables);
-        return view('admin_layouts.reports.manage', compact('subVariables','indicators','variables','dimensions','state','string','indicator_data_cuantitative','indicator_data_cualitative','region'));
+        $today = Carbon::now()->format('d/m/Y');
+        $header = public_path('assets/img/reports/footer.jpg');
+        $footer = public_path('assets/img/reports/header.jpg');
+        $pdf = \PDF::LoadView('admin_layouts.reports.manage',compact('subVariables','indicators','variables','dimensions','state','string','indicator_data_cuantitative','indicator_data_cualitative','region','today','header','footer'));
+        return $pdf->download('Reporte ORHNC '.$today.'.pdf');
+    }
+
+    public function dowloadReport(){
+        $pdf = \PDF::LoadView('admin_layouts.reports.manage');
     }
 
 }
