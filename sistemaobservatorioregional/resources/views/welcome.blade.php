@@ -147,7 +147,7 @@
             <div class="row">
               <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-5 mb-lg-0">
                 <div class="card">
-                  <img src="assets/img/portfolio/portfolio-1-1.jpg" class="card-img-top" alt="...">
+                  <img src="assets/img/portfolio/portfolio-1-1.jpg" class="card-img-top" alt="..."height="270" width="300">
                   <div class="card-body">
                     <h5 class="card-title"><a href="">Observatorio Regional Chorotega</a></h5>
                     <p class="card-text"><b>Responsable:</b> MSc. William Gómez Solis</p>
@@ -157,9 +157,9 @@
               </div>
               <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-5 mb-lg-0">
                 <div class="card">
-                  <img src="assets/img/portfolio/portfolio-2-2.jpg" class="card-img-top" alt="...">
+                  <img src="assets/img/portfolio/portfolio-2-2.jpg" class="card-img-top" alt="..." height="270" width="300">
                   <div class="card-body">
-                    <h5 class="card-title"><a href="">Observatorio Regional Huetar</a></h5>
+                    <h5 class="card-title"><a href="">Observatorio Regional Huetar norte  y caribe</a></h5>
                     <p class="card-text"><b>Responsable:</b> MSc. Adrián Carmona Miranda</p>
                     <a href="#" class="btn">Conocer más</a>
                   </div>
@@ -209,6 +209,7 @@
               <i class="bi bi-flag"></i>
               <h4><a href="#">Misión</a></h4>
               <p>Unidad estratégica que monitorea, genera, analiza y comunica información pertinente y oportuna del estado de las regiones y desarrollo integral, para la orientación de las acciones sustantivas universitarias e interuniversitarias.</p>
+              <br />
             </div>
           </div>
         </div>
@@ -258,7 +259,7 @@
             <div class="info-box  mb-4">
               <i class="bx bx-envelope"></i>
               <h3>Correo Electrónico</h3>
-              <p>observatorio.regional.Chorrotega@una.cr</p>
+              <p>observatorio.regional.Chorotega@una.cr</p>
               <p>william.gomez.solis@una.cr</p>
 
             </div>

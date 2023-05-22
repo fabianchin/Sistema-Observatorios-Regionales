@@ -52,7 +52,7 @@
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
-                  <h3 class="font-weight-bolder text-info text-gradient">Bienvenido de vuelta</h3>
+                  <h3 class="font-weight-bolder text-info text-gradient">Bienvenido</h3>
                   <p class="mb-0">Ingrese su correo y contraseña para ingresar</p>
                 </div>
                 <div class="card-body">
@@ -118,7 +118,7 @@
                     <div class="card-footer text-center pt-0 px-lg-2 px-1">
                         <p class="mb-4 text-sm mx-auto">
                           ¿No tienes cuenta?
-                          <a href="{{route('register')}}" class="text-info text-gradient font-weight-bold">Solicitar acceso</a>
+                          <a href="{{route('register')}}" class="text-info text-gradient font-weight-bold">Registrarse</a>
                         </p>
                     </div>
 
