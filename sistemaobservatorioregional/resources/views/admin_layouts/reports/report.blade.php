@@ -18,6 +18,10 @@
         color:red;
     }
 
+    .hidden {
+        display: none;
+    }
+
 </style>
 
 
@@ -35,7 +39,7 @@
       @csrf
 
       <label for="dropdownMenuButtonDimension">Dimensión</label>
-        <div class="dropdown">
+        <div class="dropdown" id="dimension">
         <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonDimension" id="dropdownMenuButtonDimension" data-bs-toggle="dropdown" aria-expanded="false" text="Dimension">
             Selecciona la dimensión
         </button>
@@ -47,8 +51,9 @@
         <input type="hidden" id="dimension_id" name="dimension_id" value="none">
         </div>
 
-      <label for="dropdownMenuButtonVariable">Variable</label>
-      <div class="dropdown">
+      
+      <div class="dropdown hidden" id="variable" >
+        <label for="dropdownMenuButtonVariable">Variable</label><br>
         <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonVariable" id="dropdownMenuButtonVariable" data-bs-toggle="dropdown" aria-expanded="false" text="Variable" >
           Selecciona la variable
         </button>
@@ -58,8 +63,9 @@
         <input type="hidden" id="variable_id" name="variable_id" value="none">
       </div>
 
-      <label for="dropdownMenuButtonSubVariable">Subvariable</label>
-        <div class="dropdown">
+      
+        <div class="dropdown hidden" id="subVariable">
+        <label for="dropdownMenuButtonSubVariable">Subvariable</label><br>
         <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonSubVariable" id="dropdownMenuButtonSubVariable" data-bs-toggle="dropdown" aria-expanded="false" text="SubVariable" >
             Selecciona la subvariable
         </button>
@@ -69,9 +75,8 @@
         <input type="hidden" id="subvariable_id" name="subvariable_id" value="">
         </div>
 
-
-        <label for="dropdownMenuButtonIndicator">Indicador</label>
-        <div class="dropdown">
+        <div  class="dropdown hidden" id="indicator">
+        <label for="dropdownMenuButtonIndicator">Indicador</label><br>
         <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonIndicator" id="dropdownMenuButtonIndicator" data-bs-toggle="dropdown" aria-expanded="false" text="Indicator" >
             Selecciona el indicador
         </button>
@@ -104,6 +109,7 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
       $("#dropdown-menu-dimension li a").click(function() 
       {
         document.getElementById("btn_genReport").disabled = false;
+        $('#variable').removeClass('hidden');
         $("#dropdown_menu_variable").html('');
         $("#dropdown-menu-variable").empty().off('click');
         $("#dropdown-menu-subvariable").empty().off('click');
@@ -146,6 +152,7 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
         function clickAndFill_Variable(element,variable_id_value) 
         {
             //alert('Variable id: '+variable_id_value+', variable nombre: '+$(element).attr('variable_nombre'));    
+            $('#subVariable').removeClass('hidden');
             $('#dropdownMenuButtonVariable').text($(element).attr('variable_nombre')); //Setea el nombre en el texto del boton
             $("#variable_id").val(variable_id_value); //Setea el valor en el input hidden
             $('#dropdownMenuButtonSubVariable').text('SELECCIONE LA SUB-VARIABLE'); //Setea el nombre en el texto del boton de variable
@@ -184,6 +191,7 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
 
         function clickAndFill_SubVariable(element,sub_variable_id_value) {
           //alert('Subvariable id: '+sub_variable_id_value+', subvariable nombre: '+$(element).attr('sub_variable_nombre'));    
+          $('#indicator').removeClass('hidden');
           $('#dropdownMenuButtonSubVariable').text($(element).attr('sub_variable_nombre')); //Setea el nombre en el texto del boton
           $("#subvariable_id").val(sub_variable_id_value); //Setea el valor en el input hidden
           $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR');
