@@ -3,6 +3,10 @@
 @section('crud_content')
 
 <style>
+    .inline-div {
+        display: inline;
+    }
+
     .form-section{
         display:none;
     }
@@ -38,8 +42,7 @@
     <form role="form text-left" method="get" action="{{route('report.create')}}">
       @csrf
 
-      <label for="dropdownMenuButtonDimension">Dimensión</label>
-        <div class="dropdown" id="dimension">
+        <div class="dropdown inline-div" id="dimension">
         <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonDimension" id="dropdownMenuButtonDimension" data-bs-toggle="dropdown" aria-expanded="false" text="Dimension">
             Selecciona la dimensión
         </button>
@@ -52,8 +55,7 @@
         </div>
 
       
-      <div class="dropdown hidden" id="variable" >
-        <label for="dropdownMenuButtonVariable">Variable</label><br>
+      <div class="dropdown hidden inline-div" id="variable" >
         <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonVariable" id="dropdownMenuButtonVariable" data-bs-toggle="dropdown" aria-expanded="false" text="Variable" >
           Selecciona la variable
         </button>
@@ -64,8 +66,7 @@
       </div>
 
       
-        <div class="dropdown hidden" id="subVariable">
-        <label for="dropdownMenuButtonSubVariable">Subvariable</label><br>
+        <div class="dropdown hidden inline-div" id="subVariable">
         <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonSubVariable" id="dropdownMenuButtonSubVariable" data-bs-toggle="dropdown" aria-expanded="false" text="SubVariable" >
             Selecciona la subvariable
         </button>
@@ -75,8 +76,7 @@
         <input type="hidden" id="subvariable_id" name="subvariable_id" value="">
         </div>
 
-        <div  class="dropdown hidden" id="indicator">
-        <label for="dropdownMenuButtonIndicator">Indicador</label><br>
+        <div  class="dropdown hidden inline-div" id="indicator">
         <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonIndicator" id="dropdownMenuButtonIndicator" data-bs-toggle="dropdown" aria-expanded="false" text="Indicator" >
             Selecciona el indicador
         </button>

@@ -89,7 +89,9 @@
     </table>
 @endif
 @if($state == 2)
-    <h6>Sub Variables de Variable: {{$variables->variable_name}}</h6>
+    <h1>Reporte de Dimension  {{$variables->variable_name}}</h1>
+    <h2>Fecha de emision: {{$today}}</h2>
+    <h3>Sub Variables de Variable: {{$variables->variable_name}}</h3>
     <table border="2">
         <thead>
             <tr>
@@ -117,7 +119,9 @@
     </table>
 @endif
 @if($state == 1)
-    <h6>Indicadores de la Sub Variable: {{$subVariables->sub_variable_name}}</h6>
+    <h1>Reporte de Dimension  {{$subVariables->sub_variable_name}}</h1>
+    <h2>Fecha de emision: {{$today}}</h2>
+    <h3>Indicadores de la Sub Variable: {{$subVariables->sub_variable_name}}</h3>
         <table border="2">
             <thead>
                 <tr>
@@ -136,7 +140,9 @@
         </table>
 @endif
 @if($state == 0)
-    <h6>Indicador: {{$indicators->indicator_name}}</h6>
+    <h1>Reporte de Dimension  {{$indicators->indicator_name}}</h1>
+    <h2>Fecha de emision: {{$today}}</h2>
+    <h3>Indicador: {{$indicators->indicator_name}}</h3>
         <table border="2">
             <thead>
                 <tr>
