@@ -5,8 +5,13 @@ use App\Models\Dimension;
 use App\Models\Variable;
 use App\Models\Sub_Variable;
 use App\Models\Indicator;
+use App\Models\Region;
+use App\Models\Indicator_reference;
+use App\Models\Indicator_data_cuantitative;
+use App\Models\Indicator_data_cualitative;
 use Illuminate\Http\Request;
 use Termwind\Components\Dd;
+use Carbon\Carbon;
 
 class ReportsController extends Controller
 {
@@ -57,8 +62,21 @@ class ReportsController extends Controller
         $subVariables = new Sub_Variable();
         $variables = new Variable();
         $dimensions = new Dimension();
+        $region = new Region();
+        $indicator_data_cuantitative = new Indicator_data_cuantitative();
+        $indicator_data_cualitative = new Indicator_data_cualitative();
+
+        $indicator_reference = new Indicator_reference();
         if($indicatorId != 'none'){
-            //$indicators = $indicators->getAllIndicatorsBySubVariableId($subVariableId);
+            $indicators = $indicators->getIndicatorById($indicatorId);
+            $indicator_reference = $indicator_reference->getIndicatorReferensByIndicatorId($indicatorId);
+            $region = $region->getRegionbyId($indicator_reference->indicator_region_id);
+            dd($region);
+            if($indicators->indicator_sub_variable_type == 1){
+                $indicator_data_cuantitative = $indicator_data_cuantitative->getIndicatorDataCuantitativebyId($indicatorId,$region->region_id);
+            }else{
+                $indicator_data_cualitative = $indicator_data_cualitative->getIndicatorDataCualitativebyId($indicatorId,$region->region_id);
+            }
             $state = 0;
         }else if($subVariableId != 'none'){
             $indicators = $indicators->getAllIndicatorsBySubVariableId($subVariableId);
@@ -78,7 +96,15 @@ class ReportsController extends Controller
             $state = 3;
         }
         //dd($subVariables);
-        return view('admin_layouts.reports.manage', compact('subVariables','indicators','variables','dimensions','state','string'));
+        $today = Carbon::now()->format('d/m/Y');
+        $header = public_path('assets/img/reports/footer.jpg');
+        $footer = public_path('assets/img/reports/header.jpg');
+        $pdf = \PDF::LoadView('admin_layouts.reports.manage',compact('subVariables','indicators','variables','dimensions','state','string','indicator_data_cuantitative','indicator_data_cualitative','region','today','header','footer'));
+        return $pdf->download('Reporte ORHNC '.$today.'.pdf');
+    }
+
+    public function dowloadReport(){
+        $pdf = \PDF::LoadView('admin_layouts.reports.manage');
     }
 
 }

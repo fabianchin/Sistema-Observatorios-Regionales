@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Dimension;
 use Illuminate\Http\Request;
 use App\Models\Variable;
-use Termwind\Components\Dd;
 
 class VariableController extends Controller
 {
@@ -25,7 +24,7 @@ class VariableController extends Controller
     {
         $variableModel = new Variable(); 
         $variableModel->deleteVariable($request->variable_id);
-        return redirect()->route('variable.manage'); 
+        return redirect()->route('variable.manage')->with('success', 'Variable borrada correctamente');; 
     }
 
     //Llenado del dropdown en la vista de crear

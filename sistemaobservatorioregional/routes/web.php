@@ -96,6 +96,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/fillVariableReport',[ReportsController::class, 'fillVariable'])->name("report.fillVariable");
     Route::post('/fillSubVariableReport',[ReportsController::class, 'fillSubVariable'])->name("report.fillSubVariable");
     Route::post('/fillIndicatorReport',[ReportsController::class, 'fillIndicator'])->name("report.fillIndicator");
+    Route::post('downloadRepor',[ReportsController::class, 'fillIndicator'])->name("download.report");
 //-----------------------------------------actualizar informacion de usuario-----------------------------------------
     Route::group(['prefix' => 'usuarios'], function () {
         Route::get('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
