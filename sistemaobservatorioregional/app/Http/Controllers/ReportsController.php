@@ -6,9 +6,11 @@ use App\Models\Variable;
 use App\Models\Sub_Variable;
 use App\Models\Indicator;
 use App\Models\Region;
-use App\Models\Indicator_reference;
+use App\Models\Reference;
 use App\Models\Indicator_data_cuantitative;
 use App\Models\Indicator_data_cualitative;
+use App\Models\Year;
+use App\Models\List_data;
 use Illuminate\Http\Request;
 use Termwind\Components\Dd;
 use Carbon\Carbon;
@@ -65,18 +67,23 @@ class ReportsController extends Controller
         $region = new Region();
         $indicator_data_cuantitative = new Indicator_data_cuantitative();
         $indicator_data_cualitative = new Indicator_data_cualitative();
+        $list = new List_Data();
+        $reference = new Reference();
 
-        $indicator_reference = new Indicator_reference();
         if($indicatorId != 'none'){
             $indicators = $indicators->getIndicatorById($indicatorId);
-            $indicator_reference = $indicator_reference->getIndicatorReferensByIndicatorId($indicatorId);
-            $region = $region->getRegionbyId($indicator_reference->indicator_region_id);
-            dd($region);
+            $region = $region->getRegionbyId($indicators->indicator_region_id);
+            $region = !empty($region) ? (object) $region[0] : null;
+            $reference = $reference->getAllReferenceByIndicatorId($indicatorId);
+            $list = $list->getAllListByIndicatorId($indicatorId);
             if($indicators->indicator_sub_variable_type == 1){
                 $indicator_data_cuantitative = $indicator_data_cuantitative->getIndicatorDataCuantitativebyId($indicatorId,$region->region_id);
+                $indicator_data_cuantitative = !empty($indicator_data_cuantitative) ? (object) $indicator_data_cuantitative[0] : null;;
             }else{
-                $indicator_data_cualitative = $indicator_data_cualitative->getIndicatorDataCualitativebyId($indicatorId,$region->region_id);
+                $indicator_data_cualitative = $indicator_data_cualitative->getIndicatorDataCualitativebyId($indicatorId);
+                $indicator_data_cualitative = !empty($indicator_data_cualitative) ? (object) $indicator_data_cualitative[0] : null;
             }
+            //dd($region);
             $state = 0;
         }else if($subVariableId != 'none'){
             $indicators = $indicators->getAllIndicatorsBySubVariableId($subVariableId);
@@ -97,9 +104,9 @@ class ReportsController extends Controller
         }
         //dd($subVariables);
         $today = Carbon::now()->format('d/m/Y');
-        $header = public_path('assets/img/reports/footer.jpg');
-        $footer = public_path('assets/img/reports/header.jpg');
-        $pdf = \PDF::LoadView('admin_layouts.reports.manage',compact('subVariables','indicators','variables','dimensions','state','string','indicator_data_cuantitative','indicator_data_cualitative','region','today','header','footer'));
+        $header = public_path('assets/img/reports/header.jpg');
+        $footer = public_path('assets/img/reports/footer.jpg');
+        $pdf = \PDF::LoadView('admin_layouts.reports.manage',compact('subVariables','indicators','variables','dimensions','state','string','indicator_data_cuantitative','indicator_data_cualitative','region','today','header','footer','list','reference'));
         return $pdf->download('Reporte ORHNC '.$today.'.pdf');
     }
 

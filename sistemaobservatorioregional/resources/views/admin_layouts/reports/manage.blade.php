@@ -45,6 +45,15 @@
     color: #777;
     text-align: left;
     margin-left: 20px;
+    white-space: nowrap;
+  }
+
+  p {
+    font-size: 14px;
+    color: #555;
+    text-align: left;
+    margin-left: 20px;
+    white-space: nowrap;
   }
 
 
@@ -140,25 +149,66 @@
         </table>
 @endif
 @if($state == 0)
-    <h1>Reporte de Dimension  {{$indicators->indicator_name}}</h1>
+    <h1>Reporte de Indicador  {{$indicators->indicator_name}}</h1>
     <h2>Fecha de emision: {{$today}}</h2>
     <h3>Indicador: {{$indicators->indicator_name}}</h3>
+    <h3>Descripción</h3>
+    @if($indicators->indicator_sub_variable_type == 1)
+      <h3>{!! nl2br(trim($indicator_data_cuantitative->indicator_data_description)) !!}</h3>
+    @else
+      <h3>{!! nl2br(trim($indicator_data_cualitative->indicator_data_description)) !!}</h3>
+    @endif
         <table border="2">
             <thead>
                 <tr>
-                    <th>Descripcion</th>
+                    <th>Nombre</th>
                     <th>Region</th>
                     <th>Tipo</th>
-                    <th>Dato</th>
                 </tr>
             </thead>
             <tbody>
-               <tr>
+              <tr>
                 <td>{{$indicators->indicator_name}}</td>
-                <td>{{$region->region_name}}</td>
-               </tr>
+                <td>{{ $region->region_name }}</td>  
+                @if($indicators->indicator_sub_variable_type == 1)
+                  <td>Cuantitativo</td>
+                @else
+                  <td>Cualitativo</td>
+                @endif
+              </tr>
             </tbody>
         </table>
+        <br>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Listado</th>
+                    <th>Informacion</th>
+                </tr>
+            </thead>
+            <tbody>
+              @if($indicators->indicator_sub_variable_type == 1)
+                    @foreach ($list as $li)
+                      <tr>
+                        <td>{{ $li->list_name }}</td>
+                        <td>{{ $li->list_value }}</td>
+                      </tr>
+                    @endforeach
+              @else
+                    @foreach ($list as $li)
+                      <tr>
+                        <td>{{ $li->list_name }}</td>
+                        <td>{{ $li->list_value }}</td>
+                      </tr>
+                    @endforeach
+              @endif
+            </tbody>
+        </table>
+        <h2>Referencias</h2>
+        @foreach ($reference as $ref)
+          <h3>{{ $ref->reference_link }}</h3>
+        @endforeach
+
 @endif
 <div style="margin: 0; padding: 0;">
     <img src="{{ $footer }}" alt="footer" style="position: absolute; bottom: 0;">

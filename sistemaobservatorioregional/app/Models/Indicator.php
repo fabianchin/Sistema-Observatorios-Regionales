@@ -10,7 +10,7 @@ class Indicator extends Model
 {
     use HasFactory;
     protected $table = 'tb_obs_indicator';
-    protected $fillable = ['indicator_name','indicator_sub_variable','indicator_sub_variable_type', 'indicator_code']; //indicator_sub_variable_id, indicator_variable_type_id
+    protected $fillable = ['indicator_name','indicator_sub_variable','indicator_sub_variable_type', 'indicator_region_id']; //indicator_sub_variable_id, indicator_variable_type_id
     protected $hidden = ['indicator_id'];
 
     //Storaged procedures

@@ -28,69 +28,70 @@
 
 </style>
 
+<div class="card mb-4">
+  <div class="card-body">
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+    @elseif (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+      <form role="form text-left" method="get" action="{{route('report.create')}}">
+        @csrf
 
-<div class="card-body">
-  @if (session('status'))
-  <div class="alert alert-success">
-      {{ session('status') }}
-  </div>
-  @elseif (session('error'))
-  <div class="alert alert-danger">
-      {{ session('error') }}
-  </div>
-  @endif
-    <form role="form text-left" method="get" action="{{route('report.create')}}">
-      @csrf
+          <div class="dropdown inline-div" id="dimension">
+          <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonDimension" id="dropdownMenuButtonDimension" data-bs-toggle="dropdown" aria-expanded="false" text="Dimension">
+              Selecciona la dimensión
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonDimension" id="dropdown-menu-dimension">
+              @foreach ($dimensions as $dimension) 
+              <li><a class="dropdown-item" name="dimension_id" href="#" value="{{$dimension->dimension_id}}">{{$dimension->dimension_name}}</a></li>
+              @endforeach
+          </ul>
+          <input type="hidden" id="dimension_id" name="dimension_id" value="none">
+          </div>
 
-        <div class="dropdown inline-div" id="dimension">
-        <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonDimension" id="dropdownMenuButtonDimension" data-bs-toggle="dropdown" aria-expanded="false" text="Dimension">
-            Selecciona la dimensión
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonDimension" id="dropdown-menu-dimension">
-            @foreach ($dimensions as $dimension) 
-            <li><a class="dropdown-item" name="dimension_id" href="#" value="{{$dimension->dimension_id}}">{{$dimension->dimension_name}}</a></li>
-            @endforeach
-        </ul>
-        <input type="hidden" id="dimension_id" name="dimension_id" value="none">
+        
+        <div class="dropdown hidden inline-div" id="variable" >
+          <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonVariable" id="dropdownMenuButtonVariable" data-bs-toggle="dropdown" aria-expanded="false" text="Variable" >
+            Selecciona la variable
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropdown-menu-variable">
+            {{-- Aqui se llena por medio de Ajax --}}
+          </ul>
+          <input type="hidden" id="variable_id" name="variable_id" value="none">
         </div>
 
-      
-      <div class="dropdown hidden inline-div" id="variable" >
-        <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonVariable" id="dropdownMenuButtonVariable" data-bs-toggle="dropdown" aria-expanded="false" text="Variable" >
-          Selecciona la variable
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropdown-menu-variable">
-          {{-- Aqui se llena por medio de Ajax --}}
-        </ul>
-        <input type="hidden" id="variable_id" name="variable_id" value="none">
-      </div>
+        
+          <div class="dropdown hidden inline-div" id="subVariable">
+          <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonSubVariable" id="dropdownMenuButtonSubVariable" data-bs-toggle="dropdown" aria-expanded="false" text="SubVariable" >
+              Selecciona la subvariable
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSubVariable" id="dropdown-menu-subvariable">
+            {{-- Aqui se llena por medio de Ajax --}}
+          </ul>
+          <input type="hidden" id="subvariable_id" name="subvariable_id" value="">
+          </div>
 
-      
-        <div class="dropdown hidden inline-div" id="subVariable">
-        <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonSubVariable" id="dropdownMenuButtonSubVariable" data-bs-toggle="dropdown" aria-expanded="false" text="SubVariable" >
-            Selecciona la subvariable
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSubVariable" id="dropdown-menu-subvariable">
-          {{-- Aqui se llena por medio de Ajax --}}
-        </ul>
-        <input type="hidden" id="subvariable_id" name="subvariable_id" value="">
+          <div  class="dropdown hidden inline-div" id="indicator">
+          <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonIndicator" id="dropdownMenuButtonIndicator" data-bs-toggle="dropdown" aria-expanded="false" text="Indicator" >
+              Selecciona el indicador
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonIndicator" id="dropdown-menu-indicator">
+            {{-- Aqui se llena por medio de Ajax --}}
+          </ul>
+          <input type="hidden" id="indicator_id" name="indicator_id" value="">
+          </div>
+
+
+        <div class="container text-center">
+          <button id="btn_genReport" class="btn bg-gradient-success w-30 my-4 mb-2" href={{route('sub_variable.insert')}} style="color:white">Generar Reporte</button>
         </div>
-
-        <div  class="dropdown hidden inline-div" id="indicator">
-        <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonIndicator" id="dropdownMenuButtonIndicator" data-bs-toggle="dropdown" aria-expanded="false" text="Indicator" >
-            Selecciona el indicador
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonIndicator" id="dropdown-menu-indicator">
-          {{-- Aqui se llena por medio de Ajax --}}
-        </ul>
-        <input type="hidden" id="indicator_id" name="indicator_id" value="">
-        </div>
-
-
-      <div class="container text-center">
-        <button id="btn_genReport" class="btn bg-gradient-success w-30 my-4 mb-2" href={{route('sub_variable.insert')}} style="color:white">Generar Reporte</button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 @endsection
 
