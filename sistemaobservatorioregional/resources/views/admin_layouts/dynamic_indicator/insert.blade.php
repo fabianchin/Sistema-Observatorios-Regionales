@@ -2,130 +2,113 @@
 
 @section('crud_content')
 
-  <!--CSS que hace que la seccion que no sea current no aparezca -->
+<!--CSS que hace que la seccion que no sea current no aparezca -->
 <style>
-    .form-section{
-        display:none;
+    .form-section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px; /* Espacio entre las columnas */
     }
+
     
-    .form-section.current{
-        display:inherit;
+
+    .hidden {
+        display: none;
     }
 
-    .parsley-errors-list{
-        margin:2px 0 3px;
-        padding:0;
-        list-style-type:none;
-        color:red;
+    .form-section.current {
+        display: inherit;
     }
 
+    .parsley-errors-list {
+        margin: 2px 0 3px;
+        padding: 0;
+        list-style-type: none;
+        color: red;
+    }
 </style>
 
 <div class="container">
     <div class="row">
         <div class="card">
             <div class="card-header text-white">
-                <h5>Crear Indicador de manera dinamica</h5>
+                <h4 class="text-center">Crear Indicador de manera dinamica</h4>
             </div>
             <div class="card-body">
-                <form class="contact-form" method="post" action="{{route('dynamic_indicator.insert')}}">
+                <form id="form" class="contact-form" method="post" action="{{route('dynamic_indicator.insert')}}">
                     @csrf
                     <div class="form-section">
-                        <label for="indicator_name">Nombre del indicador</label>
-                        <input type="text" name="indicator_name" id="indicator_name" class="form-control" placeholder="Nombre del indicador" required>
-                        <br/>
-
-                        <label for="variable-type">Tipo de indicador:&nbsp;</label>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons" id="variable-type">
-                            
-                            <label class="btn active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" value="1" checked> Cuantitativo
-                            </label>
-                            <label class="btn">
-                                <input type="radio" name="options" id="option2" autocomplete="off" value="2"> Cualitativo
-                            </label>
-                            <input type="hidden" name="variable_type_id" id="variable_type_id" class="form-control" value="">
-                        </div>
-                        <br/>
 
                         
-                        {{-- <div class="measurement_toggle"> --}}
-                            <label for="dropdownMenuButtonMeasurement">Unidad de medida: </label>
-                            <div class="dropdown">
-                                <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonMeasurement" id="dropdownMenuButtonMeasurement" data-bs-toggle="dropdown" aria-expanded="false" text="Medida">
-                                Selecciona la unidad
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMeasurement" id="dropdown-menu-measurement">
-                                    {{-- @foreach ($dimensions as $dimension) 
-                                        <li><a class="dropdown-item" id="dimension_id_drop" name="dimension_id_drop" href="#" value="{{$dimension->dimension_id}}">{{$dimension->dimension_name}}</a></li>
-                                    @endforeach --}}
-                                    <li><a class="dropdown-item"  value="1">Litros</a></li>
-                                    <li><a class="dropdown-item"  value="2">Kg</a></li>
-                                    <li><a class="dropdown-item"  value="3">Centrimetros</a></li>
-
-                                </ul>
-                                <input type="hidden" id="measuremente_unit_id" name="measuremente_unit_id" value="none">
+                        <div class="dropdown column">
+                            <div>
+                                <label for="dropdownMenuButton">Dimension: </label>
                             </div>
-                            <br/>
-                        {{-- </div> --}}
-                        
-
-                        {{-- <div class="btn-group btn-group-toggle"  id="cbs-group"> --}}
-                            <label for="dropdownMenuButton">Dimension: </label>
-                            <div class="dropdown">
-                                <button class="btn btn-outline-success dropdown-toggle" type="button" name="dropdownMenuButton" id="dropdownMenuButton" 
-                                data-bs-toggle="dropdown" aria-expanded="false" text="Dimension">
+                            <button class="btn btn-outline-success dropdown-toggle" type="button"
+                                name="dropdownMenuButton" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                aria-expanded="false" text="Dimension">
                                 Selecciona la dimension
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropdown_menu_dimension">
-                                @foreach ($dimensions as $dimension) 
-                                    <li><a class="dropdown-item" id="dimension_id_drop" name="dimension_id_drop" href="#" value="{{$dimension->dimension_id}}">{{$dimension->dimension_name}}</a></li>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropdown_menu_dimension">
+                                @foreach ($dimensions as $dimension)
+                                <li><a class="dropdown-item" id="dimension_id_drop" name="dimension_id_drop" href="#"
+                                        value="{{$dimension->dimension_id}}">{{$dimension->dimension_name}}
+                                    </a>
+                                </li>
                                 @endforeach
-                                </ul>
-                                <input type="hidden" id="dimension_id" name="dimension_id" value="none">
-                            </div>
+                            </ul>
+                            <input type="hidden" id="dimension_id" name="dimension_id" value="none">
+                        </div>
 
-                            <label for="dropdownMenuButtonVariable">Variable: </label>
-                            <div class="dropdown">
-                                <button class="btn btn-outline-success dropdown-toggle" type="button" name="dropdownMenuButtonVariable" 
-                                id="dropdownMenuButtonVariable" 
+
+                        <div id="variable-section" class="dropdown hidden column">
+                            <div>
+                                <label id="variable-label" class="hidden" for="dropdownMenuButtonVariable">Variable:
+                                </label>
+                            </div>
+                            <button class="btn btn-outline-success dropdown-toggle" type="button"
+                                name="dropdownMenuButtonVariable" id="dropdownMenuButtonVariable"
                                 data-bs-toggle="dropdown" aria-expanded="false" text="Variable">
                                 Selecciona la variable
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonVariable" 
-                                id="dropdown_menu_variable" >
-                                    {{-- Aqui se llena por medio de Ajax --}}
-
-                                </ul>
-                                <input type="hidden" id="variable_id" name="variable_id" value="none">
-                            </div>
-
-                            <label for="dropdownMenuButtonSub">Sub-Variable: </label>
-                            <div class="dropdown">
-                                <button class="btn btn-outline-success dropdown-toggle" 
-                                type="button" 
-                                name="dropdownMenuButtonSub" 
-                                id="dropdownMenuButtonSub" 
-                                data-bs-toggle="dropdown" aria-expanded="false" text="SubVariable">
-                                Selecciona la sub-variable
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSub" id="dropdown-menu-sub">
-                                {{-- Aqui se llena por medio de Ajax --}}
-                                </ul>
-                                <input type="hidden" id="sub_variable_id" name="sub_variable_id" value="none">
-                            </div>
-                        {{-- </div> --}}
-                        <br/>
-                        
-                        <label for="dropdownMenuButtonRegion">Region: </label>
-                        <div class="dropdown">
-                            <button class="btn bg-gradient-warning dropdown-toggle" type="button" name="dropdownMenuButtonRegion" id="dropdownMenuButtonRegion" data-bs-toggle="dropdown" aria-expanded="false" text="Dimension">
-                            Selecciona la region
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonRegion" id="dropdown-menu-region">
-                            {{-- @foreach ($dimensions as $dimension) 
-                                <li><a class="dropdown-item" id="dimension_id_drop" name="dimension_id_drop" href="#" value="{{$dimension->dimension_id}}">{{$dimension->dimension_name}}</a></li>
-                            @endforeach --}}
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonVariable"
+                                id="dropdown_menu_variable">
+                                {{-- Aqui se llena por medio de Ajax --}}
+
+                            </ul>
+                            <input type="hidden" id="variable_id" name="variable_id" value="none">
+                        </div>
+
+
+                        <div id="subvariable-section" class="dropdown hidden column">
+
+                            <div>
+                                <label id="subvariable-label" class="hidden" for="dropdownMenuButtonSub">Sub-Variable:
+                                </label>
+                            </div>
+                            <button class="btn btn-outline-success dropdown-toggle" type="button"
+                                name="dropdownMenuButtonSub" id="dropdownMenuButtonSub" data-bs-toggle="dropdown"
+                                aria-expanded="false" text="SubVariable">
+                                Selecciona la sub-variable
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSub" id="dropdown-menu-sub">
+                                {{-- Aqui se llena por medio de Ajax --}}
+                            </ul>
+                            <input type="hidden" id="sub_variable_id" name="sub_variable_id" value="none">
+                        </div>
+
+                    </div>
+                    <br />
+
+                    <label for="dropdownMenuButtonRegion">Region: </label>
+                    <div class="dropdown">
+                        <button class="btn bg-gradient-warning dropdown-toggle" type="button"
+                            name="dropdownMenuButtonRegion" id="dropdownMenuButtonRegion" data-bs-toggle="dropdown"
+                            aria-expanded="false" text="Dimension">
+                            Selecciona la region
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonRegion" id="dropdown-menu-region">
+
                             <li><a class="dropdown-item" href="#" value="1">Huetar Norte</a></li>
                             <li><a class="dropdown-item" href="#" value="2">Huetar Caribe</a></li>
                             <li><a class="dropdown-item" href="#" value="3">Huetar Norte y Caribe</a></li>
@@ -133,68 +116,118 @@
                             <li><a class="dropdown-item" href="#" value="5">Brunca</a></li>
                             <li><a class="dropdown-item" href="#" value="6">Nacional</a></li>
                         </ul>
-                            <input type="hidden" id="region_id" name="region_id" value="none">
-                        </div>
-
+                        <input type="hidden" id="region_id" name="region_id" value="none">
                     </div>
 
-                    <div class="form-section">   
-                        
-                        <div class="btn-group btn-group-toggle" id="cuantitativo_form_toggle">
-                            {{-- <label for="dropdownMenuButtonYear">Año: </label>
-                            <div class="dropdown">
-                                <button class="btn bg-gradient-warning dropdown-toggle" type="button" name="dropdownMenuButtonYear" id="dropdownMenuButtonYear" data-bs-toggle="dropdown" aria-expanded="false" text="Year">
-                                Año
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonYear" id="dropdown-menu-year">
-                                <li><a class="dropdown-item" href="#" value="1">2010</a></li>
-                                <li><a class="dropdown-item" href="#" value="2">2011</a></li>
-                                <li><a class="dropdown-item" href="#" value="3">2012</a></li>
-                                <li><a class="dropdown-item" href="#" value="4">2013</a></li>
-                                <li><a class="dropdown-item" href="#" value="5">2014</a></li>
-                                <li><a class="dropdown-item" href="#" value="6">2015</a></li>
-                                <li><a class="dropdown-item" href="#" value="1">2016</a></li>
-                                <li><a class="dropdown-item" href="#" value="2">2017</a></li>
-                                <li><a class="dropdown-item" href="#" value="3">2018</a></li>
-                                <li><a class="dropdown-item" href="#" value="4">2019</a></li>
-                                <li><a class="dropdown-item" href="#" value="5">2020</a></li>
-                                <li><a class="dropdown-item" href="#" value="6">2021</a></li>
-                                <li><a class="dropdown-item" href="#" value="6">2022</a></li>
-                                </ul>
-                                    <input type="hidden" id="year_id" name="year_id" value="none">
-                            </div> --}}
-                            <h5>2010</h5>
-                            <label for="reference_name">Referencia</label>
-                            <input type="text" name="dato_2010" class="form-control" placeholder="Dato" aria-label="reference_name" required>    
-                        </div>
-                       {{-- @if ($type == 'cuantitativo') --}}
-                       <label for="reference_name">Referencia</label>
-                       <input type="text" name="reference_name" class="form-control" placeholder="Referencia" aria-label="reference_name" required>             
-                       {{-- @else
+                    <label for="indicator_name">Nombre del indicador</label>
+                    <input type="text" name="indicator_name" id="indicator_name" class="form-control"
+                        placeholder="Nombre del indicador" required>
+                    <br />
 
-                       @endif --}}
-                    </div>
+                    <label for="variable-type">Tipo de indicador:&nbsp;</label>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="variable-type">
 
-                    <div class="fomr-section">
-                        <label for="reference_name">Dato</label>
-                        <input type="text" name="reference_name" class="form-control" placeholder="Referencia" aria-label="reference_name" required>     
+                        <label class="btn active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" value="1" checked>
+                            Cuantitativo
+                        </label>
+                        <label class="btn">
+                            <input type="radio" name="options" id="option2" autocomplete="off" value="2">
+                            Cualitativo
+                        </label>
+                        <input type="hidden" name="variable_type_id" id="variable_type_id" class="form-control"
+                            value="">
                     </div>
+                    <br />
 
-                    <div class="form-navigation">
-                        <button type="button" class="previous btn btn-primary float-left">Anterior</button>
-                        <button type="button" class="next btn btn-success float-right">Siguiente</button>
-                        <button type="submit" class="submit btn btn-success float-right">Enviar</button>
+
+                    <label for="dropdownMenuButtonMeasurement">Unidad de medida: </label>
+                    <div class="dropdown">
+                        <button class="btn bg-gradient-info dropdown-toggle" type="button"
+                            name="dropdownMenuButtonMeasurement" id="dropdownMenuButtonMeasurement"
+                            data-bs-toggle="dropdown" aria-expanded="false" text="Medida">
+                            Selecciona la unidad
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMeasurement"
+                            id="dropdown-menu-measurement">
+
+                            <li><a class="dropdown-item" value="1">Litros</a></li>
+                            <li><a class="dropdown-item" value="2">Kg</a></li>
+                            <li><a class="dropdown-item" value="3">Centrimetros</a></li>
+
+                        </ul>
+                        <input type="hidden" id="measuremente_unit_id" name="measuremente_unit_id" value="none">
                     </div>
-                </form>
+                    <br />
             </div>
+
+            <div class="form-section">
+
+                <div class="btn-group btn-group-toggle" id="cuantitativo_form_toggle">
+                    <div class="dropdown">
+                        <button class="btn bg-gradient-warning dropdown-toggle" type="button"
+                            name="dropdownMenuButtonYear" id="dropdownMenuButtonYear" data-bs-toggle="dropdown"
+                            aria-expanded="false" text="Year">
+                            Año
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonYear" id="dropdown-menu-year">
+                            <li class="dropdown-item" id="annio" value="1">2010</li>
+                            <li class="dropdown-item" id="annio" value="2">2011</li>
+                            <li class="dropdown-item" id="annio" value="3">2012</li>
+                            <li class="dropdown-item" id="annio" value="4">2013</li>
+                            <li class="dropdown-item" id="annio" value="5">2014</li>
+                            <li class="dropdown-item" id="annio" value="6">2015</li>
+                            <li class="dropdown-item" id="annio" value="7">2016</li>
+                            <li class="dropdown-item" id="annio" value="8">2017</li>
+                            <li class="dropdown-item" id="annio" value="9">2018</li>
+                            <li class="dropdown-item" id="annio" value="10">2019</li>
+                            <li class="dropdown-item" id="annio" value="11">2020</li>
+                            <li class="dropdown-item" id="annio" value="12">2021</li>
+                            <li class="dropdown-item" id="annio" value="13">2022</li>
+                        </ul>
+                        <input type="hidden" id="year_id" name="year_id" value="">
+                    </div>
+                    <label for="reference_name">Referencia</label>
+                    <input type="text" name="annio_dato" class="form-control" placeholder="Dato"
+                        aria-label="reference_name" required>
+                </div>
+
+            </div>
+
+            <div class="fomr-section">
+                <label for="reference_name">Dato</label>
+                <input type="text" name="reference_name" class="form-control" placeholder="Referencia"
+                    aria-label="reference_name" required>
+            </div>
+
+            <div class="form-navigation">
+                <button type="button" class="previous btn btn-primary float-left">Anterior</button>
+                <button type="button" class="next btn btn-success float-right">Siguiente</button>
+                <button type="submit" class="submit btn btn-success float-right">Enviar</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('scripts')
 
 <script>
+    const form = document.querySelector('form');
+    const select = document.querySelector('#annio');
+    const yearIdInput = document.querySelector('#year_id');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const selectedYear = select.value;
+      yearIdInput.value = selectedYear;
+
+      form.submit();
+    });
+
 
      //Cambiar el valor del boton dropdown (MENOS VARIABLE Y SUBVARIABLE PUES SON DINAMICOS)
     $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
@@ -218,6 +251,10 @@
     //Dimension
     $("#dropdown_menu_dimension li a").on('click',function() 
     {
+  
+        // Mostrar sección de variable
+        $('#variable-section').removeClass('hidden');
+        $('#variable-label').removeClass('hidden');
         dimension_id_value = $(this).attr('value');
         $("#dimension_id").val(dimension_id_value);
         $("#variable_id").val('none');
@@ -251,13 +288,15 @@
     });
 
     function clickAndFill_Variable(element,variable_id_value) 
-    {
-        //alert('Variable id: '+variable_id_value+', variable nombre: '+$(element).attr('variable_nombre'));    
+    {    
+        $("#dropdown-menu-sub").empty().off('click');
         $('#dropdownMenuButtonVariable').text($(element).attr('variable_nombre')); //Setea el nombre en el texto del boton
         $("#variable_id").val(variable_id_value); //Setea el valor en el input hidden
         $("#sub_variable_id").val('none');
         $('#dropdownMenuButtonSub').text('SELECCIONE LA SUB-VARIABLE'); //Setea el nombre en el texto del boton de variable
-        
+        // Mostrar sección de subvariable
+        $('#subvariable-section').removeClass('hidden');
+        $('#subvariable-label').removeClass('hidden');
         // //Ajax
         $("#dropdown_menu_sub").html('');
         $.ajax
@@ -268,7 +307,6 @@
             {
                 variable_id: variable_id_value,
                 _token: '{{csrf_token()}}'
-                // _token:'{!! csrf_token() !!}'
 
             },
             dataType: 'json',
@@ -285,10 +323,11 @@
     }
 
     //Subvariable
-    function clickAndFill_SubVariable(element,sub_variable_id_value) {
-        alert('Subvariable id: '+sub_variable_id_value+', subvariable nombre: '+$(element).attr('sub_variable_nombre'));    
+    function clickAndFill_SubVariable(element,sub_variable_id_value) {    
         $('#dropdownMenuButtonSub').text($(element).attr('sub_variable_nombre')); //Setea el nombre en el texto del boton
         $("#sub_variable_id").val(sub_variable_id_value); //Setea el valor en el input hidden
+
+      
     }
 
     //Formularios----------------------------------------------------------------------------------------------------------------
@@ -331,19 +370,18 @@
     });
 
     navigateTo(0); // Start at the beginning
+    $('#variable-section').addClass('hidden');
+    $('#subvariable-section').addClass('hidden');
+
 </script>
 
 <script type="text/javascript">
-//Script para checkbox de tipo de variable
+    //Script para checkbox de tipo de variable
     $(document).ready(function(){
         $('#variable-type input').on('change', function() {
             $('#variable_type_id').val($('input[name=\'options\']:checked', '#variable-type').val());
             $selected = $('#variable_type_id').val();
-            // if($selected == '1'){
-            //     $('.measurement_toggle').attr('hidden', false);
-            // }else{
-            //     $('.measurement_toggle').attr('hidden', true);
-            // }
+            
         });
     });
     
