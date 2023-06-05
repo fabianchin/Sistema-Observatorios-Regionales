@@ -10,8 +10,8 @@ class Year extends Model
 {
     use HasFactory;
     protected $table = 'tb_obs_year';
-    protected $fillable = ['year_id','year_value'];
-    protected $hidden = ['indicator_id', 'indicator_region_id'];
+    protected $fillable = ['year_value'];
+    protected $hidden = ['year_id'];
     
-    public function getYearByIndicatorId($indicator_id){return DB::select('call getgetAllYearByIndicatorId(?)',[$indicator_id]);}
+    public function getAllYears(){return DB::select('call getAllYears()',[]);}
 }
