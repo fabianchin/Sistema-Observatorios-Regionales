@@ -41,7 +41,12 @@
     @endif
       <form role="form text-left" method="get" action="{{route('report.create')}}">
         @csrf
-
+          <h6>Creacion de Reportes</h6>
+          <label id="labelDimension">Dimension</label>
+          <label id="labelVariable" class="dropdown hidden inline-div" >Variable</label>
+          <label id="labelSubVariable" class="dropdown hidden inline-div" >Sub-Variable</label>
+          <label id="labelIndicator" class="dropdown hidden inline-div">Indicador</label>
+          <br>
           <div class="dropdown inline-div" id="dimension">
           <button class="btn bg-gradient-info dropdown-toggle" type="button" name="dropdownMenuButtonDimension" id="dropdownMenuButtonDimension" data-bs-toggle="dropdown" aria-expanded="false" text="Dimension">
               Selecciona la dimensión
@@ -99,9 +104,9 @@
 <script>
 
 $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
-          $(this).closest(".dropdown-menu").prev(".dropdown-toggle").text($(this).text()); //Boton
-      });
-
+        $(this).closest(".dropdown-menu").prev(".dropdown-toggle").text($(this).text()); //Boton
+  
+      });  
 
     $(document).ready(function() {
       document.getElementById("btn_genReport").disabled = true;
@@ -123,6 +128,22 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
         $('#dropdownMenuButtonVariable').text('SELECCIONE LA VARIABLE'); //Setea el nombre en el texto del boton de variable
         $('#dropdownMenuButtonSubVariable').text('SELECCIONE LA SUB-VARIABLE'); //Setea el nombre en el texto del boton de variable
         $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR');
+        var buttonDimension = document.getElementById("dropdownMenuButtonDimension");
+        var buttonWidthDimension = buttonDimension.offsetWidth;
+        var marginRightDimension = buttonWidthDimension + "px";
+        document.getElementById("labelDimension").style.marginRight = marginRightDimension;
+        var labelDimension = document.getElementById("labelDimension");
+        var labelWidthDimension = labelDimension.offsetWidth;
+        var newMarginRightDimension = "calc(" + marginRightDimension + " - " + labelWidthDimension + "px)";
+        labelDimension.style.marginRight = newMarginRightDimension;
+        var buttonVariable = document.getElementById("dropdownMenuButtonVariable");
+        var buttonWidthVariable = buttonVariable.offsetWidth;
+        var marginRightVariable = buttonWidthVariable + "px";
+        document.getElementById("labelVariable").style.marginRight = marginRightVariable;
+        var labelVariable = document.getElementById("labelVariable");
+        var labelWidthVariable = labelVariable.offsetWidth;
+        var newMarginRightVariable = "calc(" + marginRightVariable + " - " + labelWidthVariable + "px)";
+        labelVariable.style.marginRight = newMarginRightVariable;
         //Ajax
        
         $.ajax
@@ -154,6 +175,7 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
         {
             //alert('Variable id: '+variable_id_value+', variable nombre: '+$(element).attr('variable_nombre'));    
             $('#subVariable').removeClass('hidden');
+            $('#labelVariable').removeClass('hidden');
             $('#dropdownMenuButtonVariable').text($(element).attr('variable_nombre')); //Setea el nombre en el texto del boton
             $("#variable_id").val(variable_id_value); //Setea el valor en el input hidden
             $('#dropdownMenuButtonSubVariable').text('SELECCIONE LA SUB-VARIABLE'); //Setea el nombre en el texto del boton de variable
@@ -164,6 +186,30 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
             $("#indicator_id").val('none');
             // //Ajax
             $("#dropdown-menu-subvariable").html('');
+            var buttonDimension = document.getElementById("dropdownMenuButtonDimension");
+            var buttonWidthDimension = buttonDimension.offsetWidth;
+            var marginRightDimension = buttonWidthDimension + "px";
+            document.getElementById("labelDimension").style.marginRight = marginRightDimension;
+            var labelDimension = document.getElementById("labelDimension");
+            var labelWidthDimension = labelDimension.offsetWidth;
+            var newMarginRightDimension = "calc(" + marginRightDimension + " - " + labelWidthDimension + "px)";
+            labelDimension.style.marginRight = newMarginRightDimension;
+            var buttonVariable = document.getElementById("dropdownMenuButtonVariable");
+            var buttonWidthVariable = buttonVariable.offsetWidth;
+            var marginRightVariable = buttonWidthVariable + "px";
+            document.getElementById("labelVariable").style.marginRight = marginRightVariable;
+            var labelVariable = document.getElementById("labelVariable");
+            var labelWidthVariable = labelVariable.offsetWidth;
+            var newMarginRightVariable = "calc(" + marginRightVariable + " - " + labelWidthVariable + "px)";
+            labelVariable.style.marginRight = newMarginRightVariable;
+            var buttonSubVariable = document.getElementById("dropdownMenuButtonSubVariable");
+            var buttonWidthSubVariable = buttonSubVariable.offsetWidth;
+            var marginRightSubVariable = buttonWidthSubVariable + "px";
+            document.getElementById("labelSubVariable").style.marginRight = marginRightSubVariable;
+            var labelSubVariable = document.getElementById("labelSubVariable");
+            var labelWidthSubVariable = labelSubVariable.offsetWidth;
+            var newMarginRightSubVariable = "calc(" + marginRightSubVariable + " - " + labelWidthSubVariable + "px)";
+            labelSubVariable.style.marginRight = newMarginRightSubVariable;
             $.ajax
             ({
                 url: "{{route('report.fillSubVariable')}}",
@@ -193,12 +239,45 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
         function clickAndFill_SubVariable(element,sub_variable_id_value) {
           //alert('Subvariable id: '+sub_variable_id_value+', subvariable nombre: '+$(element).attr('sub_variable_nombre'));    
           $('#indicator').removeClass('hidden');
+          $('#labelSubVariable').removeClass('hidden');
           $('#dropdownMenuButtonSubVariable').text($(element).attr('sub_variable_nombre')); //Setea el nombre en el texto del boton
           $("#subvariable_id").val(sub_variable_id_value); //Setea el valor en el input hidden
           $('#dropdownMenuButtonIndicator').text('SELECCIONE EL INDICADOR');
           $("#indicator_id").val('none');
           $("#dropdown-menu-indicator").empty().off('click');
           $("#indicator_id").val('none');
+          var buttonDimension = document.getElementById("dropdownMenuButtonDimension");
+            var buttonWidthDimension = buttonDimension.offsetWidth;
+            var marginRightDimension = buttonWidthDimension + "px";
+            document.getElementById("labelDimension").style.marginRight = marginRightDimension;
+            var labelDimension = document.getElementById("labelDimension");
+            var labelWidthDimension = labelDimension.offsetWidth;
+            var newMarginRightDimension = "calc(" + marginRightDimension + " - " + labelWidthDimension + "px)";
+            labelDimension.style.marginRight = newMarginRightDimension;
+            var buttonVariable = document.getElementById("dropdownMenuButtonVariable");
+            var buttonWidthVariable = buttonVariable.offsetWidth;
+            var marginRightVariable = buttonWidthVariable + "px";
+            document.getElementById("labelVariable").style.marginRight = marginRightVariable;
+            var labelVariable = document.getElementById("labelVariable");
+            var labelWidthVariable = labelVariable.offsetWidth;
+            var newMarginRightVariable = "calc(" + marginRightVariable + " - " + labelWidthVariable + "px)";
+            labelVariable.style.marginRight = newMarginRightVariable;
+            var buttonSubVariable = document.getElementById("dropdownMenuButtonSubVariable");
+            var buttonWidthSubVariable = buttonSubVariable.offsetWidth;
+            var marginRightSubVariable = buttonWidthSubVariable + "px";
+            document.getElementById("labelSubVariable").style.marginRight = marginRightSubVariable;
+            var labelSubVariable = document.getElementById("labelSubVariable");
+            var labelWidthSubVariable = labelSubVariable.offsetWidth;
+            var newMarginRightSubVariable = "calc(" + marginRightSubVariable + " - " + labelWidthSubVariable + "px)";
+            labelSubVariable.style.marginRight = newMarginRightSubVariable;
+            var buttonIndicator = document.getElementById("dropdownMenuButtonIndicator");
+            var buttonWidthIndicator = buttonIndicator.offsetWidth;
+            var marginRightIndicator = buttonWidthIndicator + "px";
+            document.getElementById("labelIndicator").style.marginRight = marginRightIndicator;
+            var labelIndicator = document.getElementById("labelIndicator");
+            var labelWidthIndicator = labelIndicator.offsetWidth;
+            var newMarginRightIndicator = "calc(" + marginRightIndicator + " - " + labelWidthIndicator + "px)";
+            labelIndicator.style.marginRight = newMarginRightIndicator;
           $.ajax
             ({
                 url: "{{route('report.fillIndicator')}}",
@@ -227,6 +306,7 @@ $(".dropdown-toggle").next(".dropdown-menu").children().on("click",function(){
         function clickAndFill_Indicators(element,indicator_id_value){
           $('#dropdownMenuButtonIndicator').text($(element).attr('indicator_nombre')); //Setea el nombre en el texto del boton
           $("#indicator_id").val(indicator_id_value); //Setea el valor en el input hidden
+          $('#labelIndicator').removeClass('hidden');
         }
     
 </script>
