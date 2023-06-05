@@ -10,8 +10,8 @@ class Indicator_reference extends Model
 {
     use HasFactory;
     protected $table = 'tb_obs_indicator_reference';
-    protected $fillable = ['indicator_id','indicator_region_id']; 
-    protected $hidden = ['indicator_reference_id'];
+    protected $fillable = ['indicator_id','indicator_reference_id']; 
+    //protected $hidden = ['indicator_reference_id'];
 
     public function getIndicatorReferensByIndicatorId($indicator_id){ return DB::select('call getIndicatorReferensByIndicatorId(?)',[$indicator_id]);}
 }
