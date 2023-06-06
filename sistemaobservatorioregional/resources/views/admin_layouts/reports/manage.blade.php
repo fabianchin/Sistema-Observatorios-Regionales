@@ -161,10 +161,7 @@
     <h3>Descripción</h3>
     @if($indicators->indicator_sub_variable_type == 1)
       <h3>{!! nl2br(trim($indicator_data_cuantitative->indicator_data_description)) !!}</h3>
-    @else
-      <h3>{!! nl2br(trim($indicator_data_cualitative->indicator_data_description)) !!}</h3>
-    @endif
-        <table border="2">
+      <table border="2">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -227,7 +224,51 @@
         @foreach ($reference as $ref)
           <h3>{{ $ref->reference_link }}</h3>
         @endforeach
-
+    @else
+      <h3>{!! nl2br(trim($indicator_data_cualitative->indicator_data_description)) !!}</h3>
+      <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Region</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{$indicators->indicator_name}}</td>
+                <td>{{ $region->region_name }}</td>  
+                @if($indicators->indicator_sub_variable_type == 1)
+                  <td>Cuantitativo</td>
+                @else
+                  <td>Cualitativo</td>
+                @endif 
+              </tr>
+            </tbody>
+        </table>
+        <br>
+          <table border="2">
+            <thead>
+              <tr>
+                <th>Listado</th>
+                <th>Dato</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($list as $li)
+                <tr>
+                  <td>{{ $li->list_name }}</td>
+                  <td>{{ $li->list_value }}</td>
+                </tr>
+              @endforeach         
+            </tbody>
+          </table>
+        </div>
+    @endif
+    <h2>Referencias</h2>
+    @foreach ($reference as $ref)
+      <h3>{{ $ref->reference_link }}</h3>
+    @endforeach
 @endif
 <div style="margin: 0; padding: 0;">
     <img src="{{ $footer }}" alt="footer" style="position: absolute; bottom: 0;">
