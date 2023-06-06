@@ -220,10 +220,6 @@
           <br><br> {{-- Agrega espacios en blanco entre las tablas --}}
         @endforeach
         </div>
-        <h2>Referencias</h2>
-        @foreach ($reference as $ref)
-          <h3>{{ $ref->reference_link }}</h3>
-        @endforeach
     @else
       <h3>{!! nl2br(trim($indicator_data_cualitative->indicator_data_description)) !!}</h3>
       <table border="2">
