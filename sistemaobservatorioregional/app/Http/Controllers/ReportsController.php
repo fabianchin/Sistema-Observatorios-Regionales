@@ -16,6 +16,7 @@ use App\Models\Measurement;
 use Illuminate\Http\Request;
 use Termwind\Components\Dd;
 use Carbon\Carbon;
+use SnappyPDF;
 
 class ReportsController extends Controller
 {
@@ -114,6 +115,7 @@ class ReportsController extends Controller
         $today = Carbon::now()->format('d/m/Y');
         $header = public_path('assets/img/reports/header.jpg');
         $footer = public_path('assets/img/reports/footer.jpg');
+
         $pdf = \PDF::LoadView('admin_layouts.reports.manage',compact('subVariables','indicators','variables','dimensions',
         'state','string','indicator_data_cuantitative','indicator_data_cualitative','region','today','header','footer',
         'list','reference','year','year_data','measurement'));
