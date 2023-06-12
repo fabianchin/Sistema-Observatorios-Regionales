@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Indicator;
-use App\Models\Sub_Variable;
-use App\Models\Variable_type;
-use App\Models\Dimension;
+use App\Models\Year;
+use App\Models\Region;
 use App\Models\Variable;
+use App\Models\Dimension;
+use App\Models\Indicator;
+use App\Models\Measurement;
 use Termwind\Components\Dd;
+use App\Models\Sub_Variable;
+use Illuminate\Http\Request;
+use App\Models\Variable_type;
 
 class Dynamic_IndicatorController extends Controller{
     public function insertInit(){
@@ -33,7 +36,28 @@ class Dynamic_IndicatorController extends Controller{
     {
         $subvariableModel = new Sub_Variable();
         $data['subvariables'] = $subvariableModel->getSubVariableByVariableId($request->variable_id);
-        //dd($data);
+        
+        return response()->json($data);
+    }
+
+    public function getAllMeasurementUnit(){
+        $measurementUnitModel = new Measurement();
+        $data['measurement_units'] = $measurementUnitModel->getAllMeasurementUnit();
+       
+        return response()->json($data);
+    }
+
+    public function getAllyears(){
+        $yearModel = new Year();
+        $data['years'] = $yearModel->getAllYears();
+        
+        return response()->json($data);
+    }
+
+    public function getAllRegions(){
+        $regionModel = new Region();
+        $data['regions'] = $regionModel->getAllRegions();
+        
         return response()->json($data);
     }
 
