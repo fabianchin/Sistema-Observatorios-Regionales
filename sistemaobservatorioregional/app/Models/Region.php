@@ -15,4 +15,6 @@ class Region extends Model
 	
     public function getRegionbyId($region_id){ return DB::select('call getRegionbyId(?)',[$region_id]);}
 
+    public function getAllRegions(){ return DB::select('call getAllRegion()');}
+
 }
