@@ -119,7 +119,7 @@
                         placeholder="Nombre del indicador" required>
                     <br />
 
-                    <label  for="variable-type">Tipo de indicador:&nbsp;</label>
+                    <label for="variable-type">Tipo de indicador:&nbsp;</label>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="variable-type">
 
                         <label class="btn active">
@@ -196,7 +196,6 @@
 @section('scripts')
 
 <script>
-
     // Cargar regiones
     function loadRegions() {
     
