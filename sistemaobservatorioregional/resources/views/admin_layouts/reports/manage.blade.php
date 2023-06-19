@@ -237,7 +237,7 @@ h3 {
         @endforeach
         </div>
     @else
-      <br><h3>{!! nl2br(trim($indicator_data_cualitative->indicator_data_description)) !!}</h3>
+      <br><p>{!! nl2br(trim($indicator_data_cualitative->indicator_data_description)) !!}</p>
       <table border="2">
             <thead>
                 <tr>
