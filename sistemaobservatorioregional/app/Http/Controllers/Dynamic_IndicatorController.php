@@ -8,7 +8,6 @@ use App\Models\Variable;
 use App\Models\Dimension;
 use App\Models\Indicator;
 use App\Models\Measurement;
-use Termwind\Components\Dd;
 use App\Models\Sub_Variable;
 use Illuminate\Http\Request;
 use App\Models\Variable_type;
@@ -64,5 +63,11 @@ class Dynamic_IndicatorController extends Controller{
     //Metodo final que inserta todo
     public function insertDynamicIndicator(Request $request){
         dd($request->all());
+        $indicatorModel = new Indicator();
+        if($request->indicator_sub_variable_type != null && $request->indicator_sub_variable_type != null&& 
+        $request->indicator_region_id != null && $request->indicator_code != null)
+        $indicatorModel->insertIndicator($request->indicator_name, $request->indicator_sub_variable, $request->indicator_sub_variable_type, $request->indicator_region_id, $request->indicator_code);
+        
+        
     }
 }

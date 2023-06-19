@@ -90,24 +90,5 @@ class IndicatorController extends Controller
 
     }
 
-    //onclick del boton de guardar en la vista de crear indicador
-    public function insertIndicator(Request $request)
-    {
-        if($request->indicator_name != null && $request->sub_variable_id != null && $request->variable_type_id != null)
-        {
-            
-            $indicator = new Indicator(); 
-            $indicator->insertIndicator($request->indicator_name, $request->sub_variable_id, $request->variable_type_id, $request->indicator_code);
-            return redirect()->route('indicator.manage')->with('success', 'Se agrego el indicador correctamente');
-        }else if($request->indicator_id != null && $request->indicator_name == null && $request->sub_variable_id != null && $request->variable_type_id != null){
-            return redirect()->route('indicator.manage')->with('error', 'No se puede agregar el indicador porque no se ha llenado el nombre');
-        }else if($request->indicator_id != null && $request->indicator_name != null && $request->sub_variable_id == null && $request->variable_type_id != null){
-            return redirect()->route('indicator.manage')->with('error', 'No se puede agregar el indicador porque no se ha llenado la sub variable');
-        }else if($request->indicator_id != null && $request->indicator_name != null && $request->sub_variable_id != null && $request->variable_type_id == null){
-            return redirect()->route('indicator.manage')->with('error', 'No se puede agregar el indicador porque no se ha llenado el tipo de variable');
-        }else{
-            return redirect()->route('indicator.manage')->with('error', 'No se puede agregar el indicador porque no se ha llenado ningun campo');
-        }
-        
-    }
+    
 }
