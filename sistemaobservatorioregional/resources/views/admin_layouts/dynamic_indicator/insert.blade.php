@@ -7,10 +7,11 @@
     .form-section {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 20px; /* Espacio entre las columnas */
+        grid-gap: 20px;
+        /* Espacio entre las columnas */
     }
 
-    
+
 
     .hidden {
         display: none;
@@ -39,7 +40,7 @@
                     @csrf
                     <div class="form-section">
 
-                        
+
                         <div class="dropdown column">
                             <div>
                                 <label for="dropdownMenuButton">Dimension: </label>
@@ -104,17 +105,11 @@
                     <div class="dropdown">
                         <button class="btn bg-gradient-warning dropdown-toggle" type="button"
                             name="dropdownMenuButtonRegion" id="dropdownMenuButtonRegion" data-bs-toggle="dropdown"
-                            aria-expanded="false" text="Dimension">
+                            aria-expanded="false" text="Dimension" onclick="loadRegions()">
                             Selecciona la region
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonRegion" id="dropdown-menu-region">
-
-                            <li><a class="dropdown-item" href="#" value="1">Huetar Norte</a></li>
-                            <li><a class="dropdown-item" href="#" value="2">Huetar Caribe</a></li>
-                            <li><a class="dropdown-item" href="#" value="3">Huetar Norte y Caribe</a></li>
-                            <li><a class="dropdown-item" href="#" value="4">Chorotega</a></li>
-                            <li><a class="dropdown-item" href="#" value="5">Brunca</a></li>
-                            <li><a class="dropdown-item" href="#" value="6">Nacional</a></li>
+                            {{-- Aqui se llena por medio de Ajax --}}
                         </ul>
                         <input type="hidden" id="region_id" name="region_id" value="none">
                     </div>
@@ -124,7 +119,7 @@
                         placeholder="Nombre del indicador" required>
                     <br />
 
-                    <label for="variable-type">Tipo de indicador:&nbsp;</label>
+                    <label  for="variable-type">Tipo de indicador:&nbsp;</label>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="variable-type">
 
                         <label class="btn active">
@@ -141,22 +136,18 @@
                     <br />
 
 
-                    <label for="dropdownMenuButtonMeasurement">Unidad de medida: </label>
-                    <div class="dropdown">
+                    <label id="label-units" for="dropdownMenuButtonMeasurement">Unidad de medida: </label>
+                    <div id="dropdown-menu-unit" class="dropdown">
                         <button class="btn bg-gradient-info dropdown-toggle" type="button"
                             name="dropdownMenuButtonMeasurement" id="dropdownMenuButtonMeasurement"
-                            data-bs-toggle="dropdown" aria-expanded="false" text="Medida">
+                            data-bs-toggle="dropdown" aria-expanded="false" text="Medida" onclick="loadmeasurement()">
                             Selecciona la unidad
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonMeasurement"
                             id="dropdown-menu-measurement">
-
-                            <li><a class="dropdown-item" value="1">Litros</a></li>
-                            <li><a class="dropdown-item" value="2">Kg</a></li>
-                            <li><a class="dropdown-item" value="3">Centrimetros</a></li>
-
+                            {{-- Aqui se llena por medio de Ajax --}}
                         </ul>
-                        <input type="hidden" id="measuremente_unit_id" name="measuremente_unit_id" value="none">
+                        <input type="hidden" id="measurement_unit_id" name="measuremente_unit_id" value="none">
                     </div>
                     <br />
             </div>
@@ -167,28 +158,18 @@
                     <div class="dropdown">
                         <button class="btn bg-gradient-warning dropdown-toggle" type="button"
                             name="dropdownMenuButtonYear" id="dropdownMenuButtonYear" data-bs-toggle="dropdown"
-                            aria-expanded="false" text="Year">
+                            aria-expanded="false" text="Year" onclick="loadYears()">
                             Año
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonYear" id="dropdown-menu-year">
-                            <li class="dropdown-item" id="annio" value="1">2010</li>
-                            <li class="dropdown-item" id="annio" value="2">2011</li>
-                            <li class="dropdown-item" id="annio" value="3">2012</li>
-                            <li class="dropdown-item" id="annio" value="4">2013</li>
-                            <li class="dropdown-item" id="annio" value="5">2014</li>
-                            <li class="dropdown-item" id="annio" value="6">2015</li>
-                            <li class="dropdown-item" id="annio" value="7">2016</li>
-                            <li class="dropdown-item" id="annio" value="8">2017</li>
-                            <li class="dropdown-item" id="annio" value="9">2018</li>
-                            <li class="dropdown-item" id="annio" value="10">2019</li>
-                            <li class="dropdown-item" id="annio" value="11">2020</li>
-                            <li class="dropdown-item" id="annio" value="12">2021</li>
-                            <li class="dropdown-item" id="annio" value="13">2022</li>
+
+                            {{-- Aqui se llena por medio de Ajax --}}
+
                         </ul>
                         <input type="hidden" id="year_id" name="year_id" value="">
                     </div>
                     <label for="reference_name">Referencia</label>
-                    <input type="text" name="annio_dato" class="form-control" placeholder="Dato"
+                    <input type="text" name="annio_dato" class="form-control" placeholder="fuente de información"
                         aria-label="reference_name" required>
                 </div>
 
@@ -196,7 +177,7 @@
 
             <div class="fomr-section">
                 <label for="reference_name">Dato</label>
-                <input type="text" name="reference_name" class="form-control" placeholder="Referencia"
+                <input type="text" name="reference_name" class="form-control" placeholder="dato"
                     aria-label="reference_name" required>
             </div>
 
@@ -215,6 +196,132 @@
 @section('scripts')
 
 <script>
+
+    // Cargar regiones
+    function loadRegions() {
+    
+        $.ajax({
+            url: "{{ route('fetch.regions') }}",
+            type: "POST",
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            success: function(result) {
+                var dropdownMenuRegion = $("#dropdown-menu-region");
+                dropdownMenuRegion.empty();
+
+                $.each(result.regions, function(key, value) {
+                    var regionLink = $('<a class="dropdown-item" href="#" value="' + value.region_id + '">' + value.region_name + '</a>');
+                    regionLink.on('click', function() {
+                        $("#dropdownMenuButtonRegion").text(value.region_name); // Setea el nombre en el botón
+                        $("#region_id").val(value.region_id); // Guarda el valor en un campo oculto si es necesario
+                    });
+                    dropdownMenuRegion.append($('<li></li>').append(regionLink));
+                });
+            }
+        });
+
+    }
+
+    // Cargar unidades de medida según el tipo de indicador
+    $(document).ready(function() {
+        // Escuchar el evento de cambio en los radio buttons
+        $('input[name="options"]').change(function() {
+            var selectedValue = $(this).val();
+            
+            // Si se selecciona "Cuantitativo", mostrar el label y el ul de unidades de medida
+            if (selectedValue === "1") {
+                $('#label-units').show();
+                $('#dropdown-menu-unit').show();
+            } else {
+                // Si se selecciona "Cualitativo", ocultar el label y el ul de unidades de medida
+                $('#label-units').hide();
+                $('#dropdown-menu-unit').hide();
+            }
+        });
+    });
+
+    //validacion de formulario
+
+    $(document).ready(function() {
+    // Escuchar el evento de envío del formulario
+    $('#form').submit(function() {
+        var referenceValue = $('#reference_name').val();
+        
+        // Expresión regular para verificar si es un enlace o texto
+        var regex = /^[^\s]+(\s+[^\s]+)*$/;
+        
+        // Validar el valor con la expresión regular
+        var isValid = regex.test(referenceValue);
+        
+        if (!isValid) {
+            // Si no cumple con el formato esperado, mostrar un mensaje de error o tomar la acción deseada
+            alert("Por favor, ingresa un enlace o texto válido en el campo de referencia.");
+            
+            // Detener el envío del formulario
+            return false;
+        }
+        
+        // Continuar con el envío del formulario si el valor es válido
+        return true;
+    });
+});
+
+    // Cargar años
+    function loadYears() {
+    $.ajax({
+        url: "{{ route('fetch.years') }}",
+        type: "POST",
+        data: {
+            _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(result) {
+            var dropdownMenuYear = $("#dropdown-menu-year");
+            dropdownMenuYear.empty();
+
+            $.each(result.years, function(key, value) {
+                var yearLink = $('<a class="dropdown-item" href="#" value="' + value.year_id + '">' + value.year_value + '</a>');
+                yearLink.on('click', function() {
+                    $("#dropdownMenuButtonYear").text(value.year_value); // Setea el nombre en el botón
+                    $("#year_id").val(value.year_id); // Guarda el valor en un campo oculto si es necesario
+                });
+                dropdownMenuYear.append($('<li></li>').append(yearLink));
+            });
+        }
+    });
+}
+
+
+    function loadmeasurement(){
+
+     //Cargar unidades de medida
+     $.ajax({
+        url: "{{ route('fetch.measurements') }}",
+        type: "POST",
+        data: {
+            _token: '{{ csrf_token() }}'
+        },
+        dataType: 'json',
+        success: function(result) {
+            var dropdownMenuMeasurement = $("#dropdown-menu-measurement");
+            dropdownMenuMeasurement.empty();
+
+            $.each(result.measurement_units, function(key, value) {
+                var measurementLink = $('<a class="dropdown-item" href="#" value="' + value.measurement_unit_id + '">' + value.measurement_unit_description + '</a>');
+                measurementLink.on('click', function() {
+                    $("#dropdownMenuButtonMeasurement").text(value.measurement_unit_description); // Setea el nombre en el botón
+                    $("#measurement_unit_id").val(value.measurement_unit_id); // Guarda el valor en un campo oculto si es necesario
+                });
+                dropdownMenuMeasurement.append($('<li></li>').append(measurementLink));
+            });
+        }
+    });
+
+
+    }
+
     const form = document.querySelector('form');
     const select = document.querySelector('#annio');
     const yearIdInput = document.querySelector('#year_id');

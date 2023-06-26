@@ -86,6 +86,14 @@ Route::group(['middleware' => ['auth']], function () {
     //Fill comboboxes
     Route::post('/fillVariable', [Dynamic_IndicatorController::class, 'fillVariable'])->name("dynamic_indicator.fillVariable");
     Route::post('/fillSubVariable', [Dynamic_IndicatorController::class, 'fillSubVariable'])->name("dynamic_indicator.fillSubVariable");
+    Route::post('/fetch-regions', [Dynamic_IndicatorController::class, 'getAllRegions'])->name('fetch.regions');
+    Route::post('/fetch-measurements', [Dynamic_IndicatorController::class, 'getAllMeasurementUnit'])->name('fetch.measurements');
+    Route::post('/fetch-years', [Dynamic_IndicatorController::class, 'getAllyears'])->name('fetch.years');
+
+
+
+
+
 
     //-----------------------------------------LOGOUT-----------------------------------------
     Route::post('/logout', [LogoutController::class, 'store'])->name('logout');

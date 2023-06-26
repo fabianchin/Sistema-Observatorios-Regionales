@@ -14,5 +14,6 @@ class Measurement extends Model
     protected $hidden = ['measurement_unit_id'];
 
     public function getMeasurementUnitbyId($indicator_id){return DB::select('call getMeasurementUnitbyId(?)',[$indicator_id]);}
+    public function getAllMeasurementUnit(){return DB::select('call getAllMeasurementUnit()');}
     
 }
