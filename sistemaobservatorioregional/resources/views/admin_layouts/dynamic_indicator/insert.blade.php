@@ -118,20 +118,29 @@
                     <input type="text" name="indicator_name" id="indicator_name" class="form-control"
                         placeholder="Nombre del indicador" required>
                     <br />
+                    <div >
+                        <label>Descripción </label>
+                        <input type="text" name="descripcion_indicator" class="form-control"
+                            placeholder="descripción de la información" required>
+                    </div>
+                    <label for="indicator_code">Código del indicador</label>
+                    <input type="text" name="indicator_code" id="indicator_code" class="form-control"
+                        placeholder="codigo del indicador" required>
+                    <br />
 
-                    <label  for="variable-type">Tipo de indicador:&nbsp;</label>
+                    <label for="variable-type">Tipo de indicador:&nbsp;</label>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="variable-type">
 
                         <label class="btn active">
-                            <input type="radio" name="options" id="option1" autocomplete="off" value="1" checked>
+                            <input type="radio" name="sub_variable_type" id="option1" autocomplete="off" value="1"
+                                checked>
                             Cuantitativo
                         </label>
                         <label class="btn">
-                            <input type="radio" name="options" id="option2" autocomplete="off" value="2">
+                            <input type="radio" name="sub_variable_type" id="option2" autocomplete="off" value="2">
                             Cualitativo
                         </label>
-                        <input type="hidden" name="variable_type_id" id="variable_type_id" class="form-control"
-                            value="">
+
                     </div>
                     <br />
 
@@ -155,35 +164,43 @@
             <div class="form-section">
 
                 <div class="btn-group btn-group-toggle" id="cuantitativo_form_toggle">
-                    <div class="dropdown">
+                    <div class="dropdown" id="id_year">
                         <button class="btn bg-gradient-warning dropdown-toggle" type="button"
                             name="dropdownMenuButtonYear" id="dropdownMenuButtonYear" data-bs-toggle="dropdown"
                             aria-expanded="false" text="Year" onclick="loadYears()">
                             Año
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonYear" id="dropdown-menu-year">
-
                             {{-- Aqui se llena por medio de Ajax --}}
-
                         </ul>
                         <input type="hidden" id="year_id" name="year_id" value="">
                     </div>
-                    <label for="reference_name">Referencia</label>
-                    <input type="text" name="annio_dato" class="form-control" placeholder="fuente de información"
-                        aria-label="reference_name" required>
+
                 </div>
 
             </div>
+        
+            <div id="subtitulo">
+                <label for="subtitulo">Subtitulo</label>
+                <input type="text" name="subtitulo" class="form-control" placeholder="subtitulo"
+                    aria-label="subtitulo" required>
+            </div>
 
             <div class="fomr-section">
+
+
+                <label for="reference_name">Referencia</label>
+                <input type="text" name="annio_dato" class="form-control" placeholder="fuente de información"
+                    aria-label="reference_name" required>
+                <br>
+
                 <label for="reference_name">Dato</label>
                 <input type="text" name="reference_name" class="form-control" placeholder="dato"
                     aria-label="reference_name" required>
             </div>
 
             <div class="form-navigation">
-                <button type="button" class="previous btn btn-primary float-left">Anterior</button>
-                <button type="button" class="next btn btn-success float-right">Siguiente</button>
+
                 <button type="submit" class="submit btn btn-success float-right">Enviar</button>
             </div>
             </form>
@@ -196,7 +213,7 @@
 @section('scripts')
 
 <script>
-
+    $('#subtitulo').hide();
     // Cargar regiones
     function loadRegions() {
     
@@ -227,17 +244,20 @@
     // Cargar unidades de medida según el tipo de indicador
     $(document).ready(function() {
         // Escuchar el evento de cambio en los radio buttons
-        $('input[name="options"]').change(function() {
+        $('input[name="sub_variable_type"]').change(function() {
             var selectedValue = $(this).val();
             
             // Si se selecciona "Cuantitativo", mostrar el label y el ul de unidades de medida
             if (selectedValue === "1") {
                 $('#label-units').show();
                 $('#dropdown-menu-unit').show();
+                $('#subtitulo').hide();
             } else {
                 // Si se selecciona "Cualitativo", ocultar el label y el ul de unidades de medida
                 $('#label-units').hide();
                 $('#dropdown-menu-unit').hide();
+                $('#id_year').hide();
+                $('#subtitulo').show();
             }
         });
     });
@@ -445,11 +465,7 @@
             .removeClass('current')
             .eq(index)
             .addClass('current');
-        // Show only the navigation buttons that make sense for the current section:
-        $('.form-navigation .previous').toggle(index > 0);
-        var atTheEnd = index >= $sections.length - 1;
-        $('.form-navigation .next').toggle(!atTheEnd);
-        $('.form-navigation [type=submit]').toggle(atTheEnd);
+      
     }
 
     function curIndex() {
@@ -457,19 +473,7 @@
         return $sections.index($sections.filter('.current'));
     }
 
-    // Previous button is easy, just go back
-    $('.form-navigation .previous').click(function() {
-        navigateTo(curIndex() - 1);
-    });
-
-    // Next button goes forward if current block validates
-    $('.form-navigation .next').click(function() {
-        $('.contact-form').parsley().whenValidate({
-            group: 'block-' + curIndex()
-        }).done(function() {
-            navigateTo(curIndex() + 1);
-        });
-    });
+ 
 
     // Prepare sections by setting the `data-parsley-group` attribute to 'block-0', 'block-1', etc.
     $sections.each(function(index, section) {
@@ -482,15 +486,5 @@
 
 </script>
 
-<script type="text/javascript">
-    //Script para checkbox de tipo de variable
-    $(document).ready(function(){
-        $('#variable-type input').on('change', function() {
-            $('#variable_type_id').val($('input[name=\'options\']:checked', '#variable-type').val());
-            $selected = $('#variable_type_id').val();
-            
-        });
-    });
-    
-</script>
+
 @endsection
